@@ -1,3 +1,5 @@
+import 'package:andin_project/app/widgets/ex_button_default.dart';
+import 'package:andin_project/app/widgets/ex_textfield_icon.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -12,17 +14,39 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: VStack([
-        Text(
-          'Welcome to ??? Apps',
-          style: GoogleFonts.aBeeZee(
-            fontSize: 48,
-            fontWeight: FontWeight.w700,
+      body: VStack(
+        [
+          Text(
+            'Welcome to ??? Apps',
+            style: GoogleFonts.aBeeZee(
+              fontSize: 48,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
-        48.heightBox,
-
-      ]).p24().centered(),
+          12.heightBox,
+          Text(
+            'Interactive learning for children with special needs',
+            style: GoogleFonts.aBeeZee(
+              fontSize: 24,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          48.heightBox,
+          ExTextFieldIcon(
+            prefixIcon: Icons.person_2_rounded,
+            labelText: 'Enter your student name',
+            hint: 'Student Name',
+          ),
+          64.heightBox,
+          ExButtonDefault(
+            label: 'Enter',
+            labelSize: 32,
+            height: 64,
+          ).wFull(context)
+        ],
+        alignment: MainAxisAlignment.center,
+        crossAlignment: CrossAxisAlignment.center,
+      ).paddingSymmetric(horizontal: 265).centered(),
     );
   }
 }

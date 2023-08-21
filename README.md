@@ -1,6 +1,6 @@
 # andin_project
 
-Interactive learning for difabel
+Interactive learning untuk anak berkebutuhan khusus.
 
 ## Getting Started
 
@@ -34,6 +34,7 @@ Project ini dibangun menggunakan:
 ### PENTING!!
 - untuk membuat fitur baru, terminal : `get create page:test_page`
 - untuk membuat class beans (entity / model) gunakan generator **FlutterJsonBeanFactory** (intellij)
+- run `flutter packages pub run build_runner build` first!
 
 ---
 

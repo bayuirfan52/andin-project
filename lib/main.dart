@@ -40,6 +40,7 @@ class AndinProject extends StatelessWidget {
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
         defaultTransition: Transition.native,
+        // ignore: avoid_redundant_argument_values
         debugShowCheckedModeBanner: kDebugMode,
         builder: (context, child) {
           if (FlutterConfig.get('FLAVOR') == 'production') {

@@ -1,11 +1,12 @@
 import 'package:andin_project/app/core/base/base_controller.dart';
-import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
-class LoginController extends BaseController {
+class ImagePreviewController extends BaseController {
+  final url = ''.obs;
   @override
   void onInit() {
     super.onInit();
+    url.value = Get.arguments as String;
   }
 
   @override
@@ -18,5 +19,4 @@ class LoginController extends BaseController {
     super.onClose();
   }
 
-  void goToHomePage() => Get.toNamed<dynamic>(Routes.HOME);
 }
