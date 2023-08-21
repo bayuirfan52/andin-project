@@ -18,5 +18,5 @@ class LoginController extends BaseController {
     super.onClose();
   }
 
-  void goToHomePage() => Get.toNamed<dynamic>(Routes.HOME);
+  void goToHomePage() => Get.offAndToNamed<dynamic>(Routes.HOME);
 }

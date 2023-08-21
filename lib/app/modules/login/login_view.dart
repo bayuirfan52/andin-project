@@ -42,6 +42,7 @@ class LoginView extends GetView<LoginController> {
             label: 'Enter',
             labelSize: 32,
             height: 64,
+            onPressed: () => controller.goToHomePage(),
           ).wFull(context)
         ],
         alignment: MainAxisAlignment.center,
