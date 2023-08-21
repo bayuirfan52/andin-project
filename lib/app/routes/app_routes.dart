@@ -6,6 +6,7 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const LOGIN = _Paths.LOGIN;
   static const IMAGE_PREVIEW = _Paths.MEDIA + _Paths.IMAGE_PREVIEW;
+  static const AUDIO_RECORDER = _Paths.MEDIA + _Paths.AUDIO_RECORDER;
 }
 
 abstract class _Paths {
@@ -14,4 +15,5 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const MEDIA = '/media';
   static const IMAGE_PREVIEW = '/image-preview';
+  static const AUDIO_RECORDER = '/audio-recorder';
 }
