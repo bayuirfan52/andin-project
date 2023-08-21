@@ -1,14 +1,14 @@
 name: andin_project
 version: 1.0.0+1
 publish_to: none
-description: A new Flutter project.
-environment: 
+description: Interactive learning for difabel.
+environment:
   sdk: '>=2.19.6 <3.0.0'
 
-dependencies: 
+dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
-  flutter: 
+  flutter:
     sdk: flutter
   path: ^1.8.2
   path_provider: ^2.1.0
@@ -34,11 +34,22 @@ dependencies:
   flutter_native_splash: ^2.2.0+1
   flutter_launcher_icons: ^0.11.0
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^2.0.0
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
-flutter: 
+flutter:
   uses-material-design: true
-
+  assets:
+    - assets/images/
+    - assets/fonts/
+flutter_config:
+  path: ../
+flutter_icons:
+  android: launcher_icon
+  image_path: assets/images/ic_icon.png
+  ios: true
+  remove_alpha_ios: true
+get_cli:
+  sub_folder: false
