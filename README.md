@@ -19,6 +19,7 @@ Project ini dibangun menggunakan:
 ### Development Guidelines :
 - Design Pattern **MVC**
 - Karna menggunakan `linter`, sebelum commit, pastikan check `Dart Analysis` count = 0, keep clean code sesuai anjuran flutter.
+- Flow aplikasi dan wireframe ui dapat dilihat di (https://drive.google.com/file/d/1p60wrGuoBrOqHhQlR6UVq_gjeWzZdVa2/view?usp=sharing)
 
 ---
 
