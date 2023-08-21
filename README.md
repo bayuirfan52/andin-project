@@ -1,16 +1,48 @@
 # andin_project
 
-A new Flutter project.
+Interactive learning for difabel
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Project ini dibangun menggunakan:
+- flutter versi `v3.7.3`
+- `GetX` ekosistem.
+- `VelocityX` A minimalist Flutter framework for rapidly building custom designs.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Documentation
+- [Flutter](https://docs.flutter.dev/)
+- [GetX](https://chornthorn.github.io/getx-docs/index)
+- [VelocityX](https://velocityx.dev/docs/install)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Development Guidelines :
+- Design Pattern **MVC**
+- Karna menggunakan `linter`, sebelum commit, pastikan check `Dart Analysis` count = 0, keep clean code sesuai anjuran flutter.
+
+---
+
+### Sebelum mulai, mari Set-Up tools / install dibawah:
+
+- **get_cli** : terminal : `pub global activate get_cli` atau `dart pub global activate get_cli`
+- **plug-in : getXSnippet** vscode / intellij
+- **plug-in : FlutterJsonBeanFactory**  intellij
+- **dart line** : set line to 200, biar reformatting code nya tetap rapi. ![image](https://user-images.githubusercontent.com/36602270/142856350-d62bfe1b-7af2-43de-8455-ace88a92078e.png)
+
+---
+
+### PENTING!!
+- untuk membuat fitur baru, terminal : `get create page:test_page`
+- untuk membuat class beans (entity / model) gunakan generator **FlutterJsonBeanFactory** (intellij)
+
+---
+
+### How to Run With Flavor
+```
+- Update your editor run script with argument --flavor={FlavorName}
+- or run manually on terminal `flutter run --flavor={FlavorName}`
+- Flavor Name list:
+    - Development `flutter run --flavor=Development`
+    - Staging `flutter run --flavor=Staging`
+    - Production `flutter run --flavor=Production`
+```
