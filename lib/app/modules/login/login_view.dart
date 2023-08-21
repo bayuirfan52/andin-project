@@ -34,8 +34,8 @@ class LoginView extends GetView<LoginController> {
           48.heightBox,
           ExTextFieldIcon(
             prefixIcon: Icons.person_2_rounded,
-            labelText: 'Enter your student name',
-            hint: 'Student Name',
+            labelText: 'Enter your name',
+            hint: 'Teacher Name',
           ),
           64.heightBox,
           ExButtonDefault(

@@ -8,6 +8,8 @@ import '../modules/media/audio_recorder/audio_recorder_binding.dart';
 import '../modules/media/audio_recorder/audio_recorder_view.dart';
 import '../modules/media/image_preview/image_preview_binding.dart';
 import '../modules/media/image_preview/image_preview_view.dart';
+import '../modules/select_student/select_student_binding.dart';
+import '../modules/select_student/select_student_view.dart';
 
 // ignore_for_file: inference_failure_on_instance_creation
 
@@ -38,6 +40,11 @@ class AppPages {
       name: _Paths.AUDIO_RECORDER,
       page: () => const AudioRecorderView(),
       binding: AudioRecorderBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_STUDENT,
+      page: () => const SelectStudentView(),
+      binding: SelectStudentBinding(),
     ),
   ];
 }
