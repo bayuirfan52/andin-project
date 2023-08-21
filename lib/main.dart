@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:andin_project/app/core/resources/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_config/flutter_config.dart';
@@ -12,14 +13,14 @@ import 'app/routes/app_pages.dart';
 Future<void> main() async {
   await runZonedGuarded(
     () async {
+      WidgetsFlutterBinding.ensureInitialized();
       await SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
-      WidgetsFlutterBinding.ensureInitialized();
       await FlutterConfig.loadEnvVariables();
       await GetStorage.init();
-      runApp(const AndinProject());
+      runApp(AndinProject());
     },
     (error, stack) {},
   );
@@ -31,8 +32,10 @@ class AndinProject extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GetMaterialApp(
         title: 'Andin Project',
+        theme: AppTheme.theme,
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
-        defaultTransition: Transition.cupertino,
+        defaultTransition: Transition.native,
+        builder: (context, child) => child!,
       );
 }

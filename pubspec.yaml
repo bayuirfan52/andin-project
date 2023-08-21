@@ -3,6 +3,7 @@ dependencies:
   another_flushbar: ^1.12.30
   audio_session: ^0.1.16
   build_runner: ^2.3.3
+  change_app_package_name: ^1.1.0
   cupertino_icons: ^1.0.2
   device_info_plus: ^8.2.2
   expandable: ^5.0.1

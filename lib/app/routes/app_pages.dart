@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_instance_creation
+
 import 'package:get/get.dart';
 
 import '../modules/home/home_binding.dart';
@@ -10,9 +12,9 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.LOGIN;
 
-  static final routes = <GetPage<dynamic>>[
+  static final routes = [
     GetPage(
       name: _Paths.HOME,
       page: () => const HomeView(),
