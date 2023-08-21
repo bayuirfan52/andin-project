@@ -25,6 +25,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+project.ext.envConfigFiles = [
+        staging    : ".env.staging",
+        production : ".env.production",
+]
+apply from: project(':flutter_config').projectDir.getPath() + "/dotenv.gradle"
+
 android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
@@ -52,13 +58,45 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+
+        resValue "string", "build_config_package", project.env.get("APP_ID")
+        resValue "string", "application_id", project.env.get("APP_ID") + project.env.get("APP_SUFFIX_ID")
     }
 
     buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            matchingFallbacks = ["release", "debug"]
+            debuggable true
+        }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            matchingFallbacks = ["release", "debug"]
+            debuggable false
+        }
+    }
+
+
+    flavorDimensions "andin_project"
+    productFlavors {
+        def developmentSigningVariable = signingConfigs.debug
+
+        Staging {
+            signingConfig developmentSigningVariable
+            dimension "andin_project"
+            applicationIdSuffix project.env.get("APP_SUFFIX_ID")
+            manifestPlaceholders = [
+                    appName: project.env.get("APP_NAME"),
+            ]
+        }
+        Production {
+            signingConfig signingConfigs.release
+            dimension "andin_project"
+            manifestPlaceholders = [
+                    appName: project.env.get("APP_NAME"),
+            ]
         }
     }
 }
@@ -69,4 +107,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 }

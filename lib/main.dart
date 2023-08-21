@@ -7,6 +7,7 @@ import 'package:flutter_config/flutter_config.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -36,6 +37,28 @@ class AndinProject extends StatelessWidget {
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
         defaultTransition: Transition.native,
-        builder: (context, child) => child!,
+        builder: (context, child) {
+          if (FlutterConfig.get('FLAVOR') == 'production') {
+            return child!;
+          } else {
+            return Scaffold(
+              body: Stack(
+                children: [
+                  child!,
+                  Positioned(
+                    top: 55,
+                    right: 55,
+                    child: HStack([
+                      Icon(Icons.bug_report, color: Vx.blue300),
+                      4.widthBox,
+                    ]).onInkTap(
+                      () => {},
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
       );
 }
