@@ -10,16 +10,19 @@ import 'package:get_storage/get_storage.dart';
 import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
-  await runZonedGuarded(() async {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    WidgetsFlutterBinding.ensureInitialized();
-    await FlutterConfig.loadEnvVariables();
-    await GetStorage.init();
-    runApp(const AndinProject());
-  }, (error, stack) {});
+  await runZonedGuarded(
+    () async {
+      await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+      WidgetsFlutterBinding.ensureInitialized();
+      await FlutterConfig.loadEnvVariables();
+      await GetStorage.init();
+      runApp(const AndinProject());
+    },
+    (error, stack) {},
+  );
 }
 
 class AndinProject extends StatelessWidget {
