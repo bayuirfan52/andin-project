@@ -40,11 +40,9 @@ Project ini dibangun menggunakan:
 ---
 
 ### How to Run With Flavor
-```
-- Update your editor run script with argument --flavor={FlavorName}
+- Update your editor run script with argument `--flavor={FlavorName}`
 - or run manually on terminal `flutter run --flavor={FlavorName}`
 - Flavor Name list:
-    - Development `flutter run --flavor=Development`
-    - Staging `flutter run --flavor=Staging`
-    - Production `flutter run --flavor=Production`
-```
+    - Development ```flutter run --flavor=Development```
+    - Staging ```flutter run --flavor=Staging```
+    - Production ```flutter run --flavor=Production```

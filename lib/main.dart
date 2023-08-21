@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:andin_project/app/core/resources/app_theme.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
+import 'package:andin_project/app/utils/logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +23,7 @@ Future<void> main() async {
       ]);
       await FlutterConfig.loadEnvVariables();
       await GetStorage.init();
+      await Logger.init();
       GoogleFonts.config.allowRuntimeFetching = false;
       Get.lazyPut<GetStorage>(() => GetStorage());
       runApp(AndinProject());
