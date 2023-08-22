@@ -39,6 +39,7 @@ class ExTextFieldNormal extends StatelessWidget {
     this.maxLength,
     this.maxLine = 1,
     this.counterText,
+    this.textAlign = TextAlign.left,
   });
 
   final Color? borderColor;
@@ -66,6 +67,7 @@ class ExTextFieldNormal extends StatelessWidget {
   final Color helperTextColor;
   final int? maxLength;
   final int? maxLine;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +102,7 @@ class ExTextFieldNormal extends StatelessWidget {
           maxLength: maxLength,
           maxLine: maxLine,
           counterText: counterText,
+          textAlign: textAlign,
         ),
         if (helperText != null) helperText!.text.caption(context).color(helperTextColor).make().pOnly(top: 8),
       ],

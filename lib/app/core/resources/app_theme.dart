@@ -6,9 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 mixin AppTheme {
   static final theme = ThemeData(
     primaryColor: colorPrimary,
-    colorScheme: ColorScheme.light(primary: colorPrimary, error: Colors.red),
+    colorScheme: ColorScheme.light(
+      primary: colorPrimary,
+      error: Colors.red,
+      secondary: colorPrimary,
+    ),
     scaffoldBackgroundColor: Colors.white,
     textTheme: GoogleFonts.aBeeZeeTextTheme(),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: colorPrimary,
+    ),
     appBarTheme: AppBarTheme(
       color: colorPrimary,
       elevation: 1.0,

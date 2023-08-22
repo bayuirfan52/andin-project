@@ -34,7 +34,7 @@ class LoginView extends GetView<LoginController> {
           48.heightBox,
           ExTextFieldIcon(
             prefixIcon: Icons.person_2_rounded,
-            labelText: 'Enter your name',
+            labelText: 'Enter teacher name',
             hint: 'Teacher Name',
             tfController: controller.teacherController,
             textInputType: TextInputType.name,

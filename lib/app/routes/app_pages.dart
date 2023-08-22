@@ -10,8 +10,10 @@ import '../modules/media/audio_recorder/audio_recorder_binding.dart';
 import '../modules/media/audio_recorder/audio_recorder_view.dart';
 import '../modules/media/image_preview/image_preview_binding.dart';
 import '../modules/media/image_preview/image_preview_view.dart';
-import '../modules/select_student/select_student_binding.dart';
-import '../modules/select_student/select_student_view.dart';
+import '../modules/student/add_student/add_student_binding.dart';
+import '../modules/student/add_student/add_student_view.dart';
+import '../modules/student/select_student/select_student_binding.dart';
+import '../modules/student/select_student/select_student_view.dart';
 
 // ignore_for_file: inference_failure_on_instance_creation
 
@@ -24,34 +26,39 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      name: _Paths.HOME,
+      name: Routes.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.LOGIN,
+      name: Routes.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
-      name: _Paths.IMAGE_PREVIEW,
+      name: Routes.IMAGE_PREVIEW,
       page: () => const ImagePreviewView(),
       binding: ImagePreviewBinding(),
     ),
     GetPage(
-      name: _Paths.AUDIO_RECORDER,
+      name: Routes.AUDIO_RECORDER,
       page: () => const AudioRecorderView(),
       binding: AudioRecorderBinding(),
     ),
     GetPage(
-      name: _Paths.SELECT_STUDENT,
+      name: Routes.SELECT_STUDENT,
       page: () => const SelectStudentView(),
       binding: SelectStudentBinding(),
     ),
     GetPage(
-      name: _Paths.DEV_TOOLS,
+      name: Routes.DEV_TOOLS,
       page: () => const DevToolsView(),
       binding: DevToolsBinding(),
+    ),
+    GetPage(
+      name: Routes.ADD_STUDENT,
+      page: () => const AddStudentView(),
+      binding: AddStudentBinding(),
     ),
   ];
 }
