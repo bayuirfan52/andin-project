@@ -27,14 +27,12 @@ Project ini dibangun menggunakan:
 
 - **get_cli** : terminal : `pub global activate get_cli` atau `dart pub global activate get_cli`
 - **plug-in : getXSnippet** vscode / intellij
-- **plug-in : FlutterJsonBeanFactory**  intellij
 - **dart line** : set line to 200, biar reformatting code nya tetap rapi. ![image](https://user-images.githubusercontent.com/36602270/142856350-d62bfe1b-7af2-43de-8455-ace88a92078e.png)
 
 ---
 
 ### PENTING!!
 - untuk membuat fitur baru, terminal : `get create page:test_page`
-- untuk membuat class beans (entity / model) gunakan generator **FlutterJsonBeanFactory** (intellij)
 - run `flutter packages pub run build_runner build` first!
 
 ---
@@ -43,6 +41,5 @@ Project ini dibangun menggunakan:
 - Update your editor run script with argument `--flavor={FlavorName}`
 - or run manually on terminal `flutter run --flavor={FlavorName}`
 - Flavor Name list:
-    - Development ```flutter run --flavor=Development```
     - Staging ```flutter run --flavor=Staging```
     - Production ```flutter run --flavor=Production```

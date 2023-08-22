@@ -36,13 +36,15 @@ class LoginView extends GetView<LoginController> {
             prefixIcon: Icons.person_2_rounded,
             labelText: 'Enter your name',
             hint: 'Teacher Name',
+            tfController: controller.teacherController,
+            textInputType: TextInputType.name,
           ),
           64.heightBox,
           ExButtonDefault(
             label: 'Enter',
             labelSize: 32,
             height: 64,
-            onPressed: () => controller.goToHomePage(),
+            onPressed: () => controller.saveTeacherName(),
           ).wFull(context)
         ],
         alignment: MainAxisAlignment.center,

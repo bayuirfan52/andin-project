@@ -41,7 +41,7 @@ class AndinProject extends StatelessWidget {
         theme: AppTheme.theme,
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
-        defaultTransition: Transition.native,
+        defaultTransition: Transition.cupertino,
         // ignore: avoid_redundant_argument_values
         debugShowCheckedModeBanner: kDebugMode,
         builder: (context, child) {
@@ -59,7 +59,7 @@ class AndinProject extends StatelessWidget {
                       Icon(Icons.bug_report, color: Vx.blue300),
                       4.widthBox,
                     ]).onInkTap(
-                      () => {},
+                      () => Get.toNamed<dynamic>(Routes.DEV_TOOLS),
                     ),
                   ),
                 ],

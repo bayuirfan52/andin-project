@@ -37,6 +37,7 @@ class ExTextFieldIcon extends StatelessWidget {
     this.labelTextColor = Colors.grey,
     this.helperText,
     this.helperTextColor = Colors.grey,
+    this.textAlign = TextAlign.left,
   });
 
   final IconData? prefixIcon;
@@ -64,6 +65,7 @@ class ExTextFieldIcon extends StatelessWidget {
   final Color labelTextColor;
   final String? helperText;
   final Color helperTextColor;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +113,7 @@ class ExTextFieldIcon extends StatelessWidget {
           autofocus: autoFocus,
           clear: clear,
           initialValue: initialValue,
+          textAlign: textAlign,
         ),
         if (helperText != null) helperText!.text.caption(context).color(helperTextColor).make().pOnly(top: 8),
       ],

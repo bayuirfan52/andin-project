@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 mixin FlushbarHelper {
   static void showFlushbar(
-    BuildContext context,
-    FlushbarType type, {
+    BuildContext context, {
     required String message,
+    FlushbarType type = FlushbarType.INFO,
     String? title,
   }) {
     final icon = type == FlushbarType.SUCCESS

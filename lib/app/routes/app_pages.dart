@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/dev_tools/dev_tools_binding.dart';
+import '../modules/dev_tools/dev_tools_view.dart';
 import '../modules/home/home_binding.dart';
 import '../modules/home/home_view.dart';
 import '../modules/login/login_binding.dart';
@@ -45,6 +47,11 @@ class AppPages {
       name: _Paths.SELECT_STUDENT,
       page: () => const SelectStudentView(),
       binding: SelectStudentBinding(),
+    ),
+    GetPage(
+      name: _Paths.DEV_TOOLS,
+      page: () => const DevToolsView(),
+      binding: DevToolsBinding(),
     ),
   ];
 }
