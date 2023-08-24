@@ -32,7 +32,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
               side: BorderSide(color: colorBorder),
               borderRadius: BorderRadius.circular(5),
             ),
-            onTap: () {},
+            onTap: () => controller.goToQuestionDetail('id'),
             trailing: Icon(
               Icons.navigate_next,
             ),

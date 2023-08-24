@@ -1,3 +1,4 @@
+import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class ListQuestionController extends GetxController {
@@ -17,4 +18,6 @@ class ListQuestionController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+  void goToQuestionDetail(String id) => Get.toNamed<dynamic>(Routes.QUESTION_DETAIL);
 }

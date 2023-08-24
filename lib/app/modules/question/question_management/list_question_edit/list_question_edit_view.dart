@@ -19,7 +19,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
         centerTitle: true,
         actions: [
           MaterialButton(
-            onPressed: () {},
+            onPressed: () => controller.goToAddQuestion(),
             child: Text(
               'Add New Question',
               textScaleFactor: 1.5,
@@ -41,7 +41,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
               side: BorderSide(color: colorBorder),
               borderRadius: BorderRadius.circular(5),
             ),
-            onTap: () {},
+            onTap: () => controller.goToEditQuestion(),
             trailing: IconButton(
               onPressed: () => ExDialog.alertDialog(
                 title: 'Alert',

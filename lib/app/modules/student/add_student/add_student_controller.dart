@@ -1,10 +1,9 @@
+import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AddStudentController extends GetxController {
   final studentController = TextEditingController();
-
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -20,5 +19,8 @@ class AddStudentController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void saveNewStudent() {
+
+    Get.offAllNamed<dynamic>(Routes.DASHBOARD);
+  }
 }
