@@ -9,6 +9,7 @@ import 'home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +67,22 @@ class HomeView extends GetView<HomeController> {
         ],
         alignment: MainAxisAlignment.center,
       ).centered().p24(),
+      bottomNavigationBar: HStack(
+        [
+          Text(
+            'Current Active Student : ',
+            style: GoogleFonts.aBeeZee(fontSize: 24),
+          ),
+          Text(
+            'Abdul',
+            style: GoogleFonts.aBeeZee(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+        alignment: MainAxisAlignment.center,
+      ).p24(),
     );
   }
 }

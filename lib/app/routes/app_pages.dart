@@ -18,6 +18,8 @@ import '../modules/profile/profile_binding.dart';
 import '../modules/profile/profile_view.dart';
 import '../modules/question/list_question/list_question_binding.dart';
 import '../modules/question/list_question/list_question_view.dart';
+import '../modules/question/question_detail/question_detail_binding.dart';
+import '../modules/question/question_detail/question_detail_view.dart';
 import '../modules/question/question_management/add_question/add_question_binding.dart';
 import '../modules/question/question_management/add_question/add_question_view.dart';
 import '../modules/question/question_management/edit_question/edit_question_binding.dart';
@@ -32,6 +34,8 @@ import '../modules/student/edit_student/edit_student_binding.dart';
 import '../modules/student/edit_student/edit_student_view.dart';
 import '../modules/student/select_student/select_student_binding.dart';
 import '../modules/student/select_student/select_student_view.dart';
+import '../modules/student/student_detail/student_detail_binding.dart';
+import '../modules/student/student_detail/student_detail_view.dart';
 import '../modules/student/student_management/student_management_binding.dart';
 import '../modules/student/student_management/student_management_view.dart';
 
@@ -126,6 +130,16 @@ class AppPages {
       name: Routes.LIST_QUESTION_EDIT,
       page: () => const ListQuestionEditView(),
       binding: ListQuestionEditBinding(),
+    ),
+    GetPage(
+      name: Routes.STUDENT_DETAIL,
+      page: () => const StudentDetailView(),
+      binding: StudentDetailBinding(),
+    ),
+    GetPage(
+      name: Routes.QUESTION_DETAIL,
+      page: () => const QuestionDetailView(),
+      binding: QuestionDetailBinding(),
     ),
   ];
 }

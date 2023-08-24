@@ -1,4 +1,5 @@
 import 'package:andin_project/app/core/resources/app_color.dart';
+import 'package:andin_project/app/widgets/ex_dialog.dart';
 import 'package:andin_project/app/widgets/ex_textfield_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,16 @@ class StudentManagementView extends GetView<StudentManagementController> {
       appBar: AppBar(
         title: const Text('Student Management'),
         centerTitle: true,
+        actions: [
+          MaterialButton(
+            onPressed: () => controller.goToAddStudent(),
+            child: Text(
+              'Add New Student',
+              textScaleFactor: 1.5,
+              style: GoogleFonts.aBeeZee(color: Colors.white),
+            ),
+          )
+        ],
       ),
       body: Center(
         child: VStack(
@@ -40,9 +51,13 @@ class StudentManagementView extends GetView<StudentManagementController> {
                   side: BorderSide(color: colorBorder),
                   borderRadius: BorderRadius.circular(5),
                 ),
-                onTap: () {},
+                onTap: () => controller.goToStudentDetail(),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () => ExDialog.alertDialog(
+                    title: 'Alert',
+                    message: 'Are you sure to delete this student?',
+                    onConfirmClicked: () {},
+                  ),
                   icon: Icon(
                     Icons.delete,
                   ),

@@ -20,4 +20,6 @@ abstract class Routes {
   static const LIST_QUESTION = '/question/list-question';
   static const LIST_QUESTION_EDIT =
       '/question/question-management/list-question-edit';
+  static const STUDENT_DETAIL = '/student/student-detail';
+  static const QUESTION_DETAIL = '/question/question-detail';
 }

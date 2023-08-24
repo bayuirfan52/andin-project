@@ -1,9 +1,12 @@
+import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class ListQuestionEditController extends GetxController {
+  final currentLevel = 1.obs;
   @override
   void onInit() {
     super.onInit();
+    currentLevel.value = Get.arguments as int;
   }
 
   @override
@@ -15,4 +18,7 @@ class ListQuestionEditController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+  void goToAddQuestion() => Get.toNamed<dynamic>(Routes.ADD_QUESTION);
+  void goToEditQuestion() => Get.toNamed<dynamic>(Routes.EDIT_QUESTION);
 }

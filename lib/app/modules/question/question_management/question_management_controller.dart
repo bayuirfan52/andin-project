@@ -17,5 +17,5 @@ class QuestionManagementController extends GetxController {
     super.onClose();
   }
 
-  void goToListQuestion(int level) => Get.toNamed<dynamic>(Routes.LIST_QUESTION, arguments: level);
+  void goToListQuestion(int level) => Get.toNamed<dynamic>(Routes.LIST_QUESTION_EDIT, arguments: level);
 }
