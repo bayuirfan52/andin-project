@@ -1,4 +1,5 @@
 import 'package:andin_project/app/core/resources/app_color.dart';
+import 'package:andin_project/app/widgets/empty_widget.dart';
 import 'package:andin_project/app/widgets/ex_dialog.dart';
 import 'package:andin_project/app/widgets/ex_textfield_icon.dart';
 import 'package:flutter/material.dart';
@@ -30,45 +31,51 @@ class StudentManagementView extends GetView<StudentManagementController> {
         ],
       ),
       body: Center(
-        child: VStack(
-          [
-            ExTextFieldIcon(
-              prefixIcon: Icons.search_rounded,
-              hint: 'Search',
-              tfController: controller.searchController,
-              textAlign: TextAlign.center,
-            ),
-            24.heightBox,
-            ListView.separated(
-              itemBuilder: (context, index) => ListTile(
-                title: Text(
-                  'Student $index',
-                  style: GoogleFonts.aBeeZee(
-                    fontSize: 24,
-                  ),
-                ),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: colorBorder),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                onTap: () => controller.goToStudentDetail(),
-                trailing: IconButton(
-                  onPressed: () => ExDialog.alertDialog(
-                    title: 'Alert',
-                    message: 'Are you sure to delete this student?',
-                    onConfirmClicked: () {},
-                  ),
-                  icon: Icon(
-                    Icons.delete,
-                  ),
-                ),
-              ),
-              separatorBuilder: (context, item) => 12.heightBox,
-              itemCount: 8,
-            ).expand()
-          ],
-          crossAlignment: CrossAxisAlignment.center,
-        ).pSymmetric(h: 128, v: 24).hFull(context),
+        child: Obx(
+          () => controller.listStudent.isEmpty
+              ? EmptyWidget(
+                  message: 'Student Not Found',
+                )
+              : VStack(
+                  [
+                    ExTextFieldIcon(
+                      prefixIcon: Icons.search_rounded,
+                      hint: 'Search',
+                      tfController: controller.searchController,
+                      textAlign: TextAlign.center,
+                    ),
+                    24.heightBox,
+                    ListView.separated(
+                      itemBuilder: (context, index) => ListTile(
+                        title: Text(
+                          controller.listStudent[index].studentName ?? '',
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 24,
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: colorBorder),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        onTap: () => controller.goToStudentDetail(),
+                        trailing: IconButton(
+                          onPressed: () => ExDialog.alertDialog(
+                            title: 'Alert',
+                            message: 'Are you sure to delete this student?',
+                            onConfirmClicked: () => controller.removeStudent(index),
+                          ),
+                          icon: Icon(
+                            Icons.delete,
+                          ),
+                        ),
+                      ),
+                      separatorBuilder: (context, item) => 12.heightBox,
+                      itemCount: controller.listStudent.length,
+                    ).expand()
+                  ],
+                  crossAlignment: CrossAxisAlignment.center,
+                ).pSymmetric(h: 128, v: 24).hFull(context),
+        ),
       ),
     );
   }
