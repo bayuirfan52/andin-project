@@ -46,9 +46,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static String initial = PreferenceHelper.getTeacherName().isNullOrEmpty
-      ? Routes.LOGIN
-      : Routes.DASHBOARD;
+  static String initial = PreferenceHelper.getTeacherName().isNullOrEmpty || PreferenceHelper.getCurrentActiveStudent().isNullOrEmpty ? Routes.LOGIN : Routes.DASHBOARD;
 
   static final routes = [
     GetPage(

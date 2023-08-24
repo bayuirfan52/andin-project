@@ -56,6 +56,7 @@ class ExBaseTextField extends StatefulWidget {
     this.borderColorFocus,
     this.initialValue,
     this.hintStyle,
+    this.capitalization,
   });
 
   final TextEditingController? controller;
@@ -103,6 +104,7 @@ class ExBaseTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final AutovalidateMode? autoValidateMode;
   final String? initialValue;
+  final TextCapitalization? capitalization;
 
   @override
   _ExBaseTextFieldState createState() => _ExBaseTextFieldState();
@@ -171,6 +173,7 @@ class _ExBaseTextFieldState extends State<ExBaseTextField> {
       validator: widget.validator,
       style: widget.style,
       initialValue: widget.initialValue,
+      textCapitalization: widget.capitalization ?? TextCapitalization.none,
     );
 
     const other = null;

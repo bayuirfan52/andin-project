@@ -73,11 +73,13 @@ class HomeView extends GetView<HomeController> {
             'Current Active Student : ',
             style: GoogleFonts.aBeeZee(fontSize: 24),
           ),
-          Text(
-            'Abdul',
-            style: GoogleFonts.aBeeZee(
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
+          Obx(
+            () => Text(
+              controller.currentStudent.value.studentName ?? '',
+              style: GoogleFonts.aBeeZee(
+                fontSize: 24,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ],

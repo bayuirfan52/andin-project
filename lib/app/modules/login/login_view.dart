@@ -39,7 +39,8 @@ class LoginView extends GetView<LoginController> {
             labelText: 'Enter teacher name',
             hint: 'Teacher Name',
             tfController: controller.teacherController,
-            textInputType: TextInputType.name,
+            textInputType: TextInputType.text,
+            capitalization: TextCapitalization.words,
           ),
           64.heightBox,
           ExButtonDefault(

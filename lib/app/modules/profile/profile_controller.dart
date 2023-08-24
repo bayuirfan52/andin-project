@@ -15,7 +15,7 @@ class ProfileController extends BaseController {
   @override
   void onReady() {
     super.onReady();
-    teacherController.text = PreferenceHelper.getTeacherName();
+    teacherController.text = PreferenceHelper.getTeacherName() ?? '';
   }
 
   @override

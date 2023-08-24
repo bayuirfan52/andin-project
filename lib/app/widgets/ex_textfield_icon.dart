@@ -40,6 +40,7 @@ class ExTextFieldIcon extends StatelessWidget {
     this.helperText,
     this.helperTextColor = Colors.grey,
     this.textAlign = TextAlign.left,
+    this.capitalization,
   });
 
   final IconData? prefixIcon;
@@ -68,6 +69,7 @@ class ExTextFieldIcon extends StatelessWidget {
   final String? helperText;
   final Color helperTextColor;
   final TextAlign textAlign;
+  final TextCapitalization? capitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +121,7 @@ class ExTextFieldIcon extends StatelessWidget {
           clear: clear,
           initialValue: initialValue,
           textAlign: textAlign,
+          capitalization: capitalization ?? TextCapitalization.none,
         ),
         if (helperText != null) helperText!.text.caption(context).color(helperTextColor).make().pOnly(top: 8),
       ],

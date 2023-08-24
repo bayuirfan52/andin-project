@@ -20,8 +20,8 @@ class EmptyWidget extends StatelessWidget {
         SizedBox(height: 4),
         Text(
           message,
-          style: GoogleFonts.openSans(
-            fontSize: 12,
+          style: GoogleFonts.aBeeZee(
+            fontSize: 24,
             fontWeight: FontWeight.normal,
           ),
         ).centered()

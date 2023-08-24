@@ -28,6 +28,7 @@ class AddStudentView extends GetView<AddStudentController> {
             48.heightBox,
             ExTextFieldNormal(
               hint: 'Student Name',
+              capitalization: TextCapitalization.words,
               textAlign: TextAlign.center,
               tfController: controller.studentController,
             ),
@@ -39,7 +40,7 @@ class AddStudentView extends GetView<AddStudentController> {
               onPressed: () => ExDialog.alertDialog(
                 title: 'Alert',
                 message: 'Are you sure to add this student?\nThis addition will automatically select this student to be the current active student',
-                onConfirmClicked: () {},
+                onConfirmClicked: () => controller.saveNewStudent(),
               ),
             ).wFull(context)
           ],

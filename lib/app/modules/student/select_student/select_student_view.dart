@@ -1,4 +1,5 @@
 import 'package:andin_project/app/core/resources/app_color.dart';
+import 'package:andin_project/app/widgets/empty_widget.dart';
 import 'package:andin_project/app/widgets/ex_button_default.dart';
 import 'package:andin_project/app/widgets/ex_textfield_icon.dart';
 import 'package:flutter/material.dart';
@@ -34,33 +35,43 @@ class SelectStudentView extends GetView<SelectStudentController> {
               ),
             ),
             24.heightBox,
-            ExTextFieldIcon(
-              prefixIcon: Icons.search_rounded,
-              hint: 'Search',
-              tfController: controller.searchController,
-              textAlign: TextAlign.center,
+            Obx(
+              () => controller.listStudent.isNotEmpty
+                  ? ExTextFieldIcon(
+                      prefixIcon: Icons.search_rounded,
+                      hint: 'Search',
+                      tfController: controller.searchController,
+                      textAlign: TextAlign.center,
+                    )
+                  : Container(),
             ),
             24.heightBox,
-            ListView.separated(
-              itemBuilder: (context, index) => ListTile(
-                leading: Obx(() => Checkbox(value: controller.selectedIndex.value == index, onChanged: (value) => {})),
-                title: Text(
-                  'Student $index',
-                  style: GoogleFonts.aBeeZee(
-                    fontSize: 24,
-                  ),
-                ),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: controller.selectedIndex.value == index ? colorPrimary : colorBorder),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                onTap: () {
-                  controller.selectedIndex.value = index;
-                },
-              ),
-              separatorBuilder: (context, item) => 12.heightBox,
-              itemCount: 8,
-            ).expand()
+            Obx(
+              () => controller.listStudent.isNotEmpty
+                  ? ListView.separated(
+                      itemBuilder: (context, index) => ListTile(
+                        leading: Obx(() => Checkbox(value: controller.selectedIndex.value == index, onChanged: (value) => {})),
+                        title: Text(
+                          controller.listStudent[index].studentName ?? '',
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 24,
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: controller.selectedIndex.value == index ? colorPrimary : colorBorder),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        onTap: () {
+                          controller.selectedIndex.value = index;
+                        },
+                      ),
+                      separatorBuilder: (context, item) => 12.heightBox,
+                      itemCount: controller.listStudent.length,
+                    ).expand()
+                  : EmptyWidget(
+                      message: 'Student not found',
+                    ),
+            )
           ],
           crossAlignment: CrossAxisAlignment.center,
         ).pSymmetric(h: 128, v: 24).hFull(context),
@@ -69,7 +80,8 @@ class SelectStudentView extends GetView<SelectStudentController> {
         label: 'Enter',
         labelSize: 32,
         height: 64,
-        onPressed: () => controller.goToDashboard(),
+        isEnable: controller.listStudent.isNotEmpty,
+        onPressed: () => controller.listStudent.isEmpty ? null : controller.selectCurrentActiveStudent(),
       ).wFull(context).pOnly(right: 128, left: 128, top: 24, bottom: 48),
     );
   }

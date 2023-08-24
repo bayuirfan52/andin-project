@@ -40,6 +40,7 @@ class ExTextFieldNormal extends StatelessWidget {
     this.maxLine = 1,
     this.counterText,
     this.textAlign = TextAlign.left,
+    this.capitalization = TextCapitalization.none,
   });
 
   final Color? borderColor;
@@ -68,6 +69,7 @@ class ExTextFieldNormal extends StatelessWidget {
   final int? maxLength;
   final int? maxLine;
   final TextAlign textAlign;
+  final TextCapitalization capitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +107,7 @@ class ExTextFieldNormal extends StatelessWidget {
           maxLine: maxLine,
           counterText: counterText,
           textAlign: textAlign,
+          capitalization: capitalization,
         ),
         if (helperText != null) helperText!.text.caption(context).color(helperTextColor).make().pOnly(top: 8),
       ],
