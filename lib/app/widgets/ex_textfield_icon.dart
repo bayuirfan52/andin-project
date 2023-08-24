@@ -1,4 +1,6 @@
+import 'package:andin_project/app/core/resources/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'ex_textfield.dart';
@@ -100,7 +102,10 @@ class ExTextFieldIcon extends StatelessWidget {
           onChanged: onChanged,
           onSubmitted: onSubmitted,
           onEditingComplete: onEditingComplete,
+          height: 48,
           hint: hint,
+          hintStyle: GoogleFonts.aBeeZee(color: colorBorder, fontSize: 24),
+          style: GoogleFonts.aBeeZee(fontSize: 24),
           enabled: enabled ?? true,
           controller: tfController,
           isPassword: isPassword ?? false,

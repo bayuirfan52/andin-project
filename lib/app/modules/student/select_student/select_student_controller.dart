@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 class SelectStudentController extends BaseController {
   final searchController = TextEditingController();
+  final selectedIndex = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -21,4 +22,5 @@ class SelectStudentController extends BaseController {
   }
 
   void goToAddStudent() => Get.toNamed<dynamic>(Routes.ADD_STUDENT);
+  void goToHome() => Get.toNamed<dynamic>(Routes.HOME);
 }

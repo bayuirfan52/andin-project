@@ -42,14 +42,16 @@ class SelectStudentView extends GetView<SelectStudentController> {
             24.heightBox,
             ListView.separated(
               itemBuilder: (context, index) => ListTile(
-                leading: Checkbox(value: true, onChanged: (value) => {}),
+                leading: Obx(() => Checkbox(value: controller.selectedIndex.value == index, onChanged: (value) => {})),
                 title: Text(
                   'Student $index',
                   style: GoogleFonts.aBeeZee(
                     fontSize: 24,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  controller.selectedIndex.value = index;
+                },
               ),
               separatorBuilder: (context, item) => 12.heightBox,
               itemCount: 8,
@@ -62,7 +64,7 @@ class SelectStudentView extends GetView<SelectStudentController> {
         label: 'Enter',
         labelSize: 32,
         height: 64,
-        onPressed: () => {},
+        onPressed: () => controller.goToHome(),
       ).wFull(context).pOnly(right: 128, left: 128, top: 24, bottom: 48),
     );
   }

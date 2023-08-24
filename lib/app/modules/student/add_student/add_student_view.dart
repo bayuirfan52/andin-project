@@ -1,4 +1,6 @@
+import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/app/widgets/ex_button_default.dart';
+import 'package:andin_project/app/widgets/ex_dialog.dart';
 import 'package:andin_project/app/widgets/ex_textfield_normal.dart';
 import 'package:flutter/material.dart';
 
@@ -36,11 +38,18 @@ class AddStudentView extends GetView<AddStudentController> {
               label: 'Add',
               labelSize: 32,
               height: 64,
-              onPressed: () => {},
+              onPressed: () => ExDialog.alertDialog(
+                title: 'Alert',
+                message: 'Are you sure to add this student?\nThis addition will automatically select this student to be the current active student',
+                onConfirmClicked: () {
+                  Get.back<dynamic>();
+                  logI('clicked');
+                },
+              ),
             ).wFull(context)
           ],
           crossAlignment: CrossAxisAlignment.center,
-        ).pSymmetric(v: 24, h: 128),
+        ).pSymmetric(v: 24, h: 128).scrollVertical(),
       ),
     );
   }
