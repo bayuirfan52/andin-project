@@ -10,4 +10,11 @@ abstract class Routes {
   static const SELECT_STUDENT = '/select-student';
   static const DEV_TOOLS = '/dev-tools';
   static const ADD_STUDENT = '/add-student';
+  static const DASHBOARD = '/dashboard';
+  static const PROFILE = '/profile';
+  static const STUDENT_MANAGEMENT = '/student-management';
+  static const EDIT_STUDENT = '/edit-student';
+  static const QUESTION_MANAGEMENT = '/question/question-management';
+  static const ADD_QUESTION = '/question/add-question';
+  static const EDIT_QUESTION = '/question/edit-question';
 }

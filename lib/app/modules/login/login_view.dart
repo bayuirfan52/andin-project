@@ -1,3 +1,4 @@
+import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/widgets/ex_button_default.dart';
 import 'package:andin_project/app/widgets/ex_textfield_icon.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +18,12 @@ class LoginView extends GetView<LoginController> {
       body: VStack(
         [
           Text(
-            'Welcome to ??? Apps',
+            'Welcome to ${PreferenceHelper.getCurrentAppName()} Apps',
             style: GoogleFonts.aBeeZee(
               fontSize: 48,
               fontWeight: FontWeight.w700,
             ),
+            textAlign: TextAlign.center,
           ),
           12.heightBox,
           Text(

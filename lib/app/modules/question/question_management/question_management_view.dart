@@ -1,19 +1,19 @@
-import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import 'home_controller.dart';
+import 'question_management_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+class QuestionManagementView extends GetView<QuestionManagementController> {
+  const QuestionManagementView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(PreferenceHelper.getCurrentAppName()),
+        title: const Text('Question Management'),
         centerTitle: true,
       ),
       body: HStack(
@@ -25,6 +25,7 @@ class HomeView extends GetView<HomeController> {
                 width: 480,
                 height: 480,
                 fit: BoxFit.cover,
+                opacity: AlwaysStoppedAnimation(.75),
               ),
               Positioned.fill(
                 child: Align(
@@ -37,7 +38,16 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ).pOnly(bottom: 12),
                 ),
-              )
+              ),
+              Positioned.fill(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Icon(
+                    Icons.edit,
+                    size: 48,
+                  ).pOnly(bottom: 12, right: 12),
+                ),
+              ),
             ]).onInkTap(() {}),
           ),
           48.widthBox,
@@ -48,6 +58,7 @@ class HomeView extends GetView<HomeController> {
                 width: 480,
                 height: 480,
                 fit: BoxFit.cover,
+                opacity: AlwaysStoppedAnimation(.75),
               ),
               Positioned.fill(
                 child: Align(
@@ -60,7 +71,16 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ).pOnly(bottom: 12),
                 ),
-              )
+              ),
+              Positioned.fill(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Icon(
+                    Icons.edit,
+                    size: 48,
+                  ).pOnly(bottom: 12, right: 12),
+                ),
+              ),
             ]).onInkTap(() {}),
           ),
         ],

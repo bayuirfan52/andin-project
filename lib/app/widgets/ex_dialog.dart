@@ -19,7 +19,10 @@ mixin ExDialog {
       ).p12(),
       confirmTextColor: Colors.white,
       textConfirm: 'Yes',
-      onConfirm: () => onConfirmClicked.call(),
+      onConfirm: () {
+        Get.back<dynamic>();
+        onConfirmClicked.call();
+      },
       onCancel: () => {},
     );
   }

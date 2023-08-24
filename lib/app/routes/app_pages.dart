@@ -1,5 +1,11 @@
+import 'package:andin_project/app/modules/student/edit_student/edit_student_binding.dart';
+import 'package:andin_project/app/modules/student/edit_student/edit_student_view.dart';
+import 'package:andin_project/app/modules/student/student_management/student_management_binding.dart';
+import 'package:andin_project/app/modules/student/student_management/student_management_view.dart';
 import 'package:get/get.dart';
 
+import '../modules/dashboard/dashboard_binding.dart';
+import '../modules/dashboard/dashboard_view.dart';
 import '../modules/dev_tools/dev_tools_binding.dart';
 import '../modules/dev_tools/dev_tools_view.dart';
 import '../modules/home/home_binding.dart';
@@ -10,6 +16,14 @@ import '../modules/media/audio_recorder/audio_recorder_binding.dart';
 import '../modules/media/audio_recorder/audio_recorder_view.dart';
 import '../modules/media/image_preview/image_preview_binding.dart';
 import '../modules/media/image_preview/image_preview_view.dart';
+import '../modules/profile/profile_binding.dart';
+import '../modules/profile/profile_view.dart';
+import '../modules/question/add_question/add_question_binding.dart';
+import '../modules/question/add_question/add_question_view.dart';
+import '../modules/question/edit_question/edit_question_binding.dart';
+import '../modules/question/edit_question/edit_question_view.dart';
+import '../modules/question/question_management/question_management_binding.dart';
+import '../modules/question/question_management/question_management_view.dart';
 import '../modules/student/add_student/add_student_binding.dart';
 import '../modules/student/add_student/add_student_view.dart';
 import '../modules/student/select_student/select_student_binding.dart';
@@ -59,6 +73,41 @@ class AppPages {
       name: Routes.ADD_STUDENT,
       page: () => const AddStudentView(),
       binding: AddStudentBinding(),
+    ),
+    GetPage(
+      name: Routes.DASHBOARD,
+      page: () => const DashboardView(),
+      binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: Routes.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: Routes.STUDENT_MANAGEMENT,
+      page: () => const StudentManagementView(),
+      binding: StudentManagementBinding(),
+    ),
+    GetPage(
+      name: Routes.EDIT_STUDENT,
+      page: () => const EditStudentView(),
+      binding: EditStudentBinding(),
+    ),
+    GetPage(
+      name: Routes.QUESTION_MANAGEMENT,
+      page: () => const QuestionManagementView(),
+      binding: QuestionManagementBinding(),
+    ),
+    GetPage(
+      name: Routes.ADD_QUESTION,
+      page: () => const AddQuestionView(),
+      binding: AddQuestionBinding(),
+    ),
+    GetPage(
+      name: Routes.EDIT_QUESTION,
+      page: () => const EditQuestionView(),
+      binding: EditQuestionBinding(),
     ),
   ];
 }

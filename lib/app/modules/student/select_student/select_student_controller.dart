@@ -22,5 +22,5 @@ class SelectStudentController extends BaseController {
   }
 
   void goToAddStudent() => Get.toNamed<dynamic>(Routes.ADD_STUDENT);
-  void goToHome() => Get.toNamed<dynamic>(Routes.HOME);
+  void goToDashboard() => Get.offAllNamed<dynamic>(Routes.DASHBOARD);
 }

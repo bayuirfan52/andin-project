@@ -64,7 +64,7 @@ class SelectStudentView extends GetView<SelectStudentController> {
         label: 'Enter',
         labelSize: 32,
         height: 64,
-        onPressed: () => controller.goToHome(),
+        onPressed: () => controller.goToDashboard(),
       ).wFull(context).pOnly(right: 128, left: 128, top: 24, bottom: 48),
     );
   }
