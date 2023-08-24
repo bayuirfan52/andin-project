@@ -1,3 +1,4 @@
+import 'package:andin_project/app/core/resources/app_color.dart';
 import 'package:andin_project/app/widgets/ex_button_default.dart';
 import 'package:andin_project/app/widgets/ex_textfield_icon.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,10 @@ class SelectStudentView extends GetView<SelectStudentController> {
                   style: GoogleFonts.aBeeZee(
                     fontSize: 24,
                   ),
+                ),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: controller.selectedIndex.value == index ? colorPrimary : colorBorder),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 onTap: () {
                   controller.selectedIndex.value = index;

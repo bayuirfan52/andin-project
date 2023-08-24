@@ -1,9 +1,7 @@
-import 'package:andin_project/app/modules/student/edit_student/edit_student_binding.dart';
-import 'package:andin_project/app/modules/student/edit_student/edit_student_view.dart';
-import 'package:andin_project/app/modules/student/student_management/student_management_binding.dart';
-import 'package:andin_project/app/modules/student/student_management/student_management_view.dart';
 import 'package:get/get.dart';
 
+import '../extensions/string_extensions.dart';
+import '../helper/preference_helper.dart';
 import '../modules/dashboard/dashboard_binding.dart';
 import '../modules/dashboard/dashboard_view.dart';
 import '../modules/dev_tools/dev_tools_binding.dart';
@@ -18,16 +16,24 @@ import '../modules/media/image_preview/image_preview_binding.dart';
 import '../modules/media/image_preview/image_preview_view.dart';
 import '../modules/profile/profile_binding.dart';
 import '../modules/profile/profile_view.dart';
-import '../modules/question/add_question/add_question_binding.dart';
-import '../modules/question/add_question/add_question_view.dart';
-import '../modules/question/edit_question/edit_question_binding.dart';
-import '../modules/question/edit_question/edit_question_view.dart';
+import '../modules/question/list_question/list_question_binding.dart';
+import '../modules/question/list_question/list_question_view.dart';
+import '../modules/question/question_management/add_question/add_question_binding.dart';
+import '../modules/question/question_management/add_question/add_question_view.dart';
+import '../modules/question/question_management/edit_question/edit_question_binding.dart';
+import '../modules/question/question_management/edit_question/edit_question_view.dart';
+import '../modules/question/question_management/list_question_edit/list_question_edit_binding.dart';
+import '../modules/question/question_management/list_question_edit/list_question_edit_view.dart';
 import '../modules/question/question_management/question_management_binding.dart';
 import '../modules/question/question_management/question_management_view.dart';
 import '../modules/student/add_student/add_student_binding.dart';
 import '../modules/student/add_student/add_student_view.dart';
+import '../modules/student/edit_student/edit_student_binding.dart';
+import '../modules/student/edit_student/edit_student_view.dart';
 import '../modules/student/select_student/select_student_binding.dart';
 import '../modules/student/select_student/select_student_view.dart';
+import '../modules/student/student_management/student_management_binding.dart';
+import '../modules/student/student_management/student_management_view.dart';
 
 // ignore_for_file: inference_failure_on_instance_creation
 
@@ -36,7 +42,9 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static String initial = PreferenceHelper.getTeacherName().isNullOrEmpty
+      ? Routes.LOGIN
+      : Routes.DASHBOARD;
 
   static final routes = [
     GetPage(
@@ -108,6 +116,16 @@ class AppPages {
       name: Routes.EDIT_QUESTION,
       page: () => const EditQuestionView(),
       binding: EditQuestionBinding(),
+    ),
+    GetPage(
+      name: Routes.LIST_QUESTION,
+      page: () => const ListQuestionView(),
+      binding: ListQuestionBinding(),
+    ),
+    GetPage(
+      name: Routes.LIST_QUESTION_EDIT,
+      page: () => const ListQuestionEditView(),
+      binding: ListQuestionEditBinding(),
     ),
   ];
 }

@@ -17,4 +17,7 @@ abstract class Routes {
   static const QUESTION_MANAGEMENT = '/question/question-management';
   static const ADD_QUESTION = '/question/add-question';
   static const EDIT_QUESTION = '/question/edit-question';
+  static const LIST_QUESTION = '/question/list-question';
+  static const LIST_QUESTION_EDIT =
+      '/question/question-management/list-question-edit';
 }

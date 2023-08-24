@@ -39,7 +39,7 @@ class AndinProject extends StatelessWidget {
   Widget build(BuildContext context) => GetMaterialApp(
         title: 'Andin Project',
         theme: AppTheme.theme,
-        initialRoute: AppPages.INITIAL,
+        initialRoute: AppPages.initial,
         getPages: AppPages.routes,
         defaultTransition: Transition.cupertino,
         // ignore: avoid_redundant_argument_values

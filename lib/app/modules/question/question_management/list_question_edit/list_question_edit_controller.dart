@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StudentManagementController extends GetxController {
-  final searchController = TextEditingController();
+class ListQuestionEditController extends GetxController {
   @override
   void onInit() {
     super.onInit();

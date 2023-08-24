@@ -48,7 +48,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                   ).pOnly(bottom: 12, right: 12),
                 ),
               ),
-            ]).onInkTap(() {}),
+            ]).onInkTap(() => controller.goToListQuestion(1)),
           ),
           48.widthBox,
           Card(
@@ -81,7 +81,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                   ).pOnly(bottom: 12, right: 12),
                 ),
               ),
-            ]).onInkTap(() {}),
+            ]).onInkTap(() => controller.goToListQuestion(2)),
           ),
         ],
         alignment: MainAxisAlignment.center,

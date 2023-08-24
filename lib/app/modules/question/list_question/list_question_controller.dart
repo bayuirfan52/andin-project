@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StudentManagementController extends GetxController {
-  final searchController = TextEditingController();
+class ListQuestionController extends GetxController {
+  final currentLevel = 1.obs;
   @override
   void onInit() {
     super.onInit();
+    currentLevel.value = Get.arguments as int;
   }
 
   @override
