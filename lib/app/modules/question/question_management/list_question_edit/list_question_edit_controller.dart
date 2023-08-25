@@ -19,6 +19,6 @@ class ListQuestionEditController extends GetxController {
     super.onClose();
   }
 
-  void goToAddQuestion() => Get.toNamed<dynamic>(Routes.ADD_QUESTION);
-  void goToEditQuestion() => Get.toNamed<dynamic>(Routes.EDIT_QUESTION);
+  void goToAddQuestion() => Get.toNamed<dynamic>(Routes.ADD_QUESTION, arguments: currentLevel.value);
+  void goToEditQuestion() => Get.toNamed<dynamic>(Routes.EDIT_QUESTION, arguments: currentLevel.value);
 }

@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'question_detail_controller.dart';
 
 class QuestionDetailView extends GetView<QuestionDetailController> {
-  const QuestionDetailView({Key? key}) : super(key: key);
+  const QuestionDetailView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QuestionDetailView'),
+        title: const Text('Question'),
         centerTitle: true,
       ),
       body: const Center(
