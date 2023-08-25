@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:andin_project/app/extensions/string_extensions.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
+import 'package:andin_project/app/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -12,7 +15,7 @@ import 'package:velocity_x/velocity_x.dart';
 
 class ExImageView extends StatelessWidget {
   const ExImageView({
-    required this.url,
+    required this.image,
     super.key,
     this.height,
     this.width,
@@ -26,7 +29,7 @@ class ExImageView extends StatelessWidget {
     this.canRemove = false,
   });
 
-  final String url;
+  final String image;
   final double? height;
   final double? width;
   final double? size;
@@ -40,8 +43,6 @@ class ExImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final header = {'Referer': 'https://mobile.gredu.co/*'};
-
     if (isAllowPreview ?? true) {
       return ZStack(
         [
@@ -51,10 +52,9 @@ class ExImageView extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.all(color: borderColor ?? Colors.grey[300]!, width: borderWidth ?? 0.5),
             ),
-            child: url.isUrl!
+            child: image.isUrl!
                 ? Image.network(
-                    '$url?${DateTime.now().millisecondsSinceEpoch}',
-                    headers: header,
+                    '$image',
                     width: size ?? width,
                     height: size ?? height,
                     fit: BoxFit.cover,
@@ -73,14 +73,22 @@ class ExImageView extends StatelessWidget {
                       return Container(color: Colors.grey[300], child: Icon(errorIcon));
                     },
                   )
-                : Container(color: Colors.grey[300], child: Icon(errorIcon)),
+                : Image.file(
+                    File(image),
+                    width: size ?? width,
+                    height: size ?? height,
+                    fit: BoxFit.cover,
+                    isAntiAlias: true,
+                    errorBuilder: (context, error, stackTrace) {
+                      logE('$error - ${stackTrace}');
+                      return Container(color: Colors.grey[300], child: Icon(errorIcon));
+                    },
+                  ),
           ).cornerRadius(radius),
         ],
       ).onTap(() {
-        if (url.isUrl!) {
-          if (isAllowPreview ?? true && url.contains('http')) {
-            Get.toNamed<dynamic>(Routes.IMAGE_PREVIEW, arguments: url);
-          }
+        if (isAllowPreview ?? true) {
+          Get.toNamed<dynamic>(Routes.IMAGE_PREVIEW, arguments: image);
         }
       });
     } else {
@@ -92,10 +100,9 @@ class ExImageView extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.all(color: borderColor ?? Colors.grey[300]!, width: borderWidth ?? 0.5),
             ),
-            child: url.isUrl!
+            child: image.isUrl!
                 ? Image.network(
-                    '$url?${DateTime.now().millisecondsSinceEpoch}',
-                    headers: header,
+                    '$image',
                     width: size ?? width,
                     height: size ?? height,
                     fit: BoxFit.cover,
@@ -114,7 +121,17 @@ class ExImageView extends StatelessWidget {
                       return Container(color: Colors.grey[300], child: Icon(errorIcon));
                     },
                   )
-                : Container(color: Colors.grey[300], child: Icon(errorIcon)),
+                : Image.file(
+                    File(image),
+                    width: size ?? width,
+                    height: size ?? height,
+                    fit: BoxFit.cover,
+                    isAntiAlias: true,
+                    errorBuilder: (context, error, stackTrace) {
+                      logE('$error - ${stackTrace}');
+                      return Container(color: Colors.grey[300], child: Icon(errorIcon));
+                    },
+                  ),
           ).cornerRadius(radius),
         ],
       );

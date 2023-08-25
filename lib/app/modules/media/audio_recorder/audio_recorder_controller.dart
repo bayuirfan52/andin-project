@@ -103,8 +103,12 @@ class AudioRecorderController extends BaseController {
       } else {
         dir = await getApplicationDocumentsDirectory();
       }
+      final audioDir = Directory('${dir?.path}audio');
+      if (!audioDir.existsSync()) {
+        await audioDir.create();
+      }
       final file = File(
-        '${dir?.path}/lars_audio_${DateTime.now().millisecondsSinceEpoch}.wav',
+        '${audioDir.path}/audio_${DateTime.now().millisecondsSinceEpoch}.wav',
       );
       await file.create();
       logI('File path: ${file.path}');

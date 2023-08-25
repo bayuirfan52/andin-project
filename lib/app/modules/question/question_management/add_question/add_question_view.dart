@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:andin_project/app/core/resources/app_color.dart';
+import 'package:andin_project/app/utils/logger.dart';
+import 'package:andin_project/app/widgets/ex_image_view.dart';
 import 'package:andin_project/app/widgets/ex_textfield_normal.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +22,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
         centerTitle: true,
         actions: [
           MaterialButton(
-            onPressed: () => {},
+            onPressed: () => controller.saveQuestion(),
             child: Text(
               'Save',
               textScaleFactor: 1.5,
@@ -101,12 +105,36 @@ class AddQuestionView extends GetView<AddQuestionController> {
                 ]).pOnly(top: 12)
               ]).expand(),
               24.widthBox,
-              Image.asset(
-                'assets/images/ic_empty.jpg',
-                fit: BoxFit.cover,
-                width: 128,
-                height: 128,
-              ),
+              ZStack([
+                Container(
+                  width: 128,
+                  height: 128,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: colorBorder, width: 0.5),
+                  ),
+                  child: Obx(
+                    () => Image.file(
+                      File(controller.imagePath1.value),
+                      width: 128,
+                      height: 128,
+                      fit: BoxFit.cover,
+                      isAntiAlias: true,
+                      errorBuilder: (context, error, stackTrace) {
+                        logE('$error - ${stackTrace}');
+                        return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                      },
+                    ).onInkTap(() => controller.goToImagePreview(controller.imagePath1.value)),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => controller.changeImage(1),
+                  iconSize: 32,
+                  icon: Icon(
+                    Icons.change_circle,
+                    color: colorPrimary,
+                  ),
+                )
+              ]),
             ],
             alignment: MainAxisAlignment.center,
           ).p24(),
@@ -162,12 +190,36 @@ class AddQuestionView extends GetView<AddQuestionController> {
                 ]).pOnly(top: 12)
               ]).expand(),
               24.widthBox,
-              Image.asset(
-                'assets/images/ic_empty.jpg',
-                fit: BoxFit.cover,
-                width: 128,
-                height: 128,
-              ),
+              ZStack([
+                Container(
+                  width: 128,
+                  height: 128,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: colorBorder, width: 0.5),
+                  ),
+                  child: Obx(
+                    () => Image.file(
+                      File(controller.imagePath2.value),
+                      width: 128,
+                      height: 128,
+                      fit: BoxFit.cover,
+                      isAntiAlias: true,
+                      errorBuilder: (context, error, stackTrace) {
+                        logE('$error - ${stackTrace}');
+                        return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                      },
+                    ).onInkTap(() => controller.goToImagePreview(controller.imagePath2.value)),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => controller.changeImage(2),
+                  iconSize: 32,
+                  icon: Icon(
+                    Icons.change_circle,
+                    color: colorPrimary,
+                  ),
+                )
+              ]),
             ],
             alignment: MainAxisAlignment.center,
           ).p24(),
@@ -225,12 +277,36 @@ class AddQuestionView extends GetView<AddQuestionController> {
                   ]).pOnly(top: 12)
                 ]).expand(),
                 24.widthBox,
-                Image.asset(
-                  'assets/images/ic_empty.jpg',
-                  fit: BoxFit.cover,
-                  width: 128,
-                  height: 128,
-                ),
+                ZStack([
+                  Container(
+                    width: 128,
+                    height: 128,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: colorBorder, width: 0.5),
+                    ),
+                    child: Obx(
+                      () => Image.file(
+                        File(controller.imagePath3.value),
+                        width: 128,
+                        height: 128,
+                        fit: BoxFit.cover,
+                        isAntiAlias: true,
+                        errorBuilder: (context, error, stackTrace) {
+                          logE('$error - ${stackTrace}');
+                          return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                        },
+                      ).onInkTap(() => controller.goToImagePreview(controller.imagePath3.value)),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => controller.changeImage(3),
+                    iconSize: 32,
+                    icon: Icon(
+                      Icons.change_circle,
+                      color: colorPrimary,
+                    ),
+                  )
+                ]),
               ],
               alignment: MainAxisAlignment.center,
             ).p24(),

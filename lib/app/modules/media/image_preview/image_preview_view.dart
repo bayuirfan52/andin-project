@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -16,12 +18,17 @@ class ImagePreviewView extends GetView<ImagePreviewController> {
         leading: Icon(Icons.arrow_back_rounded, color: Colors.white).onInkTap(() => Get.back<dynamic>()),
       ),
       body: Obx(
-            () => Center(
-          child: FadeInImage.assetNetwork(
-            image: controller.url.value,
-            fit: BoxFit.cover,
-            placeholder: 'assets/images/gif_loading.gif',
-          ),
+        () => Center(
+          child: controller.url.value.contains('http')
+              ? FadeInImage.assetNetwork(
+                  image: controller.url.value,
+                  fit: BoxFit.cover,
+                  placeholder: 'assets/images/gif_loading.gif',
+                )
+              : Image.file(
+                  File(controller.url.value),
+                  fit: BoxFit.cover,
+                ),
         ),
       ).backgroundColor(Colors.black),
     );

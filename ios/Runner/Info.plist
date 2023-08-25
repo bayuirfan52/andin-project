@@ -49,5 +49,7 @@
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Record assessment notes from microphone to record audio notes</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+ 	<string>Pick images for question</string>
 </dict>
 </plist>
