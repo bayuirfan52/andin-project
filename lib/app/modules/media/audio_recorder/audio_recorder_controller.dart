@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:andin_project/app/core/base/base_controller.dart';
+import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter_sound/flutter_sound.dart';
@@ -24,6 +25,7 @@ class AudioRecorderController extends BaseController {
     super.onInit();
     if (Get.arguments != null) {
       isPlayerMode.value = true;
+      recordedFile.value = Get.arguments as String;
     }
     init();
   }
@@ -55,6 +57,7 @@ class AudioRecorderController extends BaseController {
       await audioPlayer.startPlayer(
         fromURI: recordedFile.value,
         whenFinished: () {
+          logI('finish');
           stop();
         },
       );
@@ -93,17 +96,17 @@ class AudioRecorderController extends BaseController {
   }
 
   Future<void> startRecord() async {
-    final permissionAudio = await Permission.microphone.isGranted;
-    final permissionStorage = await Permission.storage.isGranted;
+    final permissionMicrophone = await Permission.microphone.isGranted;
+    final permissionMedia = await Permission.audio.isGranted;
 
-    if (permissionAudio && permissionStorage) {
+    if (permissionMicrophone && permissionMedia) {
       Directory? dir;
       if (Platform.isAndroid) {
         dir = await getExternalStorageDirectory();
       } else {
         dir = await getApplicationDocumentsDirectory();
       }
-      final audioDir = Directory('${dir?.path}audio');
+      final audioDir = Directory('${dir?.path}/audio');
       if (!audioDir.existsSync()) {
         await audioDir.create();
       }
@@ -119,9 +122,21 @@ class AudioRecorderController extends BaseController {
       );
       recordedFile.value = file.path;
     } else {
-      await Permission.storage.request().then(
-            (value) => Permission.microphone.request().then((value) => startRecord()),
-          );
+      await Permission.audio.request().then(
+        (value) {
+          if (value.isGranted) {
+            Permission.microphone.request().then((value) {
+              if (value.isGranted) {
+                startRecord();
+              } else {
+                FlushbarHelper.showFlushbar(Get.context!, message: 'Access Microphone permission required!', type: FlushbarType.ERROR);
+              }
+            });
+          } else {
+            FlushbarHelper.showFlushbar(Get.context!, message: 'Access Audio Media permission required!', type: FlushbarType.ERROR);
+          }
+        },
+      );
     }
   }
 

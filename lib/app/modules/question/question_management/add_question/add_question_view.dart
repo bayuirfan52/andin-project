@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'add_question_controller.dart';
@@ -87,10 +88,12 @@ class AddQuestionView extends GetView<AddQuestionController> {
                     ),
                   ),
                   Spacer(),
-                  Text(
-                    'audio_file.wav',
-                    style: GoogleFonts.aBeeZee(
-                      fontSize: 24,
+                  Obx(
+                    () => Text(
+                      basename(controller.audioPath1.value),
+                      style: GoogleFonts.aBeeZee(
+                        fontSize: 24,
+                      ),
                     ),
                   ),
                   24.widthBox,
@@ -172,10 +175,12 @@ class AddQuestionView extends GetView<AddQuestionController> {
                     ),
                   ),
                   Spacer(),
-                  Text(
-                    'audio_file.wav',
-                    style: GoogleFonts.aBeeZee(
-                      fontSize: 24,
+                  Obx(
+                    () => Text(
+                      basename(controller.audioPath2.value),
+                      style: GoogleFonts.aBeeZee(
+                        fontSize: 24,
+                      ),
                     ),
                   ),
                   24.widthBox,
@@ -259,10 +264,12 @@ class AddQuestionView extends GetView<AddQuestionController> {
                       ),
                     ),
                     Spacer(),
-                    Text(
-                      'audio_file.wav',
-                      style: GoogleFonts.aBeeZee(
-                        fontSize: 24,
+                    Obx(
+                      () => Text(
+                        basename(controller.audioPath3.value),
+                        style: GoogleFonts.aBeeZee(
+                          fontSize: 24,
+                        ),
                       ),
                     ),
                     24.widthBox,

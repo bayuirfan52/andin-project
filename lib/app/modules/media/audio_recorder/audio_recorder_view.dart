@@ -188,7 +188,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
                 Text(
                   'Stop',
                   style: GoogleFonts.aBeeZee(
-                    color: Colors.red.shade600,
+                    color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -270,7 +270,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
         style: TextButton.styleFrom(
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          backgroundColor: Colors.red,
+          backgroundColor: colorPrimary,
           shape: RoundedRectangleBorder(
             side: BorderSide(color: colorPrimary, width: 2),
             borderRadius: BorderRadius.circular(100),
