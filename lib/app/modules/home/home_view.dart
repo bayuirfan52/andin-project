@@ -16,6 +16,16 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: Text(PreferenceHelper.getCurrentAppName()),
         centerTitle: true,
+        actions: [
+          MaterialButton(
+            onPressed: () => controller.goToSelectStudent(),
+            child: Text(
+              'Select Student',
+              textScaleFactor: 1.5,
+              style: GoogleFonts.aBeeZee(color: Colors.white),
+            ),
+          )
+        ],
       ),
       body: HStack(
         [
