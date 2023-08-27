@@ -16,6 +16,7 @@ class SelectStudentController extends BaseController {
   @override
   void onInit() {
     super.onInit();
+    getStudentData();
   }
 
   @override
@@ -33,7 +34,7 @@ class SelectStudentController extends BaseController {
   void goToDashboard() => Get.offAllNamed<dynamic>(Routes.DASHBOARD);
 
   void selectCurrentActiveStudent() {
-    final student = listStudent[selectedIndex.value];
+    final student = listStudentFiltered[selectedIndex.value];
     PreferenceHelper.setCurrentActiveStudent(student.id ?? '');
     goToDashboard();
   }

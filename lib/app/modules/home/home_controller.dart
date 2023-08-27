@@ -35,4 +35,6 @@ class HomeController extends BaseController {
       logE(error.toString());
     });
   }
+
+  void goToSelectStudent() => Get.toNamed<dynamic>(Routes.SELECT_STUDENT);
 }

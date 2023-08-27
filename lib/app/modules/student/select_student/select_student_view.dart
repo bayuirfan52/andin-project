@@ -71,19 +71,21 @@ class SelectStudentView extends GetView<SelectStudentController> {
                     ).expand()
                   : EmptyWidget(
                       message: 'Student not found',
-                    ),
+                    ).scrollVertical().expand(),
             )
           ],
           crossAlignment: CrossAxisAlignment.center,
         ).pSymmetric(h: 128, v: 24).hFull(context),
       ),
-      bottomNavigationBar: ExButtonDefault(
-        label: 'Enter',
-        labelSize: 32,
-        height: 64,
-        isEnable: controller.listStudent.isNotEmpty,
-        onPressed: () => controller.listStudent.isEmpty ? null : controller.selectCurrentActiveStudent(),
-      ).wFull(context).pOnly(right: 128, left: 128, top: 24, bottom: 48),
+      bottomNavigationBar: Obx(
+        () => ExButtonDefault(
+          label: 'Enter',
+          labelSize: 32,
+          height: 64,
+          isEnable: controller.listStudentFiltered.isNotEmpty,
+          onPressed: () => controller.listStudentFiltered.isEmpty ? null : controller.selectCurrentActiveStudent(),
+        ).wFull(context).pOnly(right: 128, left: 128, top: 24, bottom: 48),
+      ),
     );
   }
 }
