@@ -18,7 +18,7 @@ class LoginView extends GetView<LoginController> {
       body: VStack(
         [
           Text(
-            'Welcome to ${PreferenceHelper.getCurrentAppName()} Apps',
+            'Welcome to ${PreferenceHelper.getCurrentAppName()}',
             style: GoogleFonts.aBeeZee(
               fontSize: 48,
               fontWeight: FontWeight.w700,
@@ -27,7 +27,7 @@ class LoginView extends GetView<LoginController> {
           ),
           12.heightBox,
           Text(
-            'Interactive learning for children with special needs',
+            'Autism visual communication for early student',
             style: GoogleFonts.aBeeZee(
               fontSize: 24,
               fontWeight: FontWeight.w400,

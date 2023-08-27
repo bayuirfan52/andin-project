@@ -1,6 +1,6 @@
-# andin_project
+# AVIC
 
-Interactive learning untuk anak berkebutuhan khusus.
+Autism visual communication for early student.
 
 ## Getting Started
 
