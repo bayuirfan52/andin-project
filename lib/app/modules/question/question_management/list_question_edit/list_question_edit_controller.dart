@@ -1,6 +1,7 @@
 import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/data/question_level_1.dart';
 import 'package:andin_project/app/data/question_level_2.dart';
+import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
@@ -57,7 +58,28 @@ class ListQuestionEditController extends GetxController {
     });
   }
 
+  void removeQuestion(String id) {
+    if (currentLevel.value == 1) {
+      Database.removeQuestionLevel1ById(id).then((value) {
+        FlushbarHelper.showFlushbar(Get.context!, message: 'Remove Success!', type: FlushbarType.SUCCESS);
+        handleListQuestion();
+      }).catchError((dynamic error) {
+        FlushbarHelper.showFlushbar(Get.context!, message: 'Remove Error! $error', type: FlushbarType.ERROR);
+      });
+    } else {
+      Database.removeQuestionLevel2ById(id).then((value) {
+        FlushbarHelper.showFlushbar(Get.context!, message: 'Remove Success!', type: FlushbarType.SUCCESS);
+        handleListQuestion();
+      }).catchError((dynamic error) {
+        FlushbarHelper.showFlushbar(Get.context!, message: 'Remove Error! $error', type: FlushbarType.ERROR);
+      });
+    }
+  }
+
   void goToAddQuestion() => Get.toNamed<dynamic>(Routes.ADD_QUESTION, arguments: currentLevel.value)?.then((value) => handleListQuestion());
 
-  void goToEditQuestion() => Get.toNamed<dynamic>(Routes.EDIT_QUESTION, arguments: currentLevel.value)?.then((value) => handleListQuestion());
+  void goToEditQuestion(String id) => Get.toNamed<dynamic>(
+        Routes.EDIT_QUESTION,
+        arguments: {'level': currentLevel.value, 'id': id},
+      )?.then((value) => handleListQuestion());
 }

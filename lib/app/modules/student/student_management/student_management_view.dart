@@ -31,24 +31,25 @@ class StudentManagementView extends GetView<StudentManagementController> {
         ],
       ),
       body: Center(
-        child: Obx(
-          () => controller.listStudent.isEmpty
-              ? EmptyWidget(
-                  message: 'Student Not Found',
-                )
-              : VStack(
-                  [
-                    ExTextFieldIcon(
-                      prefixIcon: Icons.search_rounded,
-                      hint: 'Search',
-                      tfController: controller.searchController,
-                      textAlign: TextAlign.center,
-                    ),
-                    24.heightBox,
-                    ListView.separated(
+        child: VStack(
+          [
+            ExTextFieldIcon(
+              prefixIcon: Icons.search_rounded,
+              hint: 'Search',
+              tfController: controller.searchController,
+              textAlign: TextAlign.center,
+              onChanged: (value) => controller.filter(),
+            ),
+            24.heightBox,
+            Obx(
+              () => controller.listStudentFiltered.isEmpty
+                  ? EmptyWidget(
+                      message: 'Student Not Found',
+                    )
+                  : ListView.separated(
                       itemBuilder: (context, index) => ListTile(
                         title: Text(
-                          controller.listStudent[index].studentName ?? '',
+                          controller.listStudentFiltered[index].studentName ?? '',
                           style: GoogleFonts.aBeeZee(
                             fontSize: 24,
                           ),
@@ -70,12 +71,12 @@ class StudentManagementView extends GetView<StudentManagementController> {
                         ),
                       ),
                       separatorBuilder: (context, item) => 12.heightBox,
-                      itemCount: controller.listStudent.length,
-                    ).expand()
-                  ],
-                  crossAlignment: CrossAxisAlignment.center,
-                ).pSymmetric(h: 128, v: 24).hFull(context),
-        ),
+                      itemCount: controller.listStudentFiltered.length,
+                    ).expand(),
+            )
+          ],
+          crossAlignment: CrossAxisAlignment.center,
+        ).pSymmetric(h: 128, v: 24).hFull(context),
       ),
     );
   }
