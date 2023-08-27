@@ -42,17 +42,18 @@ class SelectStudentView extends GetView<SelectStudentController> {
                       hint: 'Search',
                       tfController: controller.searchController,
                       textAlign: TextAlign.center,
+                      onChanged: (value) => controller.filter(),
                     )
                   : Container(),
             ),
             24.heightBox,
             Obx(
-              () => controller.listStudent.isNotEmpty
+              () => controller.listStudentFiltered.isNotEmpty
                   ? ListView.separated(
                       itemBuilder: (context, index) => ListTile(
                         leading: Obx(() => Checkbox(value: controller.selectedIndex.value == index, onChanged: (value) => {})),
                         title: Text(
-                          controller.listStudent[index].studentName ?? '',
+                          controller.listStudentFiltered[index].studentName ?? '',
                           style: GoogleFonts.aBeeZee(
                             fontSize: 24,
                           ),
@@ -66,7 +67,7 @@ class SelectStudentView extends GetView<SelectStudentController> {
                         },
                       ),
                       separatorBuilder: (context, item) => 12.heightBox,
-                      itemCount: controller.listStudent.length,
+                      itemCount: controller.listStudentFiltered.length,
                     ).expand()
                   : EmptyWidget(
                       message: 'Student not found',

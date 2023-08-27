@@ -51,12 +51,12 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                       side: BorderSide(color: colorBorder),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    onTap: () => controller.goToEditQuestion(),
+                    onTap: () => controller.goToEditQuestion(item.id ?? ''),
                     trailing: IconButton(
                       onPressed: () => ExDialog.alertDialog(
                         title: 'Alert',
                         message: 'Are you sure to delete this question?',
-                        onConfirmClicked: () {},
+                        onConfirmClicked: () => controller.removeQuestion(item.id ?? ''),
                       ),
                       icon: Icon(
                         Icons.delete,
@@ -88,12 +88,12 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                       side: BorderSide(color: colorBorder),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    onTap: () => controller.goToEditQuestion(),
+                    onTap: () => controller.goToEditQuestion(item.id ?? ''),
                     trailing: IconButton(
                       onPressed: () => ExDialog.alertDialog(
                         title: 'Alert',
                         message: 'Are you sure to delete this question?',
-                        onConfirmClicked: () {},
+                        onConfirmClicked: () => controller.removeQuestion(item.id ?? ''),
                       ),
                       icon: Icon(
                         Icons.delete,

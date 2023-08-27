@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 class StudentManagementController extends GetxController {
   final searchController = TextEditingController();
   final listStudent = <Student>[].obs;
+  final listStudentFiltered = <Student>[].obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -26,10 +28,25 @@ class StudentManagementController extends GetxController {
     super.onClose();
   }
 
+  void filter() {
+    listStudentFiltered.clear();
+    if (searchController.text.isNotEmpty) {
+      listStudent.forEach((element) {
+        if (element.studentName!.contains(searchController.text.toLowerCase())) {
+          listStudentFiltered.add(element);
+        }
+      });
+    } else {
+      listStudentFiltered.addAll(listStudent);
+    }
+  }
+
   Future<void> getStudentData() async {
     await Database.getAllStudentData().then((value) {
       listStudent.clear();
+      listStudentFiltered.clear();
       listStudent.addAll(value);
+      listStudentFiltered.addAll(value);
     }).catchError((dynamic error) {
       logE('$error');
     });

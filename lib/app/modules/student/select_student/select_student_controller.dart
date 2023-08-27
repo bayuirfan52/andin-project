@@ -11,6 +11,8 @@ class SelectStudentController extends BaseController {
   final searchController = TextEditingController();
   final selectedIndex = 0.obs;
   final listStudent = <Student>[].obs;
+  final listStudentFiltered = <Student>[].obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -27,6 +29,7 @@ class SelectStudentController extends BaseController {
   }
 
   void goToAddStudent() => Get.toNamed<dynamic>(Routes.ADD_STUDENT);
+
   void goToDashboard() => Get.offAllNamed<dynamic>(Routes.DASHBOARD);
 
   void selectCurrentActiveStudent() {
@@ -35,10 +38,25 @@ class SelectStudentController extends BaseController {
     goToDashboard();
   }
 
+  void filter() {
+    listStudentFiltered.clear();
+    if (searchController.text.isNotEmpty) {
+      listStudent.forEach((element) {
+        if (element.studentName!.contains(searchController.text.toLowerCase())) {
+          listStudentFiltered.add(element);
+        }
+      });
+    } else {
+      listStudentFiltered.addAll(listStudent);
+    }
+  }
+
   Future<void> getStudentData() async {
     await Database.getAllStudentData().then((value) {
       listStudent.clear();
+      listStudentFiltered.clear();
       listStudent.addAll(value);
+      listStudentFiltered.addAll(value);
     }).catchError((dynamic error) {
       logE('$error');
     });
