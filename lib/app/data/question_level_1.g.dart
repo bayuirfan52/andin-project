@@ -21,16 +21,13 @@ class QuestionLevel1Adapter extends TypeAdapter<QuestionLevel1> {
       .._question = fields[1] as String?
       .._imagePath1 = fields[2] as String?
       .._audioPath1 = fields[3] as String?
-      .._answer1 = fields[4] as String?
-      .._imagePath2 = fields[5] as String?
-      .._audioPath2 = fields[6] as String?
-      .._answer2 = fields[7] as String?;
+      .._answer1 = fields[4] as String?;
   }
 
   @override
   void write(BinaryWriter writer, QuestionLevel1 obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj._id)
       ..writeByte(1)
@@ -40,13 +37,7 @@ class QuestionLevel1Adapter extends TypeAdapter<QuestionLevel1> {
       ..writeByte(3)
       ..write(obj._audioPath1)
       ..writeByte(4)
-      ..write(obj._answer1)
-      ..writeByte(5)
-      ..write(obj._imagePath2)
-      ..writeByte(6)
-      ..write(obj._audioPath2)
-      ..writeByte(7)
-      ..write(obj._answer2);
+      ..write(obj._answer1);
   }
 
   @override

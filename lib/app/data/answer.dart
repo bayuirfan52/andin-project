@@ -6,15 +6,26 @@ part 'answer.g.dart';
 @HiveType(typeId: 3)
 class Answer extends HiveObject {
   @HiveField(0)
-  String? _idStudent;
+  String? _idAnswer;
   @HiveField(1)
-  String? _idQuestion;
+  String? _idStudent;
   @HiveField(2)
-  int? _level;
+  String? _idQuestion;
   @HiveField(3)
+  int? _level;
+  @HiveField(4)
   int? _score;
 
-  Answer({String? idStudent, String? idQuestion, int? level, int? score}) {
+  Answer({
+    String? idAnswer,
+    String? idStudent,
+    String? idQuestion,
+    int? level,
+    int? score,
+  }) {
+    if (_idAnswer != null) {
+      this._idAnswer = idAnswer;
+    }
     if (idStudent != null) {
       this._idStudent = idStudent;
     }
@@ -29,16 +40,28 @@ class Answer extends HiveObject {
     }
   }
 
+  String? get idAnswer => _idAnswer;
+
+  set idAnswer(String? idAnswer) => _idAnswer = idAnswer;
+
   String? get idStudent => _idStudent;
+
   set idStudent(String? idStudent) => _idStudent = idStudent;
+
   String? get idQuestion => _idQuestion;
+
   set idQuestion(String? idQuestion) => _idQuestion = idQuestion;
+
   int? get level => _level;
+
   set level(int? level) => _level = level;
+
   int? get score => _score;
+
   set score(int? score) => _score = score;
 
   Answer.fromJson(Map<String, dynamic> json) {
+    _idAnswer = json['id_answer'];
     _idStudent = json['id_student'];
     _idQuestion = json['id_question'];
     _level = json['level'];
@@ -47,6 +70,7 @@ class Answer extends HiveObject {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id_answer'] = this._idAnswer;
     data['id_student'] = this._idStudent;
     data['id_question'] = this._idQuestion;
     data['level'] = this._level;

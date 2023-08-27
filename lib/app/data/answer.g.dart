@@ -17,23 +17,26 @@ class AnswerAdapter extends TypeAdapter<Answer> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Answer()
-      .._idStudent = fields[0] as String?
-      .._idQuestion = fields[1] as String?
-      .._level = fields[2] as int?
-      .._score = fields[3] as int?;
+      .._idAnswer = fields[0] as String?
+      .._idStudent = fields[1] as String?
+      .._idQuestion = fields[2] as String?
+      .._level = fields[3] as int?
+      .._score = fields[4] as int?;
   }
 
   @override
   void write(BinaryWriter writer, Answer obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
-      ..write(obj._idStudent)
+      ..write(obj._idAnswer)
       ..writeByte(1)
-      ..write(obj._idQuestion)
+      ..write(obj._idStudent)
       ..writeByte(2)
-      ..write(obj._level)
+      ..write(obj._idQuestion)
       ..writeByte(3)
+      ..write(obj._level)
+      ..writeByte(4)
       ..write(obj._score);
   }
 

@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:andin_project/app/core/resources/app_color.dart';
 import 'package:andin_project/app/utils/logger.dart';
-import 'package:andin_project/app/widgets/ex_image_view.dart';
 import 'package:andin_project/app/widgets/ex_textfield_normal.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart';
@@ -143,94 +141,97 @@ class AddQuestionView extends GetView<AddQuestionController> {
           ).p24(),
         ),
         48.heightBox,
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12)),
-            side: BorderSide(color: colorBorder),
-          ),
-          child: HStack(
-            [
-              VStack([
-                ExTextFieldNormal(
-                  hint: 'Answer 2',
-                  tfController: controller.answer2Controller,
-                  textInputType: TextInputType.text,
-                  capitalization: TextCapitalization.words,
-                ),
-                HStack([
-                  IconButton(
-                    onPressed: () {},
-                    iconSize: 48,
-                    icon: Icon(
-                      Icons.play_circle,
-                      color: colorPrimary,
-                    ),
+        Visibility(
+          visible: controller.currentLevel.value == 2,
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+              side: BorderSide(color: colorBorder),
+            ),
+            child: HStack(
+              [
+                VStack([
+                  ExTextFieldNormal(
+                    hint: 'Answer 2',
+                    tfController: controller.answer2Controller,
+                    textInputType: TextInputType.text,
+                    capitalization: TextCapitalization.words,
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    iconSize: 48,
-                    icon: Icon(
-                      Icons.pause_circle,
-                      color: colorPrimary,
-                    ),
-                  ),
-                  Spacer(),
-                  Obx(
-                    () => Text(
-                      basename(controller.audioPath2.value),
-                      style: GoogleFonts.aBeeZee(
-                        fontSize: 24,
+                  HStack([
+                    IconButton(
+                      onPressed: () {},
+                      iconSize: 48,
+                      icon: Icon(
+                        Icons.play_circle,
+                        color: colorPrimary,
                       ),
                     ),
-                  ),
-                  24.widthBox,
-                  IconButton(
-                    onPressed: () => controller.goToAudioRecorder(2),
-                    iconSize: 48,
-                    icon: Icon(
-                      Icons.mic,
-                      color: colorPrimary,
+                    IconButton(
+                      onPressed: () {},
+                      iconSize: 48,
+                      icon: Icon(
+                        Icons.pause_circle,
+                        color: colorPrimary,
+                      ),
+                    ),
+                    Spacer(),
+                    Obx(
+                      () => Text(
+                        basename(controller.audioPath2.value),
+                        style: GoogleFonts.aBeeZee(
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                    24.widthBox,
+                    IconButton(
+                      onPressed: () => controller.goToAudioRecorder(2),
+                      iconSize: 48,
+                      icon: Icon(
+                        Icons.mic,
+                        color: colorPrimary,
+                      ),
+                    ),
+                  ]).pOnly(top: 12)
+                ]).expand(),
+                24.widthBox,
+                ZStack([
+                  Container(
+                    width: 128,
+                    height: 128,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: colorBorder, width: 0.5),
+                    ),
+                    child: Obx(
+                      () => Image.file(
+                        File(controller.imagePath2.value),
+                        width: 128,
+                        height: 128,
+                        fit: BoxFit.cover,
+                        isAntiAlias: true,
+                        errorBuilder: (context, error, stackTrace) {
+                          logE('$error - ${stackTrace}');
+                          return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                        },
+                      ).onInkTap(() => controller.goToImagePreview(controller.imagePath2.value)),
                     ),
                   ),
-                ]).pOnly(top: 12)
-              ]).expand(),
-              24.widthBox,
-              ZStack([
-                Container(
-                  width: 128,
-                  height: 128,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: colorBorder, width: 0.5),
-                  ),
-                  child: Obx(
-                    () => Image.file(
-                      File(controller.imagePath2.value),
-                      width: 128,
-                      height: 128,
-                      fit: BoxFit.cover,
-                      isAntiAlias: true,
-                      errorBuilder: (context, error, stackTrace) {
-                        logE('$error - ${stackTrace}');
-                        return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
-                      },
-                    ).onInkTap(() => controller.goToImagePreview(controller.imagePath2.value)),
-                  ),
-                ),
-                IconButton(
-                  onPressed: () => controller.changeImage(2),
-                  iconSize: 32,
-                  icon: Icon(
-                    Icons.change_circle,
-                    color: colorPrimary,
-                  ),
-                )
-              ]),
-            ],
-            alignment: MainAxisAlignment.center,
-          ).p24(),
+                  IconButton(
+                    onPressed: () => controller.changeImage(2),
+                    iconSize: 32,
+                    icon: Icon(
+                      Icons.change_circle,
+                      color: colorPrimary,
+                    ),
+                  )
+                ]),
+              ],
+              alignment: MainAxisAlignment.center,
+            ).p24(),
+          ),
         ),
         48.heightBox,
-        Visibility(
+        /*Visibility(
           visible: controller.currentLevel.value == 2,
           child: Card(
             shape: RoundedRectangleBorder(
@@ -318,7 +319,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
               alignment: MainAxisAlignment.center,
             ).p24(),
           ),
-        ),
+        ),*/
       ]).scrollVertical().p24(),
     );
   }
