@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:andin_project/app/core/resources/app_color.dart';
+import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/app/widgets/ex_dialog.dart';
 import 'package:andin_project/app/widgets/ex_textfield_normal.dart';
@@ -84,20 +85,30 @@ class EditQuestionView extends GetView<EditQuestionController> {
                   capitalization: TextCapitalization.words,
                 ),
                 HStack([
-                  IconButton(
-                    onPressed: () {},
-                    iconSize: 48,
-                    icon: Icon(
-                      Icons.play_circle,
-                      color: colorPrimary,
+                  Obx(
+                        () => Visibility(
+                      visible: controller.audioPath1.isNotEmpty && (controller.status.value == Status.IDLE || controller.status.value == Status.PAUSED),
+                      child: IconButton(
+                        onPressed: () => controller.play(controller.audioPath1.value, 1),
+                        iconSize: 48,
+                        icon: Icon(
+                          Icons.play_circle,
+                          color: colorPrimary,
+                        ),
+                      ),
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    iconSize: 48,
-                    icon: Icon(
-                      Icons.pause_circle,
-                      color: colorPrimary,
+                  Obx(
+                        () => Visibility(
+                      visible: controller.status.value == Status.PLAYING && controller.currentPlayedAudio.value == 1,
+                      child: IconButton(
+                        onPressed: () => controller.pause(),
+                        iconSize: 48,
+                        icon: Icon(
+                          Icons.pause_circle,
+                          color: colorPrimary,
+                        ),
+                      ),
                     ),
                   ),
                   Spacer(),
@@ -173,20 +184,30 @@ class EditQuestionView extends GetView<EditQuestionController> {
                     capitalization: TextCapitalization.words,
                   ),
                   HStack([
-                    IconButton(
-                      onPressed: () {},
-                      iconSize: 48,
-                      icon: Icon(
-                        Icons.play_circle,
-                        color: colorPrimary,
+                    Obx(
+                          () => Visibility(
+                        visible: controller.audioPath2.isNotEmpty && (controller.status.value == Status.IDLE || controller.status.value == Status.PAUSED),
+                        child: IconButton(
+                          onPressed: () => controller.play(controller.audioPath2.value, 2),
+                          iconSize: 48,
+                          icon: Icon(
+                            Icons.play_circle,
+                            color: colorPrimary,
+                          ),
+                        ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      iconSize: 48,
-                      icon: Icon(
-                        Icons.pause_circle,
-                        color: colorPrimary,
+                    Obx(
+                          () => Visibility(
+                        visible: controller.status.value == Status.PLAYING && controller.currentPlayedAudio.value == 2,
+                        child: IconButton(
+                          onPressed: () => controller.pause(),
+                          iconSize: 48,
+                          icon: Icon(
+                            Icons.pause_circle,
+                            color: colorPrimary,
+                          ),
+                        ),
                       ),
                     ),
                     Spacer(),

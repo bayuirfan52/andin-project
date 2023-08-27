@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'dart:math';
+
+import 'package:andin_project/app/utils/logger.dart' as logger;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-import 'package:andin_project/app/utils/logger.dart' as logger;
 
 mixin FileHelper {
   static String getFileSize(String filepath, int decimals) {
@@ -40,7 +41,6 @@ mixin FileHelper {
     logger.logI('Image Dir: ${imageDir.path}');
     final timeStamp = DateTime.now().millisecondsSinceEpoch;
     final newFile = File('${imageDir.path}/image_$timeStamp${getFileExtensions(file.path)}');
-    await newFile.create();
     await newFile.writeAsBytes(file.readAsBytesSync());
     return newFile;
   }
