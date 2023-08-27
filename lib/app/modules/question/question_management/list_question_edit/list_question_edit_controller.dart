@@ -80,6 +80,9 @@ class ListQuestionEditController extends GetxController {
 
   void goToEditQuestion(String id) => Get.toNamed<dynamic>(
         Routes.EDIT_QUESTION,
-        arguments: {'level': currentLevel.value, 'id': id},
+        arguments: {
+          'level': currentLevel.value,
+          'id': id,
+        },
       )?.then((value) => handleListQuestion());
 }

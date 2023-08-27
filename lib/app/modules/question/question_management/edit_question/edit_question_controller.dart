@@ -5,9 +5,12 @@ import 'package:andin_project/app/data/question_level_1.dart';
 import 'package:andin_project/app/data/question_level_2.dart';
 import 'package:andin_project/app/helper/file_helper.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
+import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
+import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -27,22 +30,76 @@ class EditQuestionController extends GetxController {
   final questionController = TextEditingController();
   final answer1Controller = TextEditingController();
   final answer2Controller = TextEditingController();
+  final audioPlayer = FlutterSoundPlayer();
+  final status = Status.IDLE.obs;
+  final currentPlayedAudio = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
     currentLevel.value = Get.arguments['level'] as int;
-    getQuestionData(Get.arguments['id'] as String);
+    init();
   }
 
   @override
   void onReady() {
     super.onReady();
+    getQuestionData(Get.arguments['id'] as String);
   }
 
   @override
   void onClose() {
     super.onClose();
+    audioPlayer.closePlayer();
+  }
+
+  Future<void> init() async {
+    final session = await AudioSession.instance;
+    await session.configure(
+      AudioSessionConfiguration(
+        avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
+        avAudioSessionCategoryOptions: AVAudioSessionCategoryOptions.allowBluetooth,
+        avAudioSessionMode: AVAudioSessionMode.spokenAudio,
+        avAudioSessionRouteSharingPolicy: AVAudioSessionRouteSharingPolicy.defaultPolicy,
+        avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
+        androidAudioAttributes: const AndroidAudioAttributes(
+          contentType: AndroidAudioContentType.speech,
+          usage: AndroidAudioUsage.voiceCommunication,
+        ),
+        androidWillPauseWhenDucked: true,
+      ),
+    );
+    await audioPlayer.openPlayer();
+    audioPlayer.onProgress?.listen((event) {
+      logI('Progress Playing: ${event.position.inSeconds}s');
+    });
+  }
+
+  Future<void> play(String file, int index) async {
+    if (status.value == Status.PAUSED) {
+      await audioPlayer.resumePlayer();
+    } else {
+      await audioPlayer.startPlayer(
+        fromURI: file,
+        whenFinished: () {
+          logI('finish');
+          stop();
+        },
+      );
+    }
+    currentPlayedAudio.value = index;
+    status.value = Status.PLAYING;
+  }
+
+  Future<void> pause() async {
+    status.value = Status.PAUSED;
+    await audioPlayer.pausePlayer();
+  }
+
+  Future<void> stop() async {
+    status.value = Status.IDLE;
+    currentPlayedAudio.value = 0;
+    await audioPlayer.stopPlayer();
   }
 
   void goToImagePreview(String path) {

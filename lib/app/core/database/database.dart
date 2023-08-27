@@ -67,7 +67,7 @@ mixin Database {
   static Future<List<QuestionLevel1>> getAllQuestionLevel1() async {
     final box = await Hive.openBox<QuestionLevel1>(level1Box);
     final listQuestion = <QuestionLevel1>[];
-    for (var i = 0; i < box.length - 1; i++) {
+    for (var i = 0; i < box.length; i++) {
       final item = box.getAt(i) ?? QuestionLevel1();
       listQuestion.add(item);
     }
@@ -97,7 +97,7 @@ mixin Database {
   static Future<List<QuestionLevel2>> getAllQuestionLevel2() async {
     final box = await Hive.openBox<QuestionLevel2>(level2Box);
     final listQuestion = <QuestionLevel2>[];
-    for (var i = 0; i < box.length - 1; i++) {
+    for (var i = 0; i < box.length; i++) {
       final item = box.getAt(i) ?? QuestionLevel2();
       listQuestion.add(item);
     }
@@ -106,14 +106,14 @@ mixin Database {
   }
 
   static Future<QuestionLevel2?> getQuestionLevel2(String id) async {
-    final box = await Hive.openBox<QuestionLevel2>(level1Box);
+    final box = await Hive.openBox<QuestionLevel2>(level2Box);
     final question = box.get(id);
     await box.close();
     return question;
   }
 
   static Future<void> removeQuestionLevel2ById(String id) async {
-    final box = await Hive.openBox<QuestionLevel2>(level1Box);
+    final box = await Hive.openBox<QuestionLevel2>(level2Box);
     await box.delete(id);
     await box.close();
   }
@@ -127,7 +127,7 @@ mixin Database {
   static Future<List<Answer>> getAnswerByStudent(String studentId) async {
     final box = await Hive.openBox<Answer>(answer);
     final listAnswer = <Answer>[];
-    for (var i = 0; i < box.length - 1; i++) {
+    for (var i = 0; i < box.length; i++) {
       final item = box.getAt(i) ?? Answer();
       if (item.idStudent == studentId) {
         listAnswer.add(item);
@@ -139,7 +139,7 @@ mixin Database {
 
   static Future<void> removeAnswerByStudent(String studentId) async {
     final box = await Hive.openBox<Answer>(answer);
-    for (var i = 0; i < box.length - 1; i++) {
+    for (var i = 0; i < box.length; i++) {
       final item = box.getAt(i) ?? Answer();
       if (item.idStudent == studentId) {
         await box.deleteAt(i);
@@ -150,7 +150,7 @@ mixin Database {
 
   static Future<void> removeAnswerByQuestion(String questionId) async {
     final box = await Hive.openBox<Answer>(answer);
-    for (var i = 0; i < box.length - 1; i++) {
+    for (var i = 0; i < box.length; i++) {
       final item = box.getAt(i) ?? Answer();
       if (item.idQuestion == questionId) {
         await box.deleteAt(i);
