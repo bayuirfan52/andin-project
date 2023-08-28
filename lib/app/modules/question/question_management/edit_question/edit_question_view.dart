@@ -43,7 +43,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
-          )
+          ),
         ],
       ),
       body: VStack([
