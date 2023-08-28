@@ -64,5 +64,5 @@ class StudentManagementController extends GetxController {
   }
 
   void goToAddStudent() => Get.toNamed<dynamic>(Routes.ADD_STUDENT);
-  void goToStudentDetail() => Get.toNamed<dynamic>(Routes.STUDENT_DETAIL);
+  void goToStudentDetail(String id) => Get.toNamed<dynamic>(Routes.STUDENT_DETAIL, arguments: id);
 }

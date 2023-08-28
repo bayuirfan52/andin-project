@@ -58,7 +58,7 @@ class StudentManagementView extends GetView<StudentManagementController> {
                           side: BorderSide(color: colorBorder),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        onTap: () => controller.goToStudentDetail(),
+                        onTap: () => controller.goToStudentDetail(controller.listStudentFiltered[index].id ?? ''),
                         trailing: IconButton(
                           onPressed: () => ExDialog.alertDialog(
                             title: 'Alert',
