@@ -55,7 +55,7 @@ class HomeView extends GetView<HomeController> {
           Card(
             child: ZStack([
               Image.network(
-                'https://www.kamiapp.com/wp-content/uploads/2022/09/Certified-Banner-2-1024x917.jpg',
+                'https://rollhappy.co.uk/cdn/shop/collections/roll-happy-rollerskating-level-2_1200x1200.jpg?v=1680537955',
                 width: 480,
                 height: 480,
                 fit: BoxFit.cover,

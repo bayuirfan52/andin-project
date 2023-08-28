@@ -1,4 +1,5 @@
 import 'package:andin_project/app/core/database/database.dart';
+import 'package:andin_project/app/data/answer.dart';
 import 'package:andin_project/app/data/question_level_1.dart';
 import 'package:andin_project/app/data/question_level_2.dart';
 import 'package:andin_project/app/data/student.dart';
@@ -11,6 +12,7 @@ class ListQuestionController extends GetxController {
   final currentLevel = 1.obs;
   final listLevel1 = <QuestionLevel1>[].obs;
   final listLevel2 = <QuestionLevel2>[].obs;
+  final listAnswer = <Answer>[].obs;
   final currentStudent = Student().obs;
 
   @override
@@ -23,6 +25,7 @@ class ListQuestionController extends GetxController {
   void onReady() {
     super.onReady();
     handleListQuestion();
+    getAnswered();
     getCurrentActiveStudent();
   }
 
@@ -39,6 +42,14 @@ class ListQuestionController extends GetxController {
     } else {
       await getListQuestionLevel2();
     }
+  }
+
+  Future<void> getAnswered() async {
+    await Database.getAnswerByStudent(currentStudent.value.id ?? '').then((value) {
+      listAnswer.value = value;
+    }).catchError((dynamic error){
+      logE(error);
+    });
   }
 
   Future<void> getCurrentActiveStudent() async {

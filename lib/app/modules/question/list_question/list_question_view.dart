@@ -40,7 +40,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
             style: GoogleFonts.aBeeZee(fontSize: 24),
           ),
           Obx(
-                () => Text(
+            () => Text(
               controller.currentStudent.value.studentName ?? '',
               style: GoogleFonts.aBeeZee(
                 fontSize: 24,
@@ -60,7 +60,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
                 itemBuilder: (context, index) {
                   final item = controller.listLevel1[index];
                   return ListTile(
-                    leading: Checkbox(value: true, onChanged: (value) => {}),
+                    leading: Obx(() => Checkbox(value: controller.listAnswer.where((element) => element.idQuestion == item.id).isNotEmpty, onChanged: (value) => {})),
                     title: Text(
                       item.question ?? '',
                       style: GoogleFonts.aBeeZee(
@@ -91,7 +91,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
                 itemBuilder: (context, index) {
                   final item = controller.listLevel2[index];
                   return ListTile(
-                    leading: Checkbox(value: true, onChanged: (value) => {}),
+                    leading: Obx(() => Checkbox(value: controller.listAnswer.where((element) => element.idQuestion == item.id).isNotEmpty, onChanged: (value) => {})),
                     title: Text(
                       item.question ?? '',
                       style: GoogleFonts.aBeeZee(

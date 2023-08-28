@@ -38,7 +38,22 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
         ],
       ),
       body: Center(
-        child: questionLevel1(context),
+        child: VStack(
+          [
+            24.heightBox,
+            Obx(
+              () => Text(
+                'Student: ${controller.currentStudent.value.studentName ?? ''}',
+                textScaleFactor: 2,
+                textAlign: TextAlign.end,
+              ).wFull(context).pOnly(right: 128),
+            ),
+            Spacer(),
+            Obx(() => controller.currentLevel.value == 1 ? questionLevel1(context) : questionLevel2(context)),
+            Spacer(),
+          ],
+          crossAlignment: CrossAxisAlignment.center,
+        ),
       ),
       bottomNavigationBar: HStack(
         [
@@ -153,5 +168,40 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
             },
           ).onInkTap(() => controller.play(controller.level1.value.audioPath1 ?? '', 1)).p12(),
         ),
+      );
+
+  Widget questionLevel2(BuildContext context) => Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: colorBorder),
+        ),
+        child: HStack([
+          Obx(
+            () => Image.file(
+              File(controller.level2.value.imagePath1 ?? ''),
+              width: 256,
+              height: 256,
+              isAntiAlias: true,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                logE('$error - ${stackTrace}');
+                return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+              },
+            ).onInkTap(() => controller.play(controller.level1.value.audioPath1 ?? '', 1)).p12(),
+          ),
+          64.widthBox,
+          Obx(
+            () => Image.file(
+              File(controller.level2.value.imagePath2 ?? ''),
+              width: 256,
+              height: 256,
+              isAntiAlias: true,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                logE('$error - ${stackTrace}');
+                return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+              },
+            ).onInkTap(() => controller.play(controller.level1.value.audioPath1 ?? '', 1)).p12(),
+          )
+        ]),
       );
 }
