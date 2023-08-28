@@ -22,7 +22,7 @@ class StudentDetailView extends GetView<StudentDetailController> {
             onPressed: () => ExDialog.alertDialog(
               title: 'Alert',
               message: 'Are you sure to delete this student?',
-              onConfirmClicked: () => {},
+              onConfirmClicked: () => controller.removeStudent(),
             ),
             child: Text(
               'Delete',
@@ -32,7 +32,7 @@ class StudentDetailView extends GetView<StudentDetailController> {
           ),
           12.widthBox,
           MaterialButton(
-            onPressed: () => {},
+            onPressed: () => controller.goToEditStudent(),
             child: Text(
               'Edit',
               textScaleFactor: 1.5,
