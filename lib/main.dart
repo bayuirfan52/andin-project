@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/core/resources/app_theme.dart';
+import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
+import 'package:andin_project/generated/locales.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,13 +41,16 @@ class AndinProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
-        title: 'Andin Project',
+        title: PreferenceHelper.getCurrentAppName(),
         theme: AppTheme.theme,
         initialRoute: AppPages.initial,
         getPages: AppPages.routes,
         defaultTransition: Transition.cupertino,
         // ignore: avoid_redundant_argument_values
         debugShowCheckedModeBanner: kDebugMode,
+        translationsKeys: AppTranslation.translations,
+        locale: Locale('en', 'US'),
+        fallbackLocale: Locale('id', 'ID'),
         builder: (context, child) {
           if (FlutterConfig.get('FLAVOR') == 'production') {
             return child!;
