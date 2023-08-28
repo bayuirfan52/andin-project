@@ -1,3 +1,9 @@
+import 'dart:io';
+
+import 'package:andin_project/app/core/resources/app_color.dart';
+import 'package:andin_project/app/utils/logger.dart';
+import 'package:andin_project/app/widgets/ex_button_default.dart';
+import 'package:andin_project/app/widgets/ex_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -28,39 +34,124 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
-          )
+          ),
         ],
       ),
       body: Center(
-        child: VStack(
-          [
-            HStack(
-              [
-                Text(
-                  'Current Active Student : ',
-                  style: GoogleFonts.aBeeZee(fontSize: 24),
+        child: questionLevel1(context),
+      ),
+      bottomNavigationBar: HStack(
+        [
+          Obx(
+            () => ExButtonDefault(
+              width: 164,
+              backgroundColor: colorPrimary,
+              isEnable: controller.isHasPreviousQuestion.value,
+              onPressed: () => controller.previousQuestion(),
+              label: 'Previous',
+              labelSize: 36,
+              height: 80,
+            ),
+          ),
+          VStack(
+            [
+              Obx(
+                () => Text(
+                  controller.isAnswered.value ? 'This Question is Scored' : 'Score',
+                  style: GoogleFonts.aBeeZee(fontSize: 36),
                 ),
-                Obx(
-                  () => Text(
-                    controller.currentStudent.value.studentName ?? '',
-                    style: GoogleFonts.aBeeZee(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                    ),
+              ),
+              24.heightBox,
+              HStack([
+                MaterialButton(
+                  color: Colors.red.shade500,
+                  onPressed: () => saveAnswerDialog(0),
+                  padding: EdgeInsets.all(24),
+                  child: Text(
+                    '0',
+                    textScaleFactor: 2,
+                    style: GoogleFonts.aBeeZee(color: Colors.white),
                   ),
                 ),
-              ],
-              alignment: MainAxisAlignment.center,
+                12.widthBox,
+                MaterialButton(
+                  color: Colors.orange.shade500,
+                  onPressed: () => saveAnswerDialog(30),
+                  padding: EdgeInsets.all(24),
+                  child: Text(
+                    '30',
+                    textScaleFactor: 2,
+                    style: GoogleFonts.aBeeZee(color: Colors.white),
+                  ),
+                ),
+                12.widthBox,
+                MaterialButton(
+                  color: Colors.green.shade500,
+                  onPressed: () => saveAnswerDialog(60),
+                  padding: EdgeInsets.all(24),
+                  child: Text(
+                    '60',
+                    textScaleFactor: 2,
+                    style: GoogleFonts.aBeeZee(color: Colors.white),
+                  ),
+                ),
+                12.widthBox,
+                MaterialButton(
+                  color: Colors.blue.shade500,
+                  onPressed: () => saveAnswerDialog(80),
+                  padding: EdgeInsets.all(24),
+                  child: Text(
+                    '80',
+                    textScaleFactor: 2,
+                    style: GoogleFonts.aBeeZee(color: Colors.white),
+                  ),
+                ),
+              ])
+            ],
+            crossAlignment: CrossAxisAlignment.center,
+          ),
+          Obx(
+            () => ExButtonDefault(
+              width: 164,
+              backgroundColor: colorPrimary,
+              isEnable: controller.isHasNextQuestion.value,
+              onPressed: () => controller.nextQuestion(),
+              label: 'Next',
+              labelSize: 36,
+              height: 80,
             ),
-            128.heightBox,
-            Text(
-              'Under Construction',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
-          crossAlignment: CrossAxisAlignment.center,
-        ).p24(),
-      ),
+          ),
+        ],
+        alignment: MainAxisAlignment.spaceBetween,
+        crossAlignment: CrossAxisAlignment.end,
+      ).p24(),
     );
   }
+
+  void saveAnswerDialog(int score) {
+    ExDialog.alertDialog(
+      title: 'Attention',
+      message: 'Are you sure to add score $score for this question to ${controller.currentStudent.value.studentName}?',
+      onConfirmClicked: () => controller.saveAnswer(score),
+    );
+  }
+
+  Widget questionLevel1(BuildContext context) => Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: colorBorder),
+        ),
+        child: Obx(
+          () => Image.file(
+            File(controller.level1.value.imagePath1 ?? ''),
+            width: 256,
+            height: 256,
+            isAntiAlias: true,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              logE('$error - ${stackTrace}');
+              return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+            },
+          ).onInkTap(() => controller.play(controller.level1.value.audioPath1 ?? '', 1)).p12(),
+        ),
+      );
 }
