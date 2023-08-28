@@ -1,5 +1,7 @@
 import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/data/student.dart';
+import 'package:andin_project/app/helper/flushbar_helper.dart';
+import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
 
@@ -28,6 +30,10 @@ class StudentDetailController extends GetxController {
     super.onClose();
   }
 
+  void goToEditStudent() => Get.toNamed<dynamic>(Routes.EDIT_STUDENT, arguments: id.value)?.then((value) {
+        getStudentData();
+      });
+
   Future<void> getStudentData() async {
     await Database.getStudentData(id.value).then((value) {
       if (value != null) {
@@ -54,6 +60,15 @@ class StudentDetailController extends GetxController {
       averageLevel2.value = avg2.isNaN ? 0.0 : avg2;
     }).catchError((dynamic error) {
       logE('Answer Data Error: $error');
+    });
+  }
+
+  Future<void> removeStudent() async {
+    await Database.removeStudentById(id.value).then((value) {
+      Get.back<dynamic>();
+      FlushbarHelper.showFlushbar(Get.context!, message: 'Student Removed!', type: FlushbarType.SUCCESS);
+    }).catchError((dynamic error) {
+      logE('Remove Student Failed: $error');
     });
   }
 }

@@ -1,6 +1,11 @@
+import 'package:andin_project/app/widgets/ex_button_default.dart';
+import 'package:andin_project/app/widgets/ex_dialog.dart';
+import 'package:andin_project/app/widgets/ex_textfield_normal.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import 'edit_student_controller.dart';
 
@@ -9,15 +14,38 @@ class EditStudentView extends GetView<EditStudentController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('EditStudentView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'EditStudentView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      appBar: AppBar(),
+      body: Center(
+        child: VStack(
+          [
+            Text(
+              'Edit Student',
+              style: GoogleFonts.aBeeZee(
+                fontSize: 48,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            48.heightBox,
+            ExTextFieldNormal(
+              hint: 'Student Name',
+              capitalization: TextCapitalization.words,
+              textAlign: TextAlign.center,
+              tfController: controller.studentController,
+            ),
+            128.heightBox,
+            ExButtonDefault(
+              label: 'Save',
+              labelSize: 32,
+              height: 64,
+              onPressed: () => ExDialog.alertDialog(
+                title: 'Alert',
+                message: 'Are you sure to edit this student?',
+                onConfirmClicked: () => controller.saveStudent(),
+              ),
+            ).wFull(context)
+          ],
+          crossAlignment: CrossAxisAlignment.center,
+        ).pSymmetric(v: 24, h: 128).scrollVertical(),
       ),
     );
   }
