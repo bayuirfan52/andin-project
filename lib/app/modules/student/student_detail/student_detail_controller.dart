@@ -30,6 +30,8 @@ class StudentDetailController extends GetxController {
     super.onClose();
   }
 
+  void backToDashboard() => Get.offAllNamed<dynamic>(Routes.DASHBOARD);
+
   void goToEditStudent() => Get.toNamed<dynamic>(Routes.EDIT_STUDENT, arguments: id.value)?.then((value) {
         getStudentData();
       });
