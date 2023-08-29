@@ -34,6 +34,7 @@ dependencies:
   pull_to_refresh: ^2.0.0
   velocity_x: ^3.6.0
   very_good_analysis: ^4.0.0+1
+  toggle_switch: ^2.1.0
 description: Interactive learning for difabel.
 dev_dependencies:
   flutter_lints: ^2.0.0

@@ -28,7 +28,7 @@ class SelectStudentView extends GetView<SelectStudentController> {
         child: VStack(
           [
             Text(
-              'Select Student',
+              'button_select_student'.tr,
               style: GoogleFonts.aBeeZee(
                 fontSize: 48,
                 fontWeight: FontWeight.w700,
@@ -39,7 +39,7 @@ class SelectStudentView extends GetView<SelectStudentController> {
               () => controller.listStudent.isNotEmpty
                   ? ExTextFieldIcon(
                       prefixIcon: Icons.search_rounded,
-                      hint: 'Search',
+                      hint: 'text_search'.tr,
                       tfController: controller.searchController,
                       textAlign: TextAlign.center,
                       onChanged: (value) => controller.filter(),
@@ -70,7 +70,7 @@ class SelectStudentView extends GetView<SelectStudentController> {
                       itemCount: controller.listStudentFiltered.length,
                     ).expand()
                   : EmptyWidget(
-                      message: 'Student not found',
+                      message: 'text_student_not_found'.tr,
                     ).scrollVertical().expand(),
             )
           ],
@@ -79,7 +79,7 @@ class SelectStudentView extends GetView<SelectStudentController> {
       ),
       bottomNavigationBar: Obx(
         () => ExButtonDefault(
-          label: 'Enter',
+          label: 'button_enter'.tr,
           labelSize: 32,
           height: 64,
           isEnable: controller.listStudentFiltered.isNotEmpty,

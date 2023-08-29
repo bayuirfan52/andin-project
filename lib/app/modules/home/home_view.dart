@@ -20,7 +20,7 @@ class HomeView extends GetView<HomeController> {
           MaterialButton(
             onPressed: () => controller.goToSelectStudent(),
             child: Text(
-              'Select Student',
+              'button_select_student'.tr,
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
@@ -77,24 +77,13 @@ class HomeView extends GetView<HomeController> {
         ],
         alignment: MainAxisAlignment.center,
       ).centered().p24(),
-      bottomNavigationBar: HStack(
-        [
-          Text(
-            'Current Active Student : ',
-            style: GoogleFonts.aBeeZee(fontSize: 24),
-          ),
-          Obx(
-            () => Text(
-              controller.currentStudent.value.studentName ?? '',
-              style: GoogleFonts.aBeeZee(
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ],
-        alignment: MainAxisAlignment.center,
-      ).p24(),
+      bottomNavigationBar: Obx(
+        () => Text(
+          'text_current_active_student'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
+          style: GoogleFonts.aBeeZee(fontSize: 24),
+          textAlign: TextAlign.center,
+        ).p24(),
+      ),
     );
   }
 }

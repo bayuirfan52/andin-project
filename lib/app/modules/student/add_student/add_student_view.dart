@@ -19,7 +19,7 @@ class AddStudentView extends GetView<AddStudentController> {
         child: VStack(
           [
             Text(
-              'Add Student',
+              'button_add_new_student'.tr,
               style: GoogleFonts.aBeeZee(
                 fontSize: 48,
                 fontWeight: FontWeight.w700,
@@ -27,19 +27,19 @@ class AddStudentView extends GetView<AddStudentController> {
             ),
             48.heightBox,
             ExTextFieldNormal(
-              hint: 'Student Name',
+              hint: 'text_student_name'.tr,
               capitalization: TextCapitalization.words,
               textAlign: TextAlign.center,
               tfController: controller.studentController,
             ),
             128.heightBox,
             ExButtonDefault(
-              label: 'Add',
+              label: 'button_add'.tr,
               labelSize: 32,
               height: 64,
               onPressed: () => ExDialog.alertDialog(
-                title: 'Alert',
-                message: 'Are you sure to add this student?\nThis addition will automatically select this student to be the current active student',
+                title: 'text_alert'.tr,
+                message: 'text_alert_add_student'.tr,
                 onConfirmClicked: () => controller.saveNewStudent(),
               ),
             ).wFull(context)

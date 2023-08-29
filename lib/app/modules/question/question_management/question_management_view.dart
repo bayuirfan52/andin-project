@@ -13,7 +13,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Question Management'),
+        title: Text('text_question_management'.tr),
         centerTitle: true,
       ),
       body: HStack(

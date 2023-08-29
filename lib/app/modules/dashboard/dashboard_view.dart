@@ -38,25 +38,25 @@ class DashboardView extends GetView<DashboardController> {
   List<PersistentBottomNavBarItem> _navBarItems() => [
         PersistentBottomNavBarItem(
           icon: Icon(Icons.home),
-          title: 'Home',
+          title: 'button_home'.tr,
           activeColorPrimary: colorPrimary,
           inactiveColorPrimary: colorGrey,
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.question_answer),
-          title: 'Question',
+          title: 'button_question'.tr,
           activeColorPrimary: colorPrimary,
           inactiveColorPrimary: colorGrey,
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.people),
-          title: 'Student',
+          title: 'button_student'.tr,
           activeColorPrimary: colorPrimary,
           inactiveColorPrimary: colorGrey,
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.person),
-          title: 'Profile',
+          title: 'button_profile'.tr,
           activeColorPrimary: colorPrimary,
           inactiveColorPrimary: colorGrey,
         ),

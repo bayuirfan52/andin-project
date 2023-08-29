@@ -30,7 +30,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
           MaterialButton(
             onPressed: () => controller.goToSelectStudent(),
             child: Text(
-              'Select Student',
+              'button_select_student'.tr,
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
@@ -43,7 +43,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
             24.heightBox,
             Obx(
               () => Text(
-                'Student: ${controller.currentStudent.value.studentName ?? ''}',
+                'text_student_'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
                 textScaleFactor: 2,
                 textAlign: TextAlign.end,
               ).wFull(context).pOnly(right: 128),
@@ -63,7 +63,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               backgroundColor: colorPrimary,
               isEnable: controller.isHasPreviousQuestion.value,
               onPressed: () => controller.previousQuestion(),
-              label: 'Previous',
+              label: 'button_previous'.tr,
               labelSize: 36,
               height: 80,
             ),
@@ -72,7 +72,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
             [
               Obx(
                 () => Text(
-                  controller.isAnswered.value ? 'This Question is Scored' : 'Score',
+                  controller.isAnswered.value ? 'text_question_scored'.tr : 'text_score'.tr,
                   style: GoogleFonts.aBeeZee(fontSize: 36),
                 ),
               ),
@@ -131,7 +131,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               backgroundColor: colorPrimary,
               isEnable: controller.isHasNextQuestion.value,
               onPressed: () => controller.nextQuestion(),
-              label: 'Next',
+              label: 'button_next'.tr,
               labelSize: 36,
               height: 80,
             ),
@@ -145,8 +145,8 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
 
   void saveAnswerDialog(int score) {
     ExDialog.alertDialog(
-      title: 'Attention',
-      message: 'Are you sure to add score $score for this question to ${controller.currentStudent.value.studentName}?',
+      title: 'text_attention'.tr,
+      message: 'text_alert_add_score'.trParams({'score': score.toString(), 'name': controller.currentStudent.value.studentName ?? ''}),
       onConfirmClicked: () => controller.saveAnswer(score),
     );
   }

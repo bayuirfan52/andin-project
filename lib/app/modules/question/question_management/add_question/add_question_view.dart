@@ -19,13 +19,13 @@ class AddQuestionView extends GetView<AddQuestionController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Question'),
+        title: Text('button_add_new_question'.tr),
         centerTitle: true,
         actions: [
           MaterialButton(
             onPressed: () => controller.saveQuestion(),
             child: Text(
-              'Save',
+              'button_save'.tr,
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
@@ -34,7 +34,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
       ),
       body: VStack([
         Text(
-          'Enter Question Title',
+          'text_enter_question_title'.tr,
           style: GoogleFonts.aBeeZee(
             fontSize: 24,
             fontWeight: FontWeight.w500,
@@ -42,14 +42,14 @@ class AddQuestionView extends GetView<AddQuestionController> {
         ),
         16.heightBox,
         ExTextFieldNormal(
-          hint: 'Question Title',
+          hint: 'text_question_title'.tr,
           tfController: controller.questionController,
           capitalization: TextCapitalization.words,
           textInputType: TextInputType.name,
         ),
         24.heightBox,
         Text(
-          'Enter Answer',
+          'text_enter_answer'.tr,
           style: GoogleFonts.aBeeZee(
             fontSize: 24,
             fontWeight: FontWeight.w500,
@@ -65,7 +65,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
             [
               VStack([
                 ExTextFieldNormal(
-                  hint: 'Answer 1',
+                  hint: 'text_answer_1'.tr,
                   tfController: controller.answer1Controller,
                   textInputType: TextInputType.text,
                   capitalization: TextCapitalization.words,
@@ -164,7 +164,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
               [
                 VStack([
                   ExTextFieldNormal(
-                    hint: 'Answer 2',
+                    hint: 'text_answer_2'.tr,
                     tfController: controller.answer2Controller,
                     textInputType: TextInputType.text,
                     capitalization: TextCapitalization.words,

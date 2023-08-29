@@ -21,7 +21,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
           MaterialButton(
             onPressed: () => controller.goToSelectStudent(),
             child: Text(
-              'Select Student',
+              'button_select_student'.tr,
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
@@ -35,17 +35,10 @@ class ListQuestionView extends GetView<ListQuestionController> {
       ),
       bottomNavigationBar: HStack(
         [
-          Text(
-            'Current Active Student : ',
-            style: GoogleFonts.aBeeZee(fontSize: 24),
-          ),
           Obx(
             () => Text(
-              controller.currentStudent.value.studentName ?? '',
-              style: GoogleFonts.aBeeZee(
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
+              'text_current_active_student'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
+              style: GoogleFonts.aBeeZee(fontSize: 24),
             ),
           ),
         ],
@@ -81,7 +74,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
                 itemCount: controller.listLevel1.length,
               ).pSymmetric(h: 128, v: 24).hFull(context)
             : EmptyWidget(
-                message: 'Question Not Found',
+                message: 'text_question_not_found'.tr,
               ),
       );
 
@@ -112,7 +105,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
                 itemCount: controller.listLevel2.length,
               ).pSymmetric(h: 128, v: 24).hFull(context)
             : EmptyWidget(
-                message: 'Question Not Found',
+                message: 'text_question_not_found'.tr,
               ),
       );
 }

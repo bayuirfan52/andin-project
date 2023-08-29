@@ -24,17 +24,17 @@ class StudentDetailView extends GetView<StudentDetailController> {
             icon: Icon(Icons.arrow_back),
             onPressed: () => controller.backToDashboard(),
           ),
-          title: Text('Detail Student'),
+          title: Text('text_detail_student'.tr),
           centerTitle: true,
           actions: [
             MaterialButton(
               onPressed: () => ExDialog.alertDialog(
-                title: 'Alert',
-                message: 'Are you sure to delete this student?',
+                title: 'text_alert'.tr,
+                message: 'text_alert_delete_student'.tr,
                 onConfirmClicked: () => controller.removeStudent(),
               ),
               child: Text(
-                'Delete',
+                'button_delete'.tr,
                 textScaleFactor: 1.5,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
@@ -43,7 +43,7 @@ class StudentDetailView extends GetView<StudentDetailController> {
             MaterialButton(
               onPressed: () => controller.goToEditStudent(),
               child: Text(
-                'Edit',
+                'button_edit'.tr,
                 textScaleFactor: 1.5,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
@@ -63,30 +63,29 @@ class StudentDetailView extends GetView<StudentDetailController> {
                 ),
               ),
               128.heightBox,
-              HStack([
-                24.widthBox,
-                Text(
+              ListTile(
+                title: Text(
                   'Level',
                   style: GoogleFonts.aBeeZee(
                     fontSize: 24,
                   ),
                 ),
-                Spacer(),
-                Text(
-                  'Total',
-                  style: GoogleFonts.aBeeZee(
-                    fontSize: 24,
+                trailing: HStack([
+                  Text(
+                    'Total',
+                    style: GoogleFonts.aBeeZee(
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-                128.widthBox,
-                Text(
-                  'Average',
-                  style: GoogleFonts.aBeeZee(
-                    fontSize: 24,
+                  100.widthBox,
+                  Text(
+                    'text_average'.tr,
+                    style: GoogleFonts.aBeeZee(
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-                24.widthBox,
-              ]),
+                ]),
+              ),
               24.heightBox,
               ListTile(
                 shape: RoundedRectangleBorder(side: BorderSide(color: colorBorder), borderRadius: BorderRadius.all(Radius.circular(12))),

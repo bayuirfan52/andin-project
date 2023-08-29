@@ -54,6 +54,9 @@
         "enter_answer": "Enter Answer",
         "answer_1": "Answer 1",
         "answer_2": "Answer 2",
-        "add_question": "Add Question"
+        "add_question": "Add Question",
+        "student_management": "Student Management",
+        "alert_remove_audio": "Are you sure you want to delete your audio?",
+        "select_language": "Select Language"
     }
 }

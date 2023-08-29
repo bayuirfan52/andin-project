@@ -11,7 +11,7 @@
         "add_new_question": "Tambah Pertanyaan Baru",
         "previous": "Sebelumnya",
         "next": "Selanjutnya",
-        "select_student": "Tambah Siswa",
+        "select_student": "Pilih Siswa",
         "sure": "Yakin",
         "yes": "Ya",
         "no": "Tidak",
@@ -54,6 +54,9 @@
         "enter_answer": "Masukkan Jawaban",
         "answer_1": "Jawaban 1",
         "answer_2": "Jawaban 2",
-        "add_question": "Tambah Pertanyaan"
+        "add_question": "Tambah Pertanyaan",
+        "student_management": "Manajemen Siswa",
+        "alert_remove_audio": "Apakah anda yakin ingin menghapus audio Anda?",
+        "select_language": "Pilih Bahasa"
     }
 }

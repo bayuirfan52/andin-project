@@ -20,17 +20,17 @@ class EditQuestionView extends GetView<EditQuestionController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Question'),
+        title: Text('text_edit_question'.tr),
         centerTitle: true,
         actions: [
           MaterialButton(
             onPressed: () => ExDialog.alertDialog(
-              title: 'Alert',
-              message: 'Are you sure to delete this question?',
+              title: 'text_alert'.tr,
+              message: 'text_alert_delete_question'.tr,
               onConfirmClicked: () => controller.removeQuestion(),
             ),
             child: Text(
-              'Delete',
+              'button_delete'.tr,
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
@@ -39,7 +39,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
           MaterialButton(
             onPressed: () => controller.saveQuestion(),
             child: Text(
-              'Save',
+              'button_save'.tr,
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
@@ -48,7 +48,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
       ),
       body: VStack([
         Text(
-          'Enter Question Title',
+          'text_enter_question_title'.tr,
           style: GoogleFonts.aBeeZee(
             fontSize: 24,
             fontWeight: FontWeight.w500,
@@ -56,14 +56,14 @@ class EditQuestionView extends GetView<EditQuestionController> {
         ),
         16.heightBox,
         ExTextFieldNormal(
-          hint: 'Question Title',
+          hint: 'text_question_title'.tr,
           tfController: controller.questionController,
           capitalization: TextCapitalization.words,
           textInputType: TextInputType.name,
         ),
         24.heightBox,
         Text(
-          'Enter Answer',
+          'text_enter_answer'.tr,
           style: GoogleFonts.aBeeZee(
             fontSize: 24,
             fontWeight: FontWeight.w500,
@@ -79,14 +79,14 @@ class EditQuestionView extends GetView<EditQuestionController> {
             [
               VStack([
                 ExTextFieldNormal(
-                  hint: 'Answer 1',
+                  hint: 'text_answer_1'.tr,
                   tfController: controller.answer1Controller,
                   textInputType: TextInputType.text,
                   capitalization: TextCapitalization.words,
                 ),
                 HStack([
                   Obx(
-                        () => Visibility(
+                    () => Visibility(
                       visible: controller.audioPath1.isNotEmpty && (controller.status.value == Status.IDLE || controller.status.value == Status.PAUSED),
                       child: IconButton(
                         onPressed: () => controller.play(controller.audioPath1.value, 1),
@@ -99,7 +99,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                     ),
                   ),
                   Obx(
-                        () => Visibility(
+                    () => Visibility(
                       visible: controller.status.value == Status.PLAYING && controller.currentPlayedAudio.value == 1,
                       child: IconButton(
                         onPressed: () => controller.pause(),
@@ -113,7 +113,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                   ),
                   Spacer(),
                   Obx(
-                        () => Text(
+                    () => Text(
                       basename(controller.audioPath1.value),
                       style: GoogleFonts.aBeeZee(
                         fontSize: 24,
@@ -140,7 +140,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                     border: Border.all(color: colorBorder, width: 0.5),
                   ),
                   child: Obx(
-                        () => Image.file(
+                    () => Image.file(
                       File(controller.imagePath1.value),
                       width: 128,
                       height: 128,
@@ -178,14 +178,14 @@ class EditQuestionView extends GetView<EditQuestionController> {
               [
                 VStack([
                   ExTextFieldNormal(
-                    hint: 'Answer 2',
+                    hint: 'text_answer_2',
                     tfController: controller.answer2Controller,
                     textInputType: TextInputType.text,
                     capitalization: TextCapitalization.words,
                   ),
                   HStack([
                     Obx(
-                          () => Visibility(
+                      () => Visibility(
                         visible: controller.audioPath2.isNotEmpty && (controller.status.value == Status.IDLE || controller.status.value == Status.PAUSED),
                         child: IconButton(
                           onPressed: () => controller.play(controller.audioPath2.value, 2),
@@ -198,7 +198,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                       ),
                     ),
                     Obx(
-                          () => Visibility(
+                      () => Visibility(
                         visible: controller.status.value == Status.PLAYING && controller.currentPlayedAudio.value == 2,
                         child: IconButton(
                           onPressed: () => controller.pause(),
@@ -212,7 +212,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                     ),
                     Spacer(),
                     Obx(
-                          () => Text(
+                      () => Text(
                         basename(controller.audioPath2.value),
                         style: GoogleFonts.aBeeZee(
                           fontSize: 24,
@@ -239,7 +239,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                       border: Border.all(color: colorBorder, width: 0.5),
                     ),
                     child: Obx(
-                          () => Image.file(
+                      () => Image.file(
                         File(controller.imagePath2.value),
                         width: 128,
                         height: 128,

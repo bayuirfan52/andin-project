@@ -13,7 +13,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text(controller.isPlayerMode.isTrue ? 'Audio' : 'Tambah Audio')),
+        title: Obx(() => Text(controller.isPlayerMode.isTrue ? 'Audio' : 'text_add_audio'.tr)),
         centerTitle: true,
       ),
       body: VStack(
@@ -186,7 +186,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
                 ),
                 8.widthBox,
                 Text(
-                  'Stop',
+                  'button_stop'.tr,
                   style: GoogleFonts.aBeeZee(
                     color: Colors.white,
                     fontSize: 16,
@@ -217,7 +217,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
                 ),
                 8.widthBox,
                 Text(
-                  'Rekam',
+                  'button_record'.tr,
                   style: GoogleFonts.aBeeZee(
                     color: Colors.white,
                     fontSize: 16,
@@ -232,12 +232,12 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
 
   void onRemovePressed() {
     Get.defaultDialog<dynamic>(
-      title: 'Perhatian',
+      title: 'text_attention'.tr,
       titleStyle: GoogleFonts.aBeeZee(
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
-      middleText: 'Apakah anda yakin ingin menghapus audio Anda?',
+      middleText: 'text_alert_remove_audio'.tr,
       middleTextStyle: GoogleFonts.aBeeZee(
         fontSize: 16,
       ),
@@ -257,7 +257,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
           Get.back<dynamic>();
         },
         child: Text(
-          'Batal',
+          'button_cancel'.tr,
           style: GoogleFonts.aBeeZee(
             fontSize: 14,
             color: colorPrimary,
@@ -277,7 +277,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
           ),
         ),
         child: Text(
-          'Yakin',
+          'button_sure'.tr,
           style: GoogleFonts.aBeeZee(
             fontSize: 14,
             color: Colors.white,

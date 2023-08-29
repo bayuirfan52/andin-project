@@ -49,7 +49,7 @@ class AndinProject extends StatelessWidget {
         // ignore: avoid_redundant_argument_values
         debugShowCheckedModeBanner: kDebugMode,
         translationsKeys: AppTranslation.translations,
-        locale: Locale('en', 'US'),
+        locale: Locale('id', 'ID'),
         fallbackLocale: Locale('id', 'ID'),
         builder: (context, child) {
           if (FlutterConfig.get('FLAVOR') == 'production') {

@@ -17,13 +17,13 @@ class StudentManagementView extends GetView<StudentManagementController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Student Management'),
+        title: Text('text_student_management'.tr),
         centerTitle: true,
         actions: [
           MaterialButton(
             onPressed: () => controller.goToAddStudent(),
             child: Text(
-              'Add New Student',
+              'button_add_new_student'.tr,
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
@@ -35,7 +35,7 @@ class StudentManagementView extends GetView<StudentManagementController> {
           [
             ExTextFieldIcon(
               prefixIcon: Icons.search_rounded,
-              hint: 'Search',
+              hint: 'text_search'.tr,
               tfController: controller.searchController,
               textAlign: TextAlign.center,
               onChanged: (value) => controller.filter(),
@@ -44,7 +44,7 @@ class StudentManagementView extends GetView<StudentManagementController> {
             Obx(
               () => controller.listStudentFiltered.isEmpty
                   ? EmptyWidget(
-                      message: 'Student Not Found',
+                      message: 'text_student_not_found'.tr,
                     )
                   : ListView.separated(
                       itemBuilder: (context, index) => ListTile(
@@ -61,8 +61,8 @@ class StudentManagementView extends GetView<StudentManagementController> {
                         onTap: () => controller.goToStudentDetail(controller.listStudentFiltered[index].id ?? ''),
                         trailing: IconButton(
                           onPressed: () => ExDialog.alertDialog(
-                            title: 'Alert',
-                            message: 'Are you sure to delete this student?',
+                            title: 'text_alert'.tr,
+                            message: 'text_alert_delete_student'.tr,
                             onConfirmClicked: () => controller.removeStudent(index),
                           ),
                           icon: Icon(

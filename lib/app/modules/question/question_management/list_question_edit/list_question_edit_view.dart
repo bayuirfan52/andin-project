@@ -22,7 +22,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
           MaterialButton(
             onPressed: () => controller.goToAddQuestion(),
             child: Text(
-              'Add New Question',
+              'button_add_new_question'.tr,
               textScaleFactor: 1.5,
               style: GoogleFonts.aBeeZee(color: Colors.white),
             ),
@@ -54,8 +54,8 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                     onTap: () => controller.goToEditQuestion(item.id ?? ''),
                     trailing: IconButton(
                       onPressed: () => ExDialog.alertDialog(
-                        title: 'Alert',
-                        message: 'Are you sure to delete this question?',
+                        title: 'text_alert'.tr,
+                        message: 'text_alert_delete_question'.tr,
                         onConfirmClicked: () => controller.removeQuestion(item.id ?? ''),
                       ),
                       icon: Icon(
@@ -68,7 +68,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                 itemCount: controller.listLevel1.length,
               ).pSymmetric(h: 128, v: 24).hFull(context)
             : EmptyWidget(
-                message: 'Question Not Found',
+                message: 'text_question_not_found'.tr,
               ),
       );
 
@@ -91,8 +91,8 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                     onTap: () => controller.goToEditQuestion(item.id ?? ''),
                     trailing: IconButton(
                       onPressed: () => ExDialog.alertDialog(
-                        title: 'Alert',
-                        message: 'Are you sure to delete this question?',
+                        title: 'text_alert'.tr,
+                        message: 'text_question_not_found'.tr,
                         onConfirmClicked: () => controller.removeQuestion(item.id ?? ''),
                       ),
                       icon: Icon(
@@ -105,7 +105,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                 itemCount: controller.listLevel2.length,
               ).pSymmetric(h: 128, v: 24).hFull(context)
             : EmptyWidget(
-                message: 'Question Not Found',
+                message: 'text_question_not_found'.tr,
               ),
       );
 }

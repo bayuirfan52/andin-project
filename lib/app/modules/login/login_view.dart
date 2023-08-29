@@ -18,7 +18,7 @@ class LoginView extends GetView<LoginController> {
       body: VStack(
         [
           Text(
-            'Welcome to ${PreferenceHelper.getCurrentAppName()}',
+            'text_welcome'.trParams({'app': PreferenceHelper.getCurrentAppName()}),
             style: GoogleFonts.aBeeZee(
               fontSize: 48,
               fontWeight: FontWeight.w700,
@@ -36,15 +36,15 @@ class LoginView extends GetView<LoginController> {
           48.heightBox,
           ExTextFieldIcon(
             prefixIcon: Icons.person_2_rounded,
-            labelText: 'Enter teacher name',
-            hint: 'Teacher Name',
+            labelText: 'text_enter_teacher_name'.tr,
+            hint: 'text_teacher_name'.tr,
             tfController: controller.teacherController,
             textInputType: TextInputType.text,
             capitalization: TextCapitalization.words,
           ),
           64.heightBox,
           ExButtonDefault(
-            label: 'Enter',
+            label: 'button_enter'.tr,
             labelSize: 32,
             height: 64,
             onPressed: () => controller.saveTeacherName(),

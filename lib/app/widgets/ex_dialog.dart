@@ -18,7 +18,8 @@ mixin ExDialog {
         textAlign: TextAlign.center,
       ).p12(),
       confirmTextColor: Colors.white,
-      textConfirm: 'Yes',
+      textConfirm: 'button_yes'.tr,
+      textCancel: 'button_cancel'.tr,
       onConfirm: () {
         Get.back<dynamic>();
         onConfirmClicked.call();
