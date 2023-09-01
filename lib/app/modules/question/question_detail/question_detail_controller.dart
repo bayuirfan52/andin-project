@@ -7,6 +7,7 @@ import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
+import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter_sound/flutter_sound.dart';
@@ -24,23 +25,26 @@ class QuestionDetailController extends GetxController {
   final audioPlayer = FlutterSoundPlayer();
   final status = Status.IDLE.obs;
   final currentPlayedAudio = 0.obs;
+  final currentPlayedAnswer = ''.obs;
   final isHasPreviousQuestion = false.obs;
   final isHasNextQuestion = false.obs;
   final isAnswered = false.obs;
+  final isTablet = false.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     currentLevel.value = Get.arguments['level'] as int;
     currentId.value = Get.arguments['id'] as String;
-    init();
-    getCurrentActiveStudent();
-    handleListQuestion();
+    isTablet.value = await DeviceUtil.isTablet();
+    await getCurrentActiveStudent();
+    await handleListQuestion();
   }
 
   @override
   void onReady() {
     super.onReady();
+    init();
   }
 
   @override
@@ -71,7 +75,7 @@ class QuestionDetailController extends GetxController {
     });
   }
 
-  Future<void> play(String file, int index) async {
+  Future<void> play(String answer, String file, int index) async {
     if (status.value == Status.PAUSED) {
       await audioPlayer.resumePlayer();
     } else {
@@ -83,6 +87,7 @@ class QuestionDetailController extends GetxController {
         },
       );
     }
+    currentPlayedAnswer.value = answer;
     currentPlayedAudio.value = index;
     status.value = Status.PLAYING;
   }
@@ -95,6 +100,7 @@ class QuestionDetailController extends GetxController {
   Future<void> stop() async {
     status.value = Status.IDLE;
     currentPlayedAudio.value = 0;
+    currentPlayedAnswer.value = '';
     await audioPlayer.stopPlayer();
   }
 

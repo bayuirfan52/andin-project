@@ -3,6 +3,7 @@ import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
+import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,10 +12,11 @@ class StudentManagementController extends GetxController {
   final searchController = TextEditingController();
   final listStudent = <Student>[].obs;
   final listStudentFiltered = <Student>[].obs;
-
+  final isTablet = false.obs;
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
+    isTablet.value = await DeviceUtil.isTablet();
   }
 
   @override

@@ -2,18 +2,21 @@ import 'package:andin_project/app/core/base/base_controller.dart';
 import 'package:andin_project/app/extensions/string_extensions.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
+import 'package:andin_project/app/utils/device_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends BaseController {
   final teacherController = TextEditingController();
   final currentLocale = 0.obs;
+  final isTablet = false.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
+    isTablet.value = await DeviceUtil.isTablet();
     if (PreferenceHelper.getActiveLanguage().isNullOrEmpty) {
-      PreferenceHelper.setActiveLanguage('id_ID');
+      await PreferenceHelper.setActiveLanguage('id_ID');
     }
     currentLocale.value = PreferenceHelper.getActiveLanguage() == 'id_ID' ? 0 : 1;
   }

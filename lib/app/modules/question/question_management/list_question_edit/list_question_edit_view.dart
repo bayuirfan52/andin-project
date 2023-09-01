@@ -14,26 +14,50 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Edit : Level ${controller.currentLevel.value}'),
-        centerTitle: true,
-        actions: [
-          MaterialButton(
-            onPressed: () => controller.goToAddQuestion(),
-            child: Text(
-              'button_add_new_question'.tr,
-              textScaleFactor: 1.5,
-              style: GoogleFonts.aBeeZee(color: Colors.white),
-            ),
-          )
-        ],
-      ),
-      body: Center(
-        child: Obx(() => controller.currentLevel.value == 1 ? listLevel1(context) : listLevel2(context)),
-      ),
-    );
+    return Obx(() => controller.isTablet.isTrue ? tabletUI(context) : phoneUI(context));
   }
+
+  Widget tabletUI(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text('Edit : Level ${controller.currentLevel.value}'),
+          centerTitle: true,
+          actions: [
+            MaterialButton(
+              onPressed: () => controller.goToAddQuestion(),
+              child: Text(
+                'button_add_new_question'.tr,
+                textScaleFactor: 1.5,
+                style: GoogleFonts.aBeeZee(color: Colors.white),
+              ),
+            )
+          ],
+        ),
+        body: Center(
+          child: Obx(() => controller.currentLevel.value == 1 ? listLevel1(context) : listLevel2(context)),
+        ),
+      );
+
+  Widget phoneUI(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Edit : Level ${controller.currentLevel.value}',
+            style: GoogleFonts.aBeeZee(fontSize: 16),
+          ),
+          centerTitle: true,
+          actions: [
+            MaterialButton(
+              onPressed: () => controller.goToAddQuestion(),
+              child: Text(
+                'button_add_new_question'.tr,
+                style: GoogleFonts.aBeeZee(color: Colors.white),
+              ),
+            )
+          ],
+        ),
+        body: Center(
+          child: Obx(() => controller.currentLevel.value == 1 ? listLevel1(context) : listLevel2(context)),
+        ),
+      );
 
   Widget listLevel1(BuildContext context) => Obx(
         () => controller.listLevel1.isNotEmpty
@@ -44,9 +68,11 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                     title: Text(
                       item.question ?? '',
                       style: GoogleFonts.aBeeZee(
-                        fontSize: 24,
+                        fontSize: controller.isTablet.isTrue ? 24 : 12,
                       ),
                     ),
+                    dense: controller.isTablet.isFalse,
+                    visualDensity: controller.isTablet.isFalse ? VisualDensity.compact : VisualDensity.standard,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(color: colorBorder),
                       borderRadius: BorderRadius.circular(5),
@@ -69,6 +95,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
               ).pSymmetric(h: 128, v: 24).hFull(context)
             : EmptyWidget(
                 message: 'text_question_not_found'.tr,
+                textSize: controller.isTablet.isTrue ? 24 : 12,
               ),
       );
 
@@ -81,9 +108,11 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                     title: Text(
                       item.question ?? '',
                       style: GoogleFonts.aBeeZee(
-                        fontSize: 24,
+                        fontSize: controller.isTablet.isTrue ? 24 : 12,
                       ),
                     ),
+                    dense: controller.isTablet.isFalse,
+                    visualDensity: controller.isTablet.isFalse ? VisualDensity.compact : VisualDensity.standard,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(color: colorBorder),
                       borderRadius: BorderRadius.circular(5),
@@ -106,6 +135,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
               ).pSymmetric(h: 128, v: 24).hFull(context)
             : EmptyWidget(
                 message: 'text_question_not_found'.tr,
+                textSize: controller.isTablet.isTrue ? 24 : 12,
               ),
       );
 }

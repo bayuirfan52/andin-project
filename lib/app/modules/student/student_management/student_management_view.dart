@@ -15,69 +15,145 @@ class StudentManagementView extends GetView<StudentManagementController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('text_student_management'.tr),
-        centerTitle: true,
-        actions: [
-          MaterialButton(
-            onPressed: () => controller.goToAddStudent(),
-            child: Text(
-              'button_add_new_student'.tr,
-              textScaleFactor: 1.5,
-              style: GoogleFonts.aBeeZee(color: Colors.white),
-            ),
-          )
-        ],
-      ),
-      body: Center(
-        child: VStack(
-          [
-            ExTextFieldIcon(
-              prefixIcon: Icons.search_rounded,
-              hint: 'text_search'.tr,
-              tfController: controller.searchController,
-              textAlign: TextAlign.center,
-              onChanged: (value) => controller.filter(),
-            ),
-            24.heightBox,
-            Obx(
-              () => controller.listStudentFiltered.isEmpty
-                  ? EmptyWidget(
-                      message: 'text_student_not_found'.tr,
-                    )
-                  : ListView.separated(
-                      itemBuilder: (context, index) => ListTile(
-                        title: Text(
-                          controller.listStudentFiltered[index].studentName ?? '',
-                          style: GoogleFonts.aBeeZee(
-                            fontSize: 24,
-                          ),
-                        ),
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: colorBorder),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        onTap: () => controller.goToStudentDetail(controller.listStudentFiltered[index].id ?? ''),
-                        trailing: IconButton(
-                          onPressed: () => ExDialog.alertDialog(
-                            title: 'text_alert'.tr,
-                            message: 'text_alert_delete_student'.tr,
-                            onConfirmClicked: () => controller.removeStudent(index),
-                          ),
-                          icon: Icon(
-                            Icons.delete,
-                          ),
-                        ),
-                      ),
-                      separatorBuilder: (context, item) => 12.heightBox,
-                      itemCount: controller.listStudentFiltered.length,
-                    ).expand(),
+    return Obx(() => controller.isTablet.value ? tabletUI(context) : phoneUI(context));
+  }
+
+  Widget tabletUI(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text('text_student_management'.tr),
+          centerTitle: true,
+          actions: [
+            MaterialButton(
+              onPressed: () => controller.goToAddStudent(),
+              child: Text(
+                'button_add_new_student'.tr,
+                textScaleFactor: 1.5,
+                style: GoogleFonts.aBeeZee(color: Colors.white),
+              ),
             )
           ],
-          crossAlignment: CrossAxisAlignment.center,
-        ).pSymmetric(h: 128, v: 24).hFull(context),
-      ),
-    );
-  }
+        ),
+        body: Center(
+          child: VStack(
+            [
+              ExTextFieldIcon(
+                prefixIcon: Icons.search_rounded,
+                hint: 'text_search'.tr,
+                tfController: controller.searchController,
+                textAlign: TextAlign.center,
+                onChanged: (value) => controller.filter(),
+              ),
+              24.heightBox,
+              Obx(
+                () => controller.listStudentFiltered.isEmpty
+                    ? EmptyWidget(
+                        message: 'text_student_not_found'.tr,
+                      )
+                    : ListView.separated(
+                        itemBuilder: (context, index) => ListTile(
+                          title: Text(
+                            controller.listStudentFiltered[index].studentName ?? '',
+                            style: GoogleFonts.aBeeZee(
+                              fontSize: 24,
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: colorBorder),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          onTap: () => controller.goToStudentDetail(controller.listStudentFiltered[index].id ?? ''),
+                          trailing: IconButton(
+                            onPressed: () => ExDialog.alertDialog(
+                              title: 'text_alert'.tr,
+                              message: 'text_alert_delete_student'.tr,
+                              onConfirmClicked: () => controller.removeStudent(index),
+                            ),
+                            icon: Icon(
+                              Icons.delete,
+                            ),
+                          ),
+                        ),
+                        separatorBuilder: (context, item) => 12.heightBox,
+                        itemCount: controller.listStudentFiltered.length,
+                      ).expand(),
+              )
+            ],
+            crossAlignment: CrossAxisAlignment.center,
+          ).pSymmetric(h: 128, v: 24).hFull(context),
+        ),
+      );
+
+  Widget phoneUI(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'text_student_management'.tr,
+            style: GoogleFonts.aBeeZee(fontSize: 16),
+          ),
+          centerTitle: true,
+          actions: [
+            MaterialButton(
+              onPressed: () => controller.goToAddStudent(),
+              child: Text(
+                'button_add_new_student'.tr,
+                style: GoogleFonts.aBeeZee(color: Colors.white),
+              ),
+            )
+          ],
+        ),
+        body: Center(
+          child: VStack(
+            [
+              ExTextFieldIcon(
+                prefixIcon: Icons.search_rounded,
+                hint: 'text_search'.tr,
+                size: 12,
+                hintSize: 12,
+                tfController: controller.searchController,
+                textAlign: TextAlign.center,
+                onChanged: (value) => controller.filter(),
+              ),
+              12.heightBox,
+              Obx(
+                () => controller.listStudentFiltered.isEmpty
+                    ? EmptyWidget(
+                        message: 'text_student_not_found'.tr,
+                        textSize: 12,
+                      )
+                    : ListView.separated(
+                        itemBuilder: (context, index) => ListTile(
+                          title: Text(
+                            controller.listStudentFiltered[index].studentName ?? '',
+                            style: GoogleFonts.aBeeZee(
+                              fontSize: 16,
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: colorBorder),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          dense: true,
+                          visualDensity: VisualDensity.compact,
+                          onTap: () => controller.goToStudentDetail(controller.listStudentFiltered[index].id ?? ''),
+                          trailing: IconButton(
+                            iconSize: 16,
+                            onPressed: () => ExDialog.alertDialog(
+                              title: 'text_alert'.tr,
+                              message: 'text_alert_delete_student'.tr,
+                              isTablet: false,
+                              onConfirmClicked: () => controller.removeStudent(index),
+                            ),
+                            icon: Icon(
+                              Icons.delete,
+                            ),
+                          ),
+                        ),
+                        separatorBuilder: (context, item) => 12.heightBox,
+                        itemCount: controller.listStudentFiltered.length,
+                      ).expand(),
+              )
+            ],
+            crossAlignment: CrossAxisAlignment.center,
+          ).pSymmetric(h: 128, v: 12).hFull(context),
+        ),
+      );
 }

@@ -7,6 +7,7 @@ import 'package:andin_project/app/helper/file_helper.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
+import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class EditQuestionController extends GetxController {
   final audioPath2 = ''.obs;
 
   // final audioPath3 = ''.obs;
+  final isTablet = false.obs;
   final questionController = TextEditingController();
   final answer1Controller = TextEditingController();
   final answer2Controller = TextEditingController();
@@ -35,10 +37,11 @@ class EditQuestionController extends GetxController {
   final currentPlayedAudio = 0.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     currentLevel.value = Get.arguments['level'] as int;
-    init();
+    isTablet.value = await DeviceUtil.isTablet();
+    await init();
   }
 
   @override

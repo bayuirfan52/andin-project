@@ -22,13 +22,13 @@ class ImagePreviewView extends GetView<ImagePreviewController> {
           child: controller.url.value.contains('http')
               ? FadeInImage.assetNetwork(
                   image: controller.url.value,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                   placeholder: 'assets/images/gif_loading.gif',
-                )
+                ).whFull(context)
               : Image.file(
                   File(controller.url.value),
-                  fit: BoxFit.cover,
-                ),
+                  fit: BoxFit.contain,
+                ).whFull(context),
         ),
       ).backgroundColor(Colors.black),
     );

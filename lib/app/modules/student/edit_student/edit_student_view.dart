@@ -13,40 +13,80 @@ class EditStudentView extends GetView<EditStudentController> {
   const EditStudentView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: VStack(
-          [
-            Text(
-              'text_edit_student'.tr,
-              style: GoogleFonts.aBeeZee(
-                fontSize: 48,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            48.heightBox,
-            ExTextFieldNormal(
-              hint: 'text_student_name'.tr,
-              capitalization: TextCapitalization.words,
-              textAlign: TextAlign.center,
-              tfController: controller.studentController,
-            ),
-            128.heightBox,
-            ExButtonDefault(
-              label: 'button_save'.tr,
-              labelSize: 32,
-              height: 64,
-              onPressed: () => ExDialog.alertDialog(
-                title: 'text_alert'.tr,
-                message: 'text_alert_edit_student'.tr,
-                onConfirmClicked: () => controller.saveStudent(),
-              ),
-            ).wFull(context)
-          ],
-          crossAlignment: CrossAxisAlignment.center,
-        ).pSymmetric(v: 24, h: 128).scrollVertical(),
-      ),
-    );
+    return Obx(() => controller.isTablet.value ? tabletUI(context) : phoneUI(context));
   }
+
+  Widget tabletUI(BuildContext context) => Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: VStack(
+            [
+              Text(
+                'text_edit_student'.tr,
+                style: GoogleFonts.aBeeZee(
+                  fontSize: 48,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              48.heightBox,
+              ExTextFieldNormal(
+                hint: 'text_student_name'.tr,
+                capitalization: TextCapitalization.words,
+                textAlign: TextAlign.center,
+                tfController: controller.studentController,
+              ),
+              128.heightBox,
+              ExButtonDefault(
+                label: 'button_save'.tr,
+                labelSize: 32,
+                height: 64,
+                onPressed: () => ExDialog.alertDialog(
+                  title: 'text_alert'.tr,
+                  message: 'text_alert_edit_student'.tr,
+                  onConfirmClicked: () => controller.saveStudent(),
+                ),
+              ).wFull(context)
+            ],
+            crossAlignment: CrossAxisAlignment.center,
+          ).pSymmetric(v: 24, h: 128).scrollVertical(),
+        ),
+      );
+
+  Widget phoneUI(BuildContext context) => Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: VStack(
+            [
+              Text(
+                'text_edit_student'.tr,
+                style: GoogleFonts.aBeeZee(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              24.heightBox,
+              ExTextFieldNormal(
+                hint: 'text_student_name'.tr,
+                capitalization: TextCapitalization.words,
+                textAlign: TextAlign.center,
+                hintSize: 12,
+                size: 12,
+                tfController: controller.studentController,
+              ),
+              48.heightBox,
+              ExButtonDefault(
+                label: 'button_save'.tr,
+                labelSize: 12,
+                onPressed: () => ExDialog.alertDialog(
+                  title: 'text_alert'.tr,
+                  message: 'text_alert_edit_student'.tr,
+                  isTablet: false,
+                  onConfirmClicked: () => controller.saveStudent(),
+                ),
+              ).wFull(context)
+            ],
+            crossAlignment: CrossAxisAlignment.center,
+          ).pSymmetric(v: 24, h: 128).scrollVertical(),
+        ),
+      );
 }
