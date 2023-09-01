@@ -13,7 +13,14 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text(controller.isPlayerMode.isTrue ? 'Audio' : 'text_add_audio'.tr)),
+        title: Obx(
+          () => Text(
+            controller.isPlayerMode.isTrue ? 'Audio' : 'text_add_audio'.tr,
+            style: GoogleFonts.aBeeZee(
+              fontSize: controller.isTablet.isTrue ? 24 : 16,
+            ),
+          ),
+        ),
         centerTitle: true,
       ),
       body: VStack(
@@ -28,7 +35,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
               ),
             ),
           ).centered(),
-          16.heightBox,
+          8.heightBox,
           Obx(
             () => Visibility(
               visible: controller.status.value == Status.PLAYING || controller.status.value == Status.PAUSED,

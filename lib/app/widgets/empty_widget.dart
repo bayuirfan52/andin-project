@@ -6,8 +6,10 @@ class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
     super.key,
     this.message = 'Data tidak ditemukan',
+    this.textSize = 24,
   });
   final String message;
+  final double textSize;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class EmptyWidget extends StatelessWidget {
         Text(
           message,
           style: GoogleFonts.aBeeZee(
-            fontSize: 24,
+            fontSize: textSize,
             fontWeight: FontWeight.normal,
           ),
         ).centered()

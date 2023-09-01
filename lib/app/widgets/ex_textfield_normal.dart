@@ -41,6 +41,8 @@ class ExTextFieldNormal extends StatelessWidget {
     this.counterText,
     this.textAlign = TextAlign.left,
     this.capitalization = TextCapitalization.none,
+    this.hintSize = 24,
+    this.size = 24,
   });
 
   final Color? borderColor;
@@ -70,6 +72,8 @@ class ExTextFieldNormal extends StatelessWidget {
   final int? maxLine;
   final TextAlign textAlign;
   final TextCapitalization capitalization;
+  final double size;
+  final double hintSize;
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +91,8 @@ class ExTextFieldNormal extends StatelessWidget {
           onSubmitted: onSubmitted,
           onEditingComplete: onEditingComplete,
           hint: hint,
-          hintStyle: GoogleFonts.aBeeZee(color: colorBorder, fontSize: 24),
-          style: GoogleFonts.aBeeZee(fontSize: 24),
+          hintStyle: GoogleFonts.aBeeZee(color: colorBorder, fontSize: hintSize),
+          style: GoogleFonts.aBeeZee(fontSize: size),
           enabled: enabled ?? true,
           height: 48,
           controller: tfController,

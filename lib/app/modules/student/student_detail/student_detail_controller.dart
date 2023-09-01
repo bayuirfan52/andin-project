@@ -2,6 +2,7 @@ import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
+import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
 
@@ -12,12 +13,14 @@ class StudentDetailController extends GetxController {
   final level2TotalScore = 0.obs;
   final averageLevel1 = 0.0.obs;
   final averageLevel2 = 0.0.obs;
+  final isTablet = false.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     id.value = Get.arguments as String;
-    getStudentData();
+    isTablet.value = await DeviceUtil.isTablet();
+    await getStudentData();
   }
 
   @override

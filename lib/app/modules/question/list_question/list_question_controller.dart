@@ -5,6 +5,7 @@ import 'package:andin_project/app/data/question_level_2.dart';
 import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
+import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
 
@@ -14,11 +15,13 @@ class ListQuestionController extends GetxController {
   final listLevel2 = <QuestionLevel2>[].obs;
   final listAnswer = <Answer>[].obs;
   final currentStudent = Student().obs;
+  final isTablet = false.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     currentLevel.value = Get.arguments as int;
+    isTablet.value = await DeviceUtil.isTablet();
   }
 
   @override
@@ -47,7 +50,7 @@ class ListQuestionController extends GetxController {
   Future<void> getAnswered() async {
     await Database.getAnswerByStudent(currentStudent.value.id ?? '').then((value) {
       listAnswer.value = value;
-    }).catchError((dynamic error){
+    }).catchError((dynamic error) {
       logE(error);
     });
   }

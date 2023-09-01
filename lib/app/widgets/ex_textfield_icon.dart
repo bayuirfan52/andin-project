@@ -41,6 +41,8 @@ class ExTextFieldIcon extends StatelessWidget {
     this.helperTextColor = Colors.grey,
     this.textAlign = TextAlign.left,
     this.capitalization,
+    this.hintSize = 24,
+    this.size = 24,
   });
 
   final IconData? prefixIcon;
@@ -63,6 +65,8 @@ class ExTextFieldIcon extends StatelessWidget {
   final bool autoCorrect;
   final bool autoFocus;
   final bool clear;
+  final double size;
+  final double hintSize;
   final String? initialValue;
   final String? labelText;
   final Color labelTextColor;
@@ -106,8 +110,8 @@ class ExTextFieldIcon extends StatelessWidget {
           onEditingComplete: onEditingComplete,
           height: 48,
           hint: hint,
-          hintStyle: GoogleFonts.aBeeZee(color: colorBorder, fontSize: 24),
-          style: GoogleFonts.aBeeZee(fontSize: 24),
+          hintStyle: GoogleFonts.aBeeZee(color: colorBorder, fontSize: hintSize),
+          style: GoogleFonts.aBeeZee(fontSize: size),
           enabled: enabled ?? true,
           controller: tfController,
           isPassword: isPassword ?? false,

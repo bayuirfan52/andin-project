@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:andin_project/app/core/base/base_controller.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
+import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter_sound/flutter_sound.dart';
@@ -19,15 +20,17 @@ class AudioRecorderController extends BaseController {
   final maxDuration = 1.0.obs;
   final currentDuration = 0.0.obs;
   final isPlayerMode = false.obs;
+  final isTablet = false.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
+    isTablet.value = await DeviceUtil.isTablet();
     if (Get.arguments != null) {
       isPlayerMode.value = true;
       recordedFile.value = Get.arguments as String;
     }
-    init();
+    await init();
   }
 
   @override

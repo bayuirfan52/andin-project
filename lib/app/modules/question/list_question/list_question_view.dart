@@ -13,39 +13,76 @@ class ListQuestionView extends GetView<ListQuestionController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Level ${controller.currentLevel.value}'),
-        centerTitle: true,
-        actions: [
-          MaterialButton(
-            onPressed: () => controller.goToSelectStudent(),
-            child: Text(
-              'button_select_student'.tr,
-              textScaleFactor: 1.5,
-              style: GoogleFonts.aBeeZee(color: Colors.white),
-            ),
-          )
-        ],
-      ),
-      body: Center(
-        child: Obx(
-          () => controller.currentLevel.value == 1 ? listLevel1(context) : listLevel2(context),
-        ),
-      ),
-      bottomNavigationBar: HStack(
-        [
-          Obx(
-            () => Text(
-              'text_current_active_student'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
-              style: GoogleFonts.aBeeZee(fontSize: 24),
-            ),
-          ),
-        ],
-        alignment: MainAxisAlignment.center,
-      ).p24(),
-    );
+    return Obx(() => controller.isTablet.value ? tabletUI(context) : phoneUI(context));
   }
+
+  Widget tabletUI(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text('Level ${controller.currentLevel.value}'),
+          centerTitle: true,
+          actions: [
+            MaterialButton(
+              onPressed: () => controller.goToSelectStudent(),
+              child: Text(
+                'button_select_student'.tr,
+                textScaleFactor: 1.5,
+                style: GoogleFonts.aBeeZee(color: Colors.white),
+              ),
+            )
+          ],
+        ),
+        body: Center(
+          child: Obx(
+            () => controller.currentLevel.value == 1 ? listLevel1(context) : listLevel2(context),
+          ),
+        ),
+        bottomNavigationBar: HStack(
+          [
+            Obx(
+              () => Text(
+                'text_current_active_student'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
+                style: GoogleFonts.aBeeZee(fontSize: 24),
+              ),
+            ),
+          ],
+          alignment: MainAxisAlignment.center,
+        ).p24(),
+      );
+
+  Widget phoneUI(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Level ${controller.currentLevel.value}',
+            style: GoogleFonts.aBeeZee(fontSize: 16),
+          ),
+          centerTitle: true,
+          actions: [
+            MaterialButton(
+              onPressed: () => controller.goToSelectStudent(),
+              child: Text(
+                'button_select_student'.tr,
+                style: GoogleFonts.aBeeZee(color: Colors.white),
+              ),
+            )
+          ],
+        ),
+        body: Center(
+          child: Obx(
+            () => controller.currentLevel.value == 1 ? listLevel1(context) : listLevel2(context),
+          ),
+        ),
+        bottomNavigationBar: HStack(
+          [
+            Obx(
+              () => Text(
+                'text_current_active_student'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
+                style: GoogleFonts.aBeeZee(fontSize: 16),
+              ),
+            ),
+          ],
+          alignment: MainAxisAlignment.center,
+        ).p24(),
+      );
 
   Widget listLevel1(BuildContext context) => Obx(
         () => controller.listLevel1.isNotEmpty
@@ -57,9 +94,11 @@ class ListQuestionView extends GetView<ListQuestionController> {
                     title: Text(
                       item.question ?? '',
                       style: GoogleFonts.aBeeZee(
-                        fontSize: 24,
+                        fontSize: controller.isTablet.isTrue ? 24 : 12,
                       ),
                     ),
+                    dense: controller.isTablet.isFalse,
+                    visualDensity: controller.isTablet.isFalse ? VisualDensity.compact : VisualDensity.standard,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(color: colorBorder),
                       borderRadius: BorderRadius.circular(5),
@@ -75,6 +114,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
               ).pSymmetric(h: 128, v: 24).hFull(context)
             : EmptyWidget(
                 message: 'text_question_not_found'.tr,
+                textSize: controller.isTablet.value ? 24 : 12,
               ),
       );
 
@@ -88,9 +128,11 @@ class ListQuestionView extends GetView<ListQuestionController> {
                     title: Text(
                       item.question ?? '',
                       style: GoogleFonts.aBeeZee(
-                        fontSize: 24,
+                        fontSize: controller.isTablet.isTrue ? 24 : 12,
                       ),
                     ),
+                    dense: controller.isTablet.isFalse,
+                    visualDensity: controller.isTablet.isFalse ? VisualDensity.compact : VisualDensity.standard,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(color: colorBorder),
                       borderRadius: BorderRadius.circular(5),
@@ -106,6 +148,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
               ).pSymmetric(h: 128, v: 24).hFull(context)
             : EmptyWidget(
                 message: 'text_question_not_found'.tr,
+                textSize: controller.isTablet.value ? 24 : 12,
               ),
       );
 }
