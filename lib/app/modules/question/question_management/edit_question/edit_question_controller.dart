@@ -10,6 +10,7 @@ import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
@@ -265,18 +266,36 @@ class EditQuestionController extends GetxController {
   }
 
   Future<void> changeImage(int answerIndex) async {
-    final permissionStatus = await Permission.photos.isGranted;
-    logI('Permission status $permissionStatus');
-    if (permissionStatus) {
-      await pickImage(answerIndex);
+    final imagePermissionStatus = await Permission.photos.isGranted;
+    final cameraPermissionStatus = await Permission.camera.isGranted;
+    final storagePermissionStatus = await Permission.storage.isGranted;
+    final androidInfo = await DeviceInfoPlugin().androidInfo;
+    logI('Permission status $imagePermissionStatus');
+
+    if (androidInfo.version.sdkInt >= 33) {
+      if (imagePermissionStatus) {
+        await pickImage(answerIndex);
+      } else {
+        await Permission.photos.request().then((value) {
+          if (value.isGranted) {
+            pickImage(answerIndex);
+          } else {
+            FlushbarHelper.showFlushbar(Get.context!, message: 'Photos Permission Needed!', type: FlushbarType.ERROR);
+          }
+        });
+      }
     } else {
-      await Permission.photos.request().then((value) {
-        if (value.isGranted) {
-          pickImage(answerIndex);
-        } else {
-          FlushbarHelper.showFlushbar(Get.context!, message: 'Photos Permission Needed!', type: FlushbarType.ERROR);
-        }
-      });
+      if (storagePermissionStatus) {
+        await pickImage(answerIndex);
+      } else {
+        await Permission.storage.request().then((value) {
+          if (value.isGranted) {
+            pickImage(answerIndex);
+          } else {
+            FlushbarHelper.showFlushbar(Get.context!, message: 'Storage Permission Needed!', type: FlushbarType.ERROR);
+          }
+        });
+      }
     }
   }
 
