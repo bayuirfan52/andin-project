@@ -6,6 +6,7 @@ import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
@@ -101,8 +102,10 @@ class AudioRecorderController extends BaseController {
   Future<void> startRecord() async {
     final permissionMicrophone = await Permission.microphone.isGranted;
     final permissionMedia = await Permission.audio.isGranted;
+    final permissionStorage = await Permission.storage.isGranted;
+    final androidInfo = await DeviceInfoPlugin().androidInfo;
 
-    if (permissionMicrophone && permissionMedia) {
+    if (permissionMicrophone && (permissionMedia || permissionStorage)) {
       Directory? dir;
       if (Platform.isAndroid) {
         dir = await getExternalStorageDirectory();
@@ -125,18 +128,26 @@ class AudioRecorderController extends BaseController {
       );
       recordedFile.value = file.path;
     } else {
-      await Permission.audio.request().then(
+      await Permission.microphone.request().then(
         (value) {
-          if (value.isGranted) {
-            Permission.microphone.request().then((value) {
+          if (value.isGranted && androidInfo.version.sdkInt >= 33) {
+            Permission.audio.request().then((value) {
               if (value.isGranted) {
                 startRecord();
               } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'Access Microphone permission required!', type: FlushbarType.ERROR);
+                FlushbarHelper.showFlushbar(Get.context!, message: 'Access Media Audio permission required!', type: FlushbarType.ERROR);
+              }
+            });
+          } else if (value.isGranted && androidInfo.version.sdkInt < 33) {
+            Permission.storage.request().then((value) {
+              if (value.isGranted) {
+                startRecord();
+              } else {
+                FlushbarHelper.showFlushbar(Get.context!, message: 'Access Storage permission required!', type: FlushbarType.ERROR);
               }
             });
           } else {
-            FlushbarHelper.showFlushbar(Get.context!, message: 'Access Audio Media permission required!', type: FlushbarType.ERROR);
+            FlushbarHelper.showFlushbar(Get.context!, message: 'Access Microphone permission required!', type: FlushbarType.ERROR);
           }
         },
       );

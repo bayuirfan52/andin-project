@@ -179,11 +179,12 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                     Container().expand(),
                     Text(
                       controller.currentPlayedAnswer.value,
-                      textScaleFactor: 1.2,
+                      textScaleFactor: 1.5,
                       textAlign: TextAlign.center,
                     ).expand(),
                     Text(
                       'text_student_'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
+                      textScaleFactor: 1.5,
                       textAlign: TextAlign.end,
                     ).expand()
                   ],

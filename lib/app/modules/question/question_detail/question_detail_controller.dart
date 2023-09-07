@@ -181,6 +181,7 @@ class QuestionDetailController extends GetxController {
     currentScore.value = 0;
     isAnswered.value = false;
     await Database.getAnswerByStudent(currentStudent.value.id ?? '').then((value) {
+      logD(value.toString());
       value.forEach((element) {
         if (currentLevel.value == 1) {
           isAnswered.value = element.idQuestion == level1.value.id;

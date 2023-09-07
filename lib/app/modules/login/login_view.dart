@@ -35,6 +35,7 @@ class LoginView extends GetView<LoginController> {
               fontSize: 24,
               fontWeight: FontWeight.w400,
             ),
+            textAlign: TextAlign.center,
           ),
           48.heightBox,
           ExTextFieldIcon(
@@ -79,6 +80,7 @@ class LoginView extends GetView<LoginController> {
               fontSize: 16,
               fontWeight: FontWeight.w400,
             ),
+            textAlign: TextAlign.center,
           ),
           48.heightBox,
           ExTextFieldIcon(
@@ -100,7 +102,7 @@ class LoginView extends GetView<LoginController> {
         ],
         alignment: MainAxisAlignment.center,
         crossAlignment: CrossAxisAlignment.center,
-      ).paddingSymmetric(horizontal: 265).scrollVertical(),
+      ).paddingSymmetric(horizontal: 265).centered().scrollVertical(),
     ).safeArea();
   }
 }
