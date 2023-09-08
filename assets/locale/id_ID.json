@@ -20,7 +20,9 @@
         "home": "Home",
         "question": "Pertanyaan",
         "student": "Siswa",
-        "profile": "Profil"
+        "profile": "Profil",
+        "camera": "Kamera",
+        "gallery": "Galeri"
     },
     "text": {
         "enter_teacher_name": "Masukkan Nama Guru",
@@ -57,6 +59,7 @@
         "add_question": "Tambah Pertanyaan",
         "student_management": "Manajemen Siswa",
         "alert_remove_audio": "Apakah anda yakin ingin menghapus audio Anda?",
-        "select_language": "Pilih Bahasa"
+        "select_language": "Pilih Bahasa",
+        "image_method": "Ambil gambar melalui"
     }
 }

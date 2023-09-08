@@ -20,7 +20,9 @@
         "home": "Home",
         "question": "Question",
         "student": "Student",
-        "profile": "Profile"
+        "profile": "Profile",
+        "camera": "Camera",
+        "gallery": "Gallery"
     },
     "text": {
         "enter_teacher_name": "Enter Teacher Name",
@@ -57,6 +59,7 @@
         "add_question": "Add Question",
         "student_management": "Student Management",
         "alert_remove_audio": "Are you sure you want to delete your audio?",
-        "select_language": "Select Language"
+        "select_language": "Select Language",
+        "image_method": "Pick Image From"
     }
 }

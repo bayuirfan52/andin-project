@@ -32,6 +32,8 @@ class LocaleKeys {
   static const button_question = 'button_question';
   static const button_student = 'button_student';
   static const button_profile = 'button_profile';
+  static const button_camera = 'button_camera';
+  static const button_gallery = 'button_gallery';
   static const text_enter_teacher_name = 'text_enter_teacher_name';
   static const text_teacher_name = 'text_teacher_name';
   static const text_search = 'text_search';
@@ -67,6 +69,7 @@ class LocaleKeys {
   static const text_student_management = 'text_student_management';
   static const text_alert_remove_audio = 'text_alert_remove_audio';
   static const text_select_language = 'text_select_language';
+  static const text_image_method = 'text_image_method';
 }
 
 class Locales {
@@ -92,6 +95,8 @@ class Locales {
     'button_question': 'Question',
     'button_student': 'Student',
     'button_profile': 'Profile',
+    'button_camera': 'Camera',
+    'button_gallery': 'Gallery',
     'text_enter_teacher_name': 'Enter Teacher Name',
     'text_teacher_name': 'Teacher Name',
     'text_search': 'Search',
@@ -99,14 +104,16 @@ class Locales {
     'text_add_student': 'Add Student',
     'text_student_name': 'Student Name',
     'text_alert': 'Alert',
-    'text_alert_add_student': 'Are you sure to add this student?\nThis addition will automatically select this student to be the current active student',
+    'text_alert_add_student':
+        'Are you sure to add this student?\nThis addition will automatically select this student to be the current active student',
     'text_current_active_student': 'Current Active Student : @name',
     'text_question_not_found': 'Question Not Found',
     'text_student_': 'Student : @name',
     'text_question_scored': 'This Question is Scored',
     'text_score': 'Score',
     'text_attention': 'Attention',
-    'text_alert_add_score': 'Are you sure to add score @score for this question to @name',
+    'text_alert_add_score':
+        'Are you sure to add score @score for this question to @name',
     'text_welcome_': 'Welcome to @app',
     'text_add_audio': 'Add Audio',
     'text_alert_change_name': 'Are you sure to change your name?',
@@ -127,6 +134,7 @@ class Locales {
     'text_student_management': 'Student Management',
     'text_alert_remove_audio': 'Are you sure you want to delete your audio?',
     'text_select_language': 'Select Language',
+    'text_image_method': 'Pick Image From',
   };
   static const id_ID = {
     'button_enter': 'Masuk',
@@ -150,6 +158,8 @@ class Locales {
     'button_question': 'Pertanyaan',
     'button_student': 'Siswa',
     'button_profile': 'Profil',
+    'button_camera': 'Kamera',
+    'button_gallery': 'Galeri',
     'text_enter_teacher_name': 'Masukkan Nama Guru',
     'text_teacher_name': 'Nama Guru',
     'text_search': 'Cari',
@@ -157,14 +167,16 @@ class Locales {
     'text_add_student': 'Tambah Siswa',
     'text_student_name': 'Nama Siswa',
     'text_alert': 'Peringatan',
-    'text_alert_add_student': 'Apakah anda yakin untuk menambahkan siswa ini?\nPenambahan ini secara otomatis akan memilih siswa tersebut menjadi siswa aktif saat ini',
+    'text_alert_add_student':
+        'Apakah anda yakin untuk menambahkan siswa ini?\nPenambahan ini secara otomatis akan memilih siswa tersebut menjadi siswa aktif saat ini',
     'text_current_active_student': 'Siswa Aktif : @name',
     'text_question_not_found': 'Pertanyaan Tidak Ditemukan',
     'text_student_': 'Siswa : @name',
     'text_question_scored': 'Pertanyaan Ini Telah Dinilai',
     'text_score': 'Nilai',
     'text_attention': 'Perhatian',
-    'text_alert_add_score': 'Apakah anda yakin untuk memberikan nilai @score untuk pertanyaan ini kepada @name',
+    'text_alert_add_score':
+        'Apakah anda yakin untuk memberikan nilai @score untuk pertanyaan ini kepada @name',
     'text_welcome_': 'Selamat Datang di @app',
     'text_add_audio': 'Tambah Audio',
     'text_alert_change_name': 'Apakah anda yakin untuk merubah nama anda?',
@@ -174,7 +186,8 @@ class Locales {
     'text_edit_student': 'Edit Siswa',
     'text_alert_edit_student': 'Apakah anda yakin untuk merubah siswa ini?',
     'text_question_management': 'Manajemen Pertanyaan',
-    'text_alert_delete_question': 'Apakah anda yakin untuk menghapus pertanyaan ini?',
+    'text_alert_delete_question':
+        'Apakah anda yakin untuk menghapus pertanyaan ini?',
     'text_edit_question': 'Edit Pertanyaan',
     'text_enter_question_title': 'Masukkan Judul Pertanyaan',
     'text_question_title': 'Judul Pertanyaan',
@@ -185,5 +198,6 @@ class Locales {
     'text_student_management': 'Manajemen Siswa',
     'text_alert_remove_audio': 'Apakah anda yakin ingin menghapus audio Anda?',
     'text_select_language': 'Pilih Bahasa',
+    'text_image_method': 'Ambil gambar melalui',
   };
 }

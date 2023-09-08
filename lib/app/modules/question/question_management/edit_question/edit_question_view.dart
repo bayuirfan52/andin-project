@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:andin_project/app/core/resources/app_color.dart';
+import 'package:andin_project/app/helper/bottomsheet_helper.dart';
 import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/app/widgets/ex_dialog.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -157,7 +159,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () => controller.changeImage(1),
+                    onPressed: () => showBottomSheetImageMethod(1),
                     iconSize: 32,
                     icon: Icon(
                       Icons.change_circle,
@@ -256,7 +258,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () => controller.changeImage(2),
+                      onPressed: () => showBottomSheetImageMethod(2),
                       iconSize: 32,
                       icon: Icon(
                         Icons.change_circle,
@@ -412,7 +414,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () => controller.changeImage(1),
+                    onPressed: () => showBottomSheetImageMethod(1),
                     iconSize: 24,
                     icon: Icon(
                       Icons.change_circle,
@@ -511,7 +513,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () => controller.changeImage(2),
+                      onPressed: () => showBottomSheetImageMethod(2),
                       iconSize: 24,
                       icon: Icon(
                         Icons.change_circle,
@@ -526,4 +528,35 @@ class EditQuestionView extends GetView<EditQuestionController> {
           ),
         ]).scrollVertical().p24(),
       );
+
+  void showBottomSheetImageMethod(int index) {
+    BottomSheetHelper.bottomSheetCommon(
+      children: VStack([
+        ListTile(
+          title: Text('button_camera'.tr, style: GoogleFonts.aBeeZee(fontSize: 14, fontWeight: FontWeight.bold)),
+          leading: Icon(
+            Icons.camera,
+            size: 48,
+          ),
+          onTap: () {
+            Get.back<dynamic>();
+            controller.changeImage(index, ImageSource.camera);
+          },
+        ),
+        8.heightBox,
+        ListTile(
+          title: Text('button_gallery'.tr, style: GoogleFonts.aBeeZee(fontSize: 14, fontWeight: FontWeight.bold)),
+          leading: Icon(
+            Icons.image,
+            size: 48,
+          ),
+          onTap: () {
+            Get.back<dynamic>();
+            controller.changeImage(index, ImageSource.gallery);
+          },
+        ),
+      ]),
+      title: 'text_image_method'.tr,
+    );
+  }
 }

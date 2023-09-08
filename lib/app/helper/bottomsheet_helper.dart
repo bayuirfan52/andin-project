@@ -28,8 +28,8 @@ mixin BottomSheetHelper {
               Center(
                 child: Text(
                   title,
-                  style: GoogleFonts.openSans(
-                    fontSize: 14,
+                  style: GoogleFonts.aBeeZee(
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

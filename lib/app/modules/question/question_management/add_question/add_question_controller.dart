@@ -109,43 +109,61 @@ class AddQuestionController extends GetxController {
     Get.toNamed<dynamic>(Routes.IMAGE_PREVIEW, arguments: path);
   }
 
-  Future<void> changeImage(int answerIndex) async {
+  Future<void> changeImage(int answerIndex, ImageSource method) async {
     final imagePermissionStatus = await Permission.photos.isGranted;
     final cameraPermissionStatus = await Permission.camera.isGranted;
     final storagePermissionStatus = await Permission.storage.isGranted;
     final androidInfo = await DeviceInfoPlugin().androidInfo;
     logI('Permission status $imagePermissionStatus');
 
-    if (androidInfo.version.sdkInt >= 33) {
-      if (imagePermissionStatus) {
-        await pickImage(answerIndex);
-      } else {
-        await Permission.photos.request().then((value) {
-          if (value.isGranted) {
-            pickImage(answerIndex);
+    switch (method) {
+      case ImageSource.camera:
+        if (cameraPermissionStatus) {
+        } else {
+          await Permission.camera.request().then(
+            (value) {
+              if (value.isGranted) {
+                pickImage(answerIndex, ImageSource.camera);
+              } else {
+                FlushbarHelper.showFlushbar(Get.context!, message: 'Camera Permission Needed!', type: FlushbarType.ERROR);
+              }
+            },
+          );
+        }
+        break;
+      case ImageSource.gallery:
+        if (androidInfo.version.sdkInt >= 33) {
+          if (imagePermissionStatus) {
+            await pickImage(answerIndex, ImageSource.gallery);
           } else {
-            FlushbarHelper.showFlushbar(Get.context!, message: 'Photos Permission Needed!', type: FlushbarType.ERROR);
+            await Permission.photos.request().then((value) {
+              if (value.isGranted) {
+                pickImage(answerIndex, ImageSource.gallery);
+              } else {
+                FlushbarHelper.showFlushbar(Get.context!, message: 'Photos Permission Needed!', type: FlushbarType.ERROR);
+              }
+            });
           }
-        });
-      }
-    } else {
-      if (storagePermissionStatus) {
-        await pickImage(answerIndex);
-      } else {
-        await Permission.storage.request().then((value) {
-          if (value.isGranted) {
-            pickImage(answerIndex);
+        } else {
+          if (storagePermissionStatus) {
+            await pickImage(answerIndex, ImageSource.gallery);
           } else {
-            FlushbarHelper.showFlushbar(Get.context!, message: 'Storage Permission Needed!', type: FlushbarType.ERROR);
+            await Permission.storage.request().then((value) {
+              if (value.isGranted) {
+                pickImage(answerIndex, ImageSource.gallery);
+              } else {
+                FlushbarHelper.showFlushbar(Get.context!, message: 'Storage Permission Needed!', type: FlushbarType.ERROR);
+              }
+            });
           }
-        });
-      }
+        }
+        break;
     }
   }
 
-  Future<void> pickImage(int answerIndex) async {
+  Future<void> pickImage(int answerIndex, ImageSource method) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery, imageQuality: 75);
+    final pickedFile = await picker.pickImage(source: method, imageQuality: 75);
     logI(pickedFile?.path);
     final file = await FileHelper.copyImageToAppDir(File(pickedFile?.path ?? ''));
     switch (answerIndex) {

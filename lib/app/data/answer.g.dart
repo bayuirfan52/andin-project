@@ -21,13 +21,14 @@ class AnswerAdapter extends TypeAdapter<Answer> {
       .._idStudent = fields[1] as String?
       .._idQuestion = fields[2] as String?
       .._level = fields[3] as int?
-      .._score = fields[4] as int?;
+      .._score = fields[4] as int?
+      .._count = fields[5] as int?;
   }
 
   @override
   void write(BinaryWriter writer, Answer obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj._idAnswer)
       ..writeByte(1)
@@ -37,7 +38,9 @@ class AnswerAdapter extends TypeAdapter<Answer> {
       ..writeByte(3)
       ..write(obj._level)
       ..writeByte(4)
-      ..write(obj._score);
+      ..write(obj._score)
+      ..writeByte(5)
+      ..write(obj._count);
   }
 
   @override
