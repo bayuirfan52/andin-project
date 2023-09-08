@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
   flutter_config: ^2.0.2
   flutter_html: ^2.2.1
-  flutter_launcher_icons: ^0.11.0
   flutter_loggy: ^2.0.2
   flutter_native_splash: ^2.2.0+1
   flutter_sound: ^9.2.13
@@ -37,6 +36,7 @@ dependencies:
   toggle_switch: ^2.1.0
 description: Interactive learning for difabel.
 dev_dependencies:
+  flutter_launcher_icons: ^0.11.0
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter

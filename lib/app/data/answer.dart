@@ -15,6 +15,8 @@ class Answer extends HiveObject {
   int? _level;
   @HiveField(4)
   int? _score;
+  @HiveField(5)
+  int? _count;
 
   Answer({
     String? idAnswer,
@@ -22,6 +24,7 @@ class Answer extends HiveObject {
     String? idQuestion,
     int? level,
     int? score,
+    int? count,
   }) {
     if (_idAnswer != null) {
       this._idAnswer = idAnswer;
@@ -37,6 +40,9 @@ class Answer extends HiveObject {
     }
     if (score != null) {
       this._score = score;
+    }
+    if (count != null) {
+      this._count = count;
     }
   }
 
@@ -60,12 +66,17 @@ class Answer extends HiveObject {
 
   set score(int? score) => _score = score;
 
+  int? get count => _count;
+
+  set count(int? count) => _count = count;
+
   Answer.fromJson(Map<String, dynamic> json) {
     _idAnswer = json['id_answer'];
     _idStudent = json['id_student'];
     _idQuestion = json['id_question'];
     _level = json['level'];
     _score = json['score'];
+    _count = json['count'];
   }
 
   Map<String, dynamic> toJson() {
@@ -75,6 +86,7 @@ class Answer extends HiveObject {
     data['id_question'] = this._idQuestion;
     data['level'] = this._level;
     data['score'] = this._score;
+    data['count'] = this._count;
     return data;
   }
 }
