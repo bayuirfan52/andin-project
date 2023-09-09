@@ -28,8 +28,9 @@ class ListQuestionController extends GetxController {
   void onReady() {
     super.onReady();
     handleListQuestion();
-    getAnswered();
-    getCurrentActiveStudent();
+    getCurrentActiveStudent().then(
+      (value) => getAnswered(),
+    );
   }
 
   @override
@@ -50,6 +51,7 @@ class ListQuestionController extends GetxController {
   Future<void> getAnswered() async {
     await Database.getAnswerByStudent(currentStudent.value.id ?? '').then((value) {
       listAnswer.value = value;
+      logI('Answer | ${value}');
     }).catchError((dynamic error) {
       logE(error);
     });
