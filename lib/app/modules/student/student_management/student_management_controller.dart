@@ -60,7 +60,7 @@ class StudentManagementController extends GetxController {
       await PreferenceHelper.setCurrentActiveStudent(null);
     }
     await Database.removeStudentById(student.id ?? '').then((value) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Student Removed Successfully', type: FlushbarType.SUCCESS);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_student_removed'.tr, type: FlushbarType.SUCCESS);
       getStudentData();
     });
   }

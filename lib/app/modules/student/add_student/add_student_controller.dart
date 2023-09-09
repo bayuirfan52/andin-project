@@ -29,7 +29,7 @@ class AddStudentController extends GetxController {
 
   Future<void> saveNewStudent() async {
     if (studentController.text.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: "Name can't be empty", type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_name_field_error'.tr, type: FlushbarType.ERROR);
       return;
     }
 
@@ -40,8 +40,10 @@ class AddStudentController extends GetxController {
 
     await Database.addStudent(student).then((value) {
       PreferenceHelper.setCurrentActiveStudent(student.id ?? '');
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Add new student is success', type: FlushbarType.SUCCESS);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_add_new_student_success'.tr, type: FlushbarType.SUCCESS);
       Get.offAllNamed<dynamic>(Routes.DASHBOARD);
-    }).catchError((error) {});
+    }).catchError((dynamic error) {
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_save_error'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
+    });
   }
 }

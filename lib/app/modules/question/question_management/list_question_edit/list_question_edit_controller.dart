@@ -64,17 +64,17 @@ class ListQuestionEditController extends GetxController {
   void removeQuestion(String id) {
     if (currentLevel.value == 1) {
       Database.removeQuestionLevel1ById(id).then((value) {
-        FlushbarHelper.showFlushbar(Get.context!, message: 'Remove Success!', type: FlushbarType.SUCCESS);
+        FlushbarHelper.showFlushbar(Get.context!, message: 'text_remove_success'.tr, type: FlushbarType.SUCCESS);
         handleListQuestion();
       }).catchError((dynamic error) {
-        FlushbarHelper.showFlushbar(Get.context!, message: 'Remove Error! $error', type: FlushbarType.ERROR);
+        FlushbarHelper.showFlushbar(Get.context!, message: 'text_remove_error_'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
       });
     } else {
       Database.removeQuestionLevel2ById(id).then((value) {
-        FlushbarHelper.showFlushbar(Get.context!, message: 'Remove Success!', type: FlushbarType.SUCCESS);
+        FlushbarHelper.showFlushbar(Get.context!, message: 'text_remove_success'.tr, type: FlushbarType.SUCCESS);
         handleListQuestion();
       }).catchError((dynamic error) {
-        FlushbarHelper.showFlushbar(Get.context!, message: 'Remove Error! $error', type: FlushbarType.ERROR);
+        FlushbarHelper.showFlushbar(Get.context!, message: 'text_remove_error_'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
       });
     }
   }

@@ -71,9 +71,9 @@ class StudentDetailController extends GetxController {
   Future<void> removeStudent() async {
     await Database.removeStudentById(id.value).then((value) {
       Get.back<dynamic>();
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Student Removed!', type: FlushbarType.SUCCESS);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_student_removed'.tr, type: FlushbarType.SUCCESS);
     }).catchError((dynamic error) {
-      logE('Remove Student Failed: $error');
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_remove_error_'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
     });
   }
 }
