@@ -1,6 +1,7 @@
 # AVIC
 
 Autism visual communication for early student.
+![image](https://github.com/bayuirfan52/andin-project/blob/fix/phone-layout/assets/images/img_splash.png)
 
 ## Getting Started
 
