@@ -56,7 +56,7 @@ class LoginView extends GetView<LoginController> {
         ],
         alignment: MainAxisAlignment.center,
         crossAlignment: CrossAxisAlignment.center,
-      ).paddingSymmetric(horizontal: 265).centered().scrollVertical(),
+      ).paddingSymmetric(horizontal: 265).centered(),
     ).safeArea();
   }
 

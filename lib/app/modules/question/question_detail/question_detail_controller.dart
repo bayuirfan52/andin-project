@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 
 class QuestionDetailController extends GetxController {
   final currentId = ''.obs;
-  final currentAnswerId = ''.obs;
+  final currentAnswer = Answer().obs;
   final currentLevel = 1.obs;
   final currentScore = 0.obs;
   final level1 = QuestionLevel1().obs;
@@ -180,7 +180,6 @@ class QuestionDetailController extends GetxController {
 
   Future<void> checkAnswered() async {
     currentScore.value = 0;
-    currentAnswerId.value = '';
     isAnswered.value = false;
     await Database.getAnswerByStudent(currentStudent.value.id ?? '').then((value) {
       logD(value.toString());
@@ -193,31 +192,41 @@ class QuestionDetailController extends GetxController {
 
         if (isAnswered.value) {
           currentScore.value = element.score ?? 0;
-          currentAnswerId.value = element.idAnswer ?? '';
+          currentAnswer.value = element;
+          logD('answer_id : ${currentAnswer.value.idAnswer}, score: ${currentScore.value}, count: ${element.count}');
         } else {
-          currentAnswerId.value = '';
+          currentAnswer.value = Answer();
         }
       });
     });
-    logD('isAnswered : ${isAnswered.value}, score: ${currentScore.value}');
   }
 
   Future<void> saveAnswer(int score) async {
     final answer = Answer();
     answer.idStudent = currentStudent.value.id;
-    answer.score = score;
     answer.level = currentLevel.value;
 
     if (currentLevel.value == 1) {
       answer.idQuestion = level1.value.id;
+    } else {
+      answer.idQuestion = level2.value.id;
     }
 
-    final timeStamp = DateTime.now().millisecondsSinceEpoch;
-    final answerId = 'answer_$timeStamp';
-    answer.idAnswer = answerId;
+    if (isAnswered.value) {
+      answer.idAnswer = currentAnswer.value.idAnswer;
+      answer.count = (currentAnswer.value.count ?? 0) + 1;
+      answer.score = (currentAnswer.value.score ?? 0) + score;
+    } else {
+      final timeStamp = DateTime.now().millisecondsSinceEpoch;
+      final answerId = 'answer_$timeStamp';
+      answer.idAnswer = answerId;
+      answer.count = 1;
+      answer.score = score;
+    }
 
     await Database.addAnswer(answer).then((value) {
       FlushbarHelper.showFlushbar(Get.context!, message: 'text_score_saved'.tr, type: FlushbarType.SUCCESS);
+      handleListQuestion();
     }).catchError((dynamic error) {
       FlushbarHelper.showFlushbar(Get.context!, message: 'text_save_error'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
     });
