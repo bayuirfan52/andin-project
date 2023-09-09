@@ -135,7 +135,7 @@ class AudioRecorderController extends BaseController {
               if (value.isGranted) {
                 startRecord();
               } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'Access Media Audio permission required!', type: FlushbarType.ERROR);
+                FlushbarHelper.showFlushbar(Get.context!, message: 'text_audio_permission_needed'.tr, type: FlushbarType.ERROR);
               }
             });
           } else if (value.isGranted && androidInfo.version.sdkInt < 33) {
@@ -143,11 +143,11 @@ class AudioRecorderController extends BaseController {
               if (value.isGranted) {
                 startRecord();
               } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'Access Storage permission required!', type: FlushbarType.ERROR);
+                FlushbarHelper.showFlushbar(Get.context!, message: 'text_storage_permission_needed'.tr, type: FlushbarType.ERROR);
               }
             });
           } else {
-            FlushbarHelper.showFlushbar(Get.context!, message: 'Access Microphone permission required!', type: FlushbarType.ERROR);
+            FlushbarHelper.showFlushbar(Get.context!, message: 'text_microphone_permission_needed'.tr, type: FlushbarType.ERROR);
           }
         },
       );

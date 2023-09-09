@@ -34,10 +34,10 @@ class ProfileController extends BaseController {
 
   void saveNewName() {
     if (teacherController.text.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: "Name can't be empty", type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_name_field_error'.tr, type: FlushbarType.ERROR);
     }
     PreferenceHelper.setTeachersName(teacherController.text);
-    FlushbarHelper.showFlushbar(Get.context!, message: 'Change Name Success', type: FlushbarType.SUCCESS);
+    FlushbarHelper.showFlushbar(Get.context!, message: 'text_edit_name_success'.tr, type: FlushbarType.SUCCESS);
   }
 
   void changeLanguage(int? index) {

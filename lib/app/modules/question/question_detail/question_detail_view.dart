@@ -47,7 +47,9 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               Obx(
                 () => HStack(
                   [
-                    Container().expand(),
+                    Text(
+                      'text_current_score_'.trParams({'score': controller.currentScore.value.toString()}),
+                    ).expand(),
                     Text(
                       controller.currentPlayedAnswer.value,
                       textScaleFactor: 1.2,
@@ -176,7 +178,10 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               Obx(
                 () => HStack(
                   [
-                    Container().expand(),
+                    Text(
+                      'text_current_score_'.trParams({'score': controller.currentScore.value.toString()}),
+                      textScaleFactor: 1.5,
+                    ).expand(),
                     Text(
                       controller.currentPlayedAnswer.value,
                       textScaleFactor: 1.5,

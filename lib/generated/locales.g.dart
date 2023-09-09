@@ -70,6 +70,30 @@ class LocaleKeys {
   static const text_alert_remove_audio = 'text_alert_remove_audio';
   static const text_select_language = 'text_select_language';
   static const text_image_method = 'text_image_method';
+  static const text_score_saved = 'text_score_saved';
+  static const text_audio_required_ = 'text_audio_required_';
+  static const text_image_required_ = 'text_image_required_';
+  static const text_title_required = 'text_title_required';
+  static const text_answer_required_ = 'text_answer_required_';
+  static const text_question_added_ = 'text_question_added_';
+  static const text_question_edited_ = 'text_question_edited_';
+  static const text_camera_permission_needed = 'text_camera_permission_needed';
+  static const text_storage_permission_needed =
+      'text_storage_permission_needed';
+  static const text_photo_permission_needed = 'text_photo_permission_needed';
+  static const text_microphone_permission_needed =
+      'text_microphone_permission_needed';
+  static const text_audio_permission_needed = 'text_audio_permission_needed';
+  static const text_remove_error_ = 'text_remove_error_';
+  static const text_remove_success = 'text_remove_success';
+  static const text_save_error = 'text_save_error';
+  static const text_name_field_error = 'text_name_field_error';
+  static const text_add_new_student_success = 'text_add_new_student_success';
+  static const text_edit_student_success = 'text_edit_student_success';
+  static const text_edit_student_error_ = 'text_edit_student_error_';
+  static const text_student_removed = 'text_student_removed';
+  static const text_edit_name_success = 'text_edit_name_success';
+  static const text_current_score_ = 'text_current_score_';
 }
 
 class Locales {
@@ -109,7 +133,7 @@ class Locales {
     'text_current_active_student': 'Current Active Student : @name',
     'text_question_not_found': 'Question Not Found',
     'text_student_': 'Student : @name',
-    'text_question_scored': 'This Question is Scored',
+    'text_question_scored': 'This Question is Scored!',
     'text_score': 'Score',
     'text_attention': 'Attention',
     'text_alert_add_score':
@@ -135,6 +159,28 @@ class Locales {
     'text_alert_remove_audio': 'Are you sure you want to delete your audio?',
     'text_select_language': 'Select Language',
     'text_image_method': 'Pick Image From',
+    'text_score_saved': 'Score Saved',
+    'text_audio_required_': 'Audio for Answer @answer is required',
+    'text_image_required_': 'Image for Answer @answer is required',
+    'text_title_required': 'Question title is required',
+    'text_answer_required_': 'Answer @answer is required',
+    'text_question_added_': 'Question Level @level Added',
+    'text_question_edited_': 'Question Level @level Edited',
+    'text_camera_permission_needed': 'Camera Permission Needed!',
+    'text_storage_permission_needed': 'Storage Permission Needed!',
+    'text_photo_permission_needed': 'Photo Permission Needed!',
+    'text_microphone_permission_needed': 'Microphone Permission Needed!',
+    'text_audio_permission_needed': 'Audio Permission Needed!',
+    'text_remove_error_': 'Remove Error! @error',
+    'text_remove_success': 'Remove Success!',
+    'text_save_error': 'Error when saving! @error',
+    'text_name_field_error': 'Name can\'t be empty',
+    'text_add_new_student_success': 'Add new student is success',
+    'text_edit_student_success': 'Edit student is success',
+    'text_edit_student_error_': 'Edit student error! @error',
+    'text_student_removed': 'Student Removed!',
+    'text_edit_name_success': 'Berhasil merubah nama',
+    'text_current_score_': ' Current Score: @score',
   };
   static const id_ID = {
     'button_enter': 'Masuk',
@@ -199,5 +245,27 @@ class Locales {
     'text_alert_remove_audio': 'Apakah anda yakin ingin menghapus audio Anda?',
     'text_select_language': 'Pilih Bahasa',
     'text_image_method': 'Ambil gambar melalui',
+    'text_score_saved': 'Nilai telah tersimpan',
+    'text_audio_required_': 'Audio untuk jawaban @answer dibutuhkan',
+    'text_image_required_': 'Gambar untuk jawaban @answer dibutuhkan',
+    'text_title_required': 'Judul pertanyaan dibutuhkan',
+    'text_answer_required_': 'Text jawaban @answer dibutuhkan',
+    'text_question_added_': 'Pertanyaan level @level berhasil ditambahkan',
+    'text_question_edited_': 'Pertanyaan level @level berhasil diedit',
+    'text_camera_permission_needed': 'Ijin Akses Kamera Dibutuhkan!',
+    'text_storage_permission_needed': 'Ijin Akses Penyimpanan Dibutuhkan!',
+    'text_photo_permission_needed': 'Ijin Akses Galeri Foto Dibutuhkan!',
+    'text_microphone_permission_needed': 'Ijin Akses Microphone Dibutuhkan!',
+    'text_audio_permission_needed': 'Ijin Akses Media Audio Dibutuhkan!',
+    'text_remove_error_': 'Proses Penghapusan Gagal! @error',
+    'text_remove_success': 'Proses Penghapusan Berhasil!',
+    'text_save_error': 'Proses Menyimpan Gagal! @error',
+    'text_name_field_error': 'Nama tidak boleh kosong',
+    'text_add_new_student_success': 'Berhasil menambahkan siswa baru',
+    'text_edit_student_success': 'Berhasil merubah siswa',
+    'text_edit_student_error_': 'Gagal merubah siswa! @error',
+    'text_student_removed': 'Siswa dihapus!',
+    'text_edit_name_success': 'Berhasil merubah nama',
+    'text_current_score_': ' Skor Saat Ini: @score',
   };
 }

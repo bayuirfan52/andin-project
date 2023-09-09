@@ -42,7 +42,7 @@ class EditStudentController extends BaseController {
 
   Future<void> saveStudent() async {
     if (studentController.text.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: "Name can't be empty", type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_name_field_error'.tr, type: FlushbarType.ERROR);
       return;
     }
 
@@ -52,9 +52,9 @@ class EditStudentController extends BaseController {
 
     await Database.addStudent(student).then((value) {
       Get.back<dynamic>(result: true);
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Edit student is success', type: FlushbarType.SUCCESS);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_edit_student_success'.tr, type: FlushbarType.SUCCESS);
     }).catchError((dynamic error) {
-      logE('Edit Student Fail: $error');
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_save_error'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
     });
   }
 }

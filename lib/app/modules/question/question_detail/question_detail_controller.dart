@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 
 class QuestionDetailController extends GetxController {
   final currentId = ''.obs;
+  final currentAnswerId = ''.obs;
   final currentLevel = 1.obs;
   final currentScore = 0.obs;
   final level1 = QuestionLevel1().obs;
@@ -179,6 +180,7 @@ class QuestionDetailController extends GetxController {
 
   Future<void> checkAnswered() async {
     currentScore.value = 0;
+    currentAnswerId.value = '';
     isAnswered.value = false;
     await Database.getAnswerByStudent(currentStudent.value.id ?? '').then((value) {
       logD(value.toString());
@@ -189,7 +191,12 @@ class QuestionDetailController extends GetxController {
           isAnswered.value = element.idQuestion == level2.value.id;
         }
 
-        if (isAnswered.value) currentScore.value = element.score ?? 0;
+        if (isAnswered.value) {
+          currentScore.value = element.score ?? 0;
+          currentAnswerId.value = element.idAnswer ?? '';
+        } else {
+          currentAnswerId.value = '';
+        }
       });
     });
     logD('isAnswered : ${isAnswered.value}, score: ${currentScore.value}');
@@ -210,9 +217,9 @@ class QuestionDetailController extends GetxController {
     answer.idAnswer = answerId;
 
     await Database.addAnswer(answer).then((value) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Score Saved', type: FlushbarType.SUCCESS);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_score_saved'.tr, type: FlushbarType.SUCCESS);
     }).catchError((dynamic error) {
-      logE('Error save answer : $error');
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_save_error'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
     });
   }
 }

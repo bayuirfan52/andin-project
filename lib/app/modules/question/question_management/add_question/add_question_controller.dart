@@ -119,13 +119,14 @@ class AddQuestionController extends GetxController {
     switch (method) {
       case ImageSource.camera:
         if (cameraPermissionStatus) {
+          await pickImage(answerIndex, ImageSource.camera);
         } else {
           await Permission.camera.request().then(
             (value) {
               if (value.isGranted) {
                 pickImage(answerIndex, ImageSource.camera);
               } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'Camera Permission Needed!', type: FlushbarType.ERROR);
+                FlushbarHelper.showFlushbar(Get.context!, message: 'camera_permission_needed'.tr, type: FlushbarType.ERROR);
               }
             },
           );
@@ -140,7 +141,7 @@ class AddQuestionController extends GetxController {
               if (value.isGranted) {
                 pickImage(answerIndex, ImageSource.gallery);
               } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'Photos Permission Needed!', type: FlushbarType.ERROR);
+                FlushbarHelper.showFlushbar(Get.context!, message: 'photo_permission_needed'.tr, type: FlushbarType.ERROR);
               }
             });
           }
@@ -152,7 +153,7 @@ class AddQuestionController extends GetxController {
               if (value.isGranted) {
                 pickImage(answerIndex, ImageSource.gallery);
               } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'Storage Permission Needed!', type: FlushbarType.ERROR);
+                FlushbarHelper.showFlushbar(Get.context!, message: 'text_storage_permission_needed'.tr, type: FlushbarType.ERROR);
               }
             });
           }
@@ -206,15 +207,15 @@ class AddQuestionController extends GetxController {
 
   Future<void> saveQuestion() async {
     if (questionController.text.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Question title is required', type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_title_required'.tr, type: FlushbarType.ERROR);
       return;
     }
     if (answer1Controller.text.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Answer 1 is required', type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_answer_required_'.trParams({'answer': 1.toString()}), type: FlushbarType.ERROR);
       return;
     }
     if (answer2Controller.text.isEmpty && currentLevel.value == 2) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Answer 2 is required', type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_answer_required_'.trParams({'answer': 2.toString()}), type: FlushbarType.ERROR);
       return;
     }
     // if (answer3Controller.text.isEmpty && currentLevel.value == 2) {
@@ -222,11 +223,11 @@ class AddQuestionController extends GetxController {
     //   return;
     // }
     if (imagePath1.value.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Image for Answer 1 is required', type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_image_required_'.trParams({'answer': 1.toString()}), type: FlushbarType.ERROR);
       return;
     }
     if (imagePath2.value.isEmpty && currentLevel.value == 2) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Image for Answer 2 is required', type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_image_required_'.trParams({'answer': 2.toString()}), type: FlushbarType.ERROR);
       return;
     }
     // if (imagePath3.value.isEmpty && currentLevel.value == 2) {
@@ -234,11 +235,11 @@ class AddQuestionController extends GetxController {
     //   return;
     // }
     if (audioPath1.value.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Audio for Answer 1 is required', type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_audio_required_'.trParams({'answer': 1.toString()}), type: FlushbarType.ERROR);
       return;
     }
     if (audioPath2.value.isEmpty && currentLevel.value == 2) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'Audio for Answer 2 is required', type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_audio_required_'.trParams({'answer': 2.toString()}), type: FlushbarType.ERROR);
       return;
     }
     // if (audioPath3.value.isEmpty && currentLevel.value == 2) {
@@ -260,7 +261,7 @@ class AddQuestionController extends GetxController {
 
         await Database.addQuestionLevel1(data).then((value) {
           Get.back<dynamic>();
-          FlushbarHelper.showFlushbar(Get.context!, message: 'Question Level 1 Added', type: FlushbarType.SUCCESS);
+          FlushbarHelper.showFlushbar(Get.context!, message: 'text_question_added_'.trParams({'level': 1.toString()}), type: FlushbarType.SUCCESS);
         }).catchError((dynamic error) {
           logE(error);
         });
@@ -279,7 +280,7 @@ class AddQuestionController extends GetxController {
 
         await Database.addQuestionLevel2(data).then((value) {
           Get.back<dynamic>();
-          FlushbarHelper.showFlushbar(Get.context!, message: 'Question Level 2 Added', type: FlushbarType.SUCCESS);
+          FlushbarHelper.showFlushbar(Get.context!, message: 'text_question_added_'.trParams({'level': 2.toString()}), type: FlushbarType.SUCCESS);
         }).catchError((dynamic error) {
           logE(error);
         });
