@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:andin_project/app/core/resources/app_color.dart';
+import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/app/widgets/ex_button_default.dart';
 import 'package:andin_project/app/widgets/ex_dialog.dart';
@@ -86,14 +87,14 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               [
                 Obx(
                   () => Text(
-                    controller.isAnswered.value ? 'text_question_scored'.tr : 'text_score'.tr,
+                    controller.isAnswered.value ? 'text_question_scored'.trParams({'count': (10 - (controller.currentAnswer.value.count ?? 0)).toString()}) : 'text_score'.tr,
                     style: GoogleFonts.aBeeZee(fontSize: 16),
                   ),
                 ),
                 HStack([
                   MaterialButton(
                     color: Colors.red.shade500,
-                    onPressed: () => saveAnswerDialog(0),
+                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(0) : showAlertReachMaxCount(),
                     padding: EdgeInsets.all(8),
                     child: Text(
                       '0',
@@ -103,7 +104,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                   12.widthBox,
                   MaterialButton(
                     color: Colors.orange.shade500,
-                    onPressed: () => saveAnswerDialog(30),
+                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(30) : showAlertReachMaxCount(),
                     padding: EdgeInsets.all(8),
                     child: Text(
                       '30',
@@ -113,7 +114,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                   12.widthBox,
                   MaterialButton(
                     color: Colors.green.shade500,
-                    onPressed: () => saveAnswerDialog(60),
+                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(60) : showAlertReachMaxCount(),
                     padding: EdgeInsets.all(8),
                     child: Text(
                       '60',
@@ -123,7 +124,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                   12.widthBox,
                   MaterialButton(
                     color: Colors.blue.shade500,
-                    onPressed: () => saveAnswerDialog(80),
+                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(80) : showAlertReachMaxCount(),
                     padding: EdgeInsets.all(8),
                     child: Text(
                       '80',
@@ -219,7 +220,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               [
                 Obx(
                   () => Text(
-                    controller.isAnswered.value ? 'text_question_scored'.tr : 'text_score'.tr,
+                    controller.isAnswered.value ? 'text_question_scored'.trParams({'count': (10 - (controller.currentAnswer.value.count ?? 0)).toString()}) : 'text_score'.tr,
                     style: GoogleFonts.aBeeZee(fontSize: 36),
                   ),
                 ),
@@ -227,7 +228,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                 HStack([
                   MaterialButton(
                     color: Colors.red.shade500,
-                    onPressed: () => saveAnswerDialog(0),
+                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(0) : showAlertReachMaxCount(),
                     padding: EdgeInsets.all(24),
                     child: Text(
                       '0',
@@ -238,7 +239,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                   12.widthBox,
                   MaterialButton(
                     color: Colors.orange.shade500,
-                    onPressed: () => saveAnswerDialog(30),
+                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(30) : showAlertReachMaxCount(),
                     padding: EdgeInsets.all(24),
                     child: Text(
                       '30',
@@ -249,7 +250,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                   12.widthBox,
                   MaterialButton(
                     color: Colors.green.shade500,
-                    onPressed: () => saveAnswerDialog(60),
+                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(60) : showAlertReachMaxCount(),
                     padding: EdgeInsets.all(24),
                     child: Text(
                       '60',
@@ -260,7 +261,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                   12.widthBox,
                   MaterialButton(
                     color: Colors.blue.shade500,
-                    onPressed: () => saveAnswerDialog(80),
+                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(80) : showAlertReachMaxCount(),
                     padding: EdgeInsets.all(24),
                     child: Text(
                       '80',
@@ -296,6 +297,10 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
       onConfirmClicked: () => controller.saveAnswer(score),
       isTablet: controller.isTablet.value,
     );
+  }
+
+  void showAlertReachMaxCount() {
+    FlushbarHelper.showFlushbar(Get.context!, message: 'text_react_max_count_alert'.tr, title: 'text_attention'.tr, type: FlushbarType.WARNING);
   }
 
   Widget questionLevel1(BuildContext context) => Card(

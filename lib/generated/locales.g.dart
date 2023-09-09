@@ -78,11 +78,9 @@ class LocaleKeys {
   static const text_question_added_ = 'text_question_added_';
   static const text_question_edited_ = 'text_question_edited_';
   static const text_camera_permission_needed = 'text_camera_permission_needed';
-  static const text_storage_permission_needed =
-      'text_storage_permission_needed';
+  static const text_storage_permission_needed = 'text_storage_permission_needed';
   static const text_photo_permission_needed = 'text_photo_permission_needed';
-  static const text_microphone_permission_needed =
-      'text_microphone_permission_needed';
+  static const text_microphone_permission_needed = 'text_microphone_permission_needed';
   static const text_audio_permission_needed = 'text_audio_permission_needed';
   static const text_remove_error_ = 'text_remove_error_';
   static const text_remove_success = 'text_remove_success';
@@ -94,6 +92,7 @@ class LocaleKeys {
   static const text_student_removed = 'text_student_removed';
   static const text_edit_name_success = 'text_edit_name_success';
   static const text_current_score_ = 'text_current_score_';
+  static const text_react_max_count_alert = 'text_react_max_count_alert';
 }
 
 class Locales {
@@ -128,16 +127,14 @@ class Locales {
     'text_add_student': 'Add Student',
     'text_student_name': 'Student Name',
     'text_alert': 'Alert',
-    'text_alert_add_student':
-        'Are you sure to add this student?\nThis addition will automatically select this student to be the current active student',
+    'text_alert_add_student': 'Are you sure to add this student?\nThis addition will automatically select this student to be the current active student',
     'text_current_active_student': 'Current Active Student : @name',
     'text_question_not_found': 'Question Not Found',
     'text_student_': 'Student : @name',
-    'text_question_scored': 'This Question is Scored!',
+    'text_question_scored': 'Chance Remaining: @count',
     'text_score': 'Score',
     'text_attention': 'Attention',
-    'text_alert_add_score':
-        'Are you sure to add score @score for this question to @name',
+    'text_alert_add_score': 'Are you sure to add score @score for this question to @name',
     'text_welcome_': 'Welcome to @app',
     'text_add_audio': 'Add Audio',
     'text_alert_change_name': 'Are you sure to change your name?',
@@ -181,6 +178,7 @@ class Locales {
     'text_student_removed': 'Student Removed!',
     'text_edit_name_success': 'Berhasil merubah nama',
     'text_current_score_': ' Current Score: @score',
+    'text_react_max_count_alert': 'The maximum number of opportunities to answer has been reached',
   };
   static const id_ID = {
     'button_enter': 'Masuk',
@@ -209,20 +207,18 @@ class Locales {
     'text_enter_teacher_name': 'Masukkan Nama Guru',
     'text_teacher_name': 'Nama Guru',
     'text_search': 'Cari',
-    'text_student_not_found': 'Student Not Found',
+    'text_student_not_found': 'Siswa tidak ditemukan',
     'text_add_student': 'Tambah Siswa',
     'text_student_name': 'Nama Siswa',
     'text_alert': 'Peringatan',
-    'text_alert_add_student':
-        'Apakah anda yakin untuk menambahkan siswa ini?\nPenambahan ini secara otomatis akan memilih siswa tersebut menjadi siswa aktif saat ini',
+    'text_alert_add_student': 'Apakah anda yakin untuk menambahkan siswa ini?\nPenambahan ini secara otomatis akan memilih siswa tersebut menjadi siswa aktif saat ini',
     'text_current_active_student': 'Siswa Aktif : @name',
     'text_question_not_found': 'Pertanyaan Tidak Ditemukan',
     'text_student_': 'Siswa : @name',
-    'text_question_scored': 'Pertanyaan Ini Telah Dinilai',
+    'text_question_scored': 'Sisa Kesempatan : @count',
     'text_score': 'Nilai',
     'text_attention': 'Perhatian',
-    'text_alert_add_score':
-        'Apakah anda yakin untuk memberikan nilai @score untuk pertanyaan ini kepada @name',
+    'text_alert_add_score': 'Apakah anda yakin untuk memberikan nilai @score untuk pertanyaan ini kepada @name',
     'text_welcome_': 'Selamat Datang di @app',
     'text_add_audio': 'Tambah Audio',
     'text_alert_change_name': 'Apakah anda yakin untuk merubah nama anda?',
@@ -232,8 +228,7 @@ class Locales {
     'text_edit_student': 'Edit Siswa',
     'text_alert_edit_student': 'Apakah anda yakin untuk merubah siswa ini?',
     'text_question_management': 'Manajemen Pertanyaan',
-    'text_alert_delete_question':
-        'Apakah anda yakin untuk menghapus pertanyaan ini?',
+    'text_alert_delete_question': 'Apakah anda yakin untuk menghapus pertanyaan ini?',
     'text_edit_question': 'Edit Pertanyaan',
     'text_enter_question_title': 'Masukkan Judul Pertanyaan',
     'text_question_title': 'Judul Pertanyaan',
@@ -267,5 +262,6 @@ class Locales {
     'text_student_removed': 'Siswa dihapus!',
     'text_edit_name_success': 'Berhasil merubah nama',
     'text_current_score_': ' Skor Saat Ini: @score',
+    'text_react_max_count_alert': 'Telah mencapai batas maksimal kesempatan menjawab',
   };
 }

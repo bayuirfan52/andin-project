@@ -95,5 +95,5 @@ class ListQuestionController extends GetxController {
           'level': currentLevel.value,
           'id': id,
         },
-      );
+      )?.then((value) => onReady());
 }

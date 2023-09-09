@@ -36,7 +36,7 @@
         "current_active_student": "Current Active Student : @name",
         "question_not_found": "Question Not Found",
         "student_": "Student : @name",
-        "question_scored": "This Question is Scored!",
+        "question_scored": "Chance Remaining: @count",
         "score": "Score",
         "attention": "Attention",
         "alert_add_score": "Are you sure to add score @score for this question to @name",
@@ -82,6 +82,7 @@
         "edit_student_error_": "Edit student error! @error",
         "student_removed": "Student Removed!",
         "edit_name_success": "Berhasil merubah nama",
-        "current_score_": " Current Score: @score"
+        "current_score_": " Current Score: @score",
+        "react_max_count_alert": "The maximum number of opportunities to answer has been reached"
     }
 }

@@ -28,7 +28,7 @@
         "enter_teacher_name": "Masukkan Nama Guru",
         "teacher_name": "Nama Guru",
         "search": "Cari",
-        "student_not_found": "Student Not Found",
+        "student_not_found": "Siswa tidak ditemukan",
         "add_student": "Tambah Siswa",
         "student_name": "Nama Siswa",
         "alert": "Peringatan",
@@ -36,7 +36,7 @@
         "current_active_student": "Siswa Aktif : @name",
         "question_not_found": "Pertanyaan Tidak Ditemukan",
         "student_": "Siswa : @name",
-        "question_scored": "Pertanyaan Ini Telah Dinilai",
+        "question_scored": "Sisa Kesempatan : @count",
         "score": "Nilai",
         "attention": "Perhatian",
         "alert_add_score": "Apakah anda yakin untuk memberikan nilai @score untuk pertanyaan ini kepada @name",
@@ -82,6 +82,7 @@
         "edit_student_error_": "Gagal merubah siswa! @error",
         "student_removed": "Siswa dihapus!",
         "edit_name_success": "Berhasil merubah nama",
-        "current_score_": " Skor Saat Ini: @score"
+        "current_score_": " Skor Saat Ini: @score",
+        "react_max_count_alert": "Telah mencapai batas maksimal kesempatan menjawab"
     }
 }
