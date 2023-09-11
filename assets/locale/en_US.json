@@ -83,6 +83,7 @@
         "student_removed": "Student Removed!",
         "edit_name_success": "Berhasil merubah nama",
         "current_score_": " Current Score: @score",
-        "react_max_count_alert": "The maximum number of opportunities to answer has been reached"
+        "react_max_count_alert": "The maximum number of opportunities to answer has been reached",
+        "not_reach_minimum_score": "Have not reached the minimum score to continue"
     }
 }

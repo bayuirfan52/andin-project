@@ -93,6 +93,7 @@ class LocaleKeys {
   static const text_edit_name_success = 'text_edit_name_success';
   static const text_current_score_ = 'text_current_score_';
   static const text_react_max_count_alert = 'text_react_max_count_alert';
+  static const text_not_reach_minimum_score = 'text_not_reach_minimum_score';
 }
 
 class Locales {
@@ -179,6 +180,7 @@ class Locales {
     'text_edit_name_success': 'Berhasil merubah nama',
     'text_current_score_': ' Current Score: @score',
     'text_react_max_count_alert': 'The maximum number of opportunities to answer has been reached',
+    'text_not_reach_minimum_score': 'Have not reached the minimum score to continue',
   };
   static const id_ID = {
     'button_enter': 'Masuk',
@@ -263,5 +265,6 @@ class Locales {
     'text_edit_name_success': 'Berhasil merubah nama',
     'text_current_score_': ' Skor Saat Ini: @score',
     'text_react_max_count_alert': 'Telah mencapai batas maksimal kesempatan menjawab',
+    'text_not_reach_minimum_score': 'Belum mencapai skor minimal untuk lanjut',
   };
 }
