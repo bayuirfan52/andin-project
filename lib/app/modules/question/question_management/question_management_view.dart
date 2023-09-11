@@ -22,9 +22,10 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
         body: HStack(
           [
             Card(
+              elevation: 8,
               child: ZStack([
-                Image.network(
-                  'https://www.kamiapp.com/wp-content/uploads/2022/09/Certified-Banner-2-1024x917.jpg',
+                Image.asset(
+                  'assets/images/img_pecs_1_2.png',
                   width: 480,
                   height: 480,
                   fit: BoxFit.cover,
@@ -34,7 +35,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
-                      'Level 1',
+                      'PECS 1 & 2',
                       style: GoogleFonts.aBeeZee(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -55,9 +56,10 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
             ),
             48.widthBox,
             Card(
+              elevation: 8,
               child: ZStack([
-                Image.network(
-                  'https://rollhappy.co.uk/cdn/shop/collections/roll-happy-rollerskating-level-2_1200x1200.jpg?v=1680537955',
+                Image.asset(
+                  'assets/images/img_pecs_3a_3b_1.png',
                   width: 480,
                   height: 480,
                   fit: BoxFit.cover,
@@ -67,7 +69,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
-                      'Level 2',
+                      'PECS 3A & 3B 1',
                       style: GoogleFonts.aBeeZee(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -102,9 +104,10 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
         body: HStack(
           [
             Card(
+              elevation: 8,
               child: ZStack([
-                Image.network(
-                  'https://www.kamiapp.com/wp-content/uploads/2022/09/Certified-Banner-2-1024x917.jpg',
+                Image.asset(
+                  'assets/images/img_pecs_1_2.png',
                   width: 164,
                   height: 164,
                   fit: BoxFit.cover,
@@ -114,7 +117,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
-                      'Level 1',
+                      'PECS 1 & 2',
                       style: GoogleFonts.aBeeZee(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -135,9 +138,10 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
             ),
             48.widthBox,
             Card(
+              elevation: 8,
               child: ZStack([
-                Image.network(
-                  'https://rollhappy.co.uk/cdn/shop/collections/roll-happy-rollerskating-level-2_1200x1200.jpg?v=1680537955',
+                Image.asset(
+                  'assets/images/img_pecs_3a_3b_1.png',
                   width: 164,
                   height: 164,
                   fit: BoxFit.cover,
@@ -147,7 +151,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
-                      'Level 2',
+                      'PECS 3A & 3B 1',
                       style: GoogleFonts.aBeeZee(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

@@ -19,7 +19,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
 
   Widget tabletUI(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('Edit : Level ${controller.currentLevel.value}'),
+          title: Text('Edit : ${controller.currentLevel.value == 1 ? 'PECS 1 & 2' : 'PECS 3A & 3B 1'}'),
           centerTitle: true,
           actions: [
             MaterialButton(
@@ -40,7 +40,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
   Widget phoneUI(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(
-            'Edit : Level ${controller.currentLevel.value}',
+            'Edit : ${controller.currentLevel.value == 1 ? 'PECS 1 & 2' : 'PECS 3A & 3B 1'}',
             style: GoogleFonts.aBeeZee(fontSize: 16),
           ),
           centerTitle: true,

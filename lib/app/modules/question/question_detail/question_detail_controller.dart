@@ -119,14 +119,18 @@ class QuestionDetailController extends GetxController {
   }
 
   void nextQuestion() {
-    if (currentLevel.value == 1) {
-      final index = listLevel1.indexWhere((element) => element.id == level1.value.id);
-      currentId.value = listLevel1[index + 1].id ?? '';
+    if ((currentAnswer.value.score ?? 0) < 650) {
+      FlushbarHelper.showFlushbar(Get.context!, title: 'text_attention'.tr, message: 'text_not_reach_minimum_score'.tr, type: FlushbarType.ERROR);
     } else {
-      final index = listLevel2.indexWhere((element) => element.id == level2.value.id);
-      currentId.value = listLevel2[index + 1].id ?? '';
+      if (currentLevel.value == 1) {
+        final index = listLevel1.indexWhere((element) => element.id == level1.value.id);
+        currentId.value = listLevel1[index + 1].id ?? '';
+      } else {
+        final index = listLevel2.indexWhere((element) => element.id == level2.value.id);
+        currentId.value = listLevel2[index + 1].id ?? '';
+      }
+      handleListQuestion();
     }
-    handleListQuestion();
   }
 
   Future<void> getCurrentActiveStudent() async {
