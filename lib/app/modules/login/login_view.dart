@@ -52,7 +52,7 @@ class LoginView extends GetView<LoginController> {
             labelSize: 32,
             height: 64,
             onPressed: () => controller.saveTeacherName(),
-          ).wFull(context)
+          ).wFull(context),
         ],
         alignment: MainAxisAlignment.center,
         crossAlignment: CrossAxisAlignment.center,
@@ -98,7 +98,7 @@ class LoginView extends GetView<LoginController> {
             label: 'button_enter'.tr,
             labelSize: 12,
             onPressed: () => controller.saveTeacherName(),
-          ).wFull(context)
+          ).wFull(context),
         ],
         alignment: MainAxisAlignment.center,
         crossAlignment: CrossAxisAlignment.center,

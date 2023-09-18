@@ -54,7 +54,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
                 textAlign: TextAlign.center,
               ).centered(),
             ),
-          )
+          ),
         ],
       ).p24().centered(),
       bottomNavigationBar:
@@ -139,7 +139,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
                     ),
                   ),
                 ),
-              ).pOnly(left: 8)
+              ).pOnly(left: 8),
           ]),
           8.widthBox,
           if (controller.isPlayerMode.isFalse)
@@ -199,7 +199,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
-                )
+                ),
               ]),
             )
           else
@@ -232,7 +232,7 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
                   ),
                 ),
               ]),
-            )
+            ),
         ],
         alignment: MainAxisAlignment.center,
       ).p24();

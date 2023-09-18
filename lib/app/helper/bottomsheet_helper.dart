@@ -36,7 +36,7 @@ mixin BottomSheetHelper {
               ),
               10.heightBox,
             ]),
-          children
+          children,
         ]).p16(),
       ),
       elevation: 10,

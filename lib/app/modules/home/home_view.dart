@@ -27,7 +27,7 @@ class HomeView extends GetView<HomeController> {
                 textScaleFactor: 1.5,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: HStack(
@@ -52,7 +52,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ).pOnly(bottom: 12),
                   ),
-                )
+                ),
               ]).onInkTap(() => controller.goToListQuestion(1)),
             ),
             48.widthBox,
@@ -76,7 +76,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ).pOnly(bottom: 12),
                   ),
-                )
+                ),
               ]).onInkTap(() => controller.goToListQuestion(2)),
             ),
           ],
@@ -105,7 +105,7 @@ class HomeView extends GetView<HomeController> {
                 'button_select_student'.tr,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: HStack(
@@ -130,7 +130,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ).pOnly(bottom: 12),
                   ),
-                )
+                ),
               ]).onInkTap(() => controller.goToListQuestion(1)),
             ),
             48.widthBox,
@@ -154,7 +154,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ).pOnly(bottom: 12),
                   ),
-                )
+                ),
               ]).onInkTap(() => controller.goToListQuestion(2)),
             ),
           ],

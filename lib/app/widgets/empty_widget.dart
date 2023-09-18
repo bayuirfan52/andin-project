@@ -26,7 +26,7 @@ class EmptyWidget extends StatelessWidget {
             fontSize: textSize,
             fontWeight: FontWeight.normal,
           ),
-        ).centered()
+        ).centered(),
       ],
     );
   }

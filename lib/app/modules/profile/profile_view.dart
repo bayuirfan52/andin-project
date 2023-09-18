@@ -46,7 +46,7 @@ class ProfileView extends GetView<ProfileController> {
                   message: 'text_alert_change_name'.tr,
                   onConfirmClicked: () => controller.saveNewName(),
                 ),
-              ).wFull(context)
+              ).wFull(context),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(v: 24, h: 128).scrollVertical(),
@@ -76,7 +76,7 @@ class ProfileView extends GetView<ProfileController> {
                   controller.changeLanguage(index);
                 },
               ),
-            )
+            ),
           ],
           crossAlignment: CrossAxisAlignment.center,
         ).p24(),
@@ -110,7 +110,7 @@ class ProfileView extends GetView<ProfileController> {
                   message: 'text_alert_change_name'.tr,
                   onConfirmClicked: () => controller.saveNewName(),
                 ),
-              ).wFull(context)
+              ).wFull(context),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(v: 12, h: 128).scrollVertical(),
@@ -140,7 +140,7 @@ class ProfileView extends GetView<ProfileController> {
                   controller.changeLanguage(index);
                 },
               ),
-            )
+            ),
           ],
           crossAlignment: CrossAxisAlignment.center,
         ).p12(),

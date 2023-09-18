@@ -59,7 +59,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                     Text(
                       'text_student_'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
                       textAlign: TextAlign.end,
-                    ).expand()
+                    ).expand(),
                   ],
                 ).pSymmetric(h: 128),
               ),
@@ -131,7 +131,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                       style: GoogleFonts.aBeeZee(color: Colors.white),
                     ),
                   ),
-                ])
+                ]),
               ],
               crossAlignment: CrossAxisAlignment.center,
             ),
@@ -192,7 +192,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                       'text_student_'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
                       textScaleFactor: 1.5,
                       textAlign: TextAlign.end,
-                    ).expand()
+                    ).expand(),
                   ],
                 ).pSymmetric(h: 128),
               ),
@@ -269,7 +269,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                       style: GoogleFonts.aBeeZee(color: Colors.white),
                     ),
                   ),
-                ])
+                ]),
               ],
               crossAlignment: CrossAxisAlignment.center,
             ),
@@ -385,8 +385,8 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                     ),
                   )
                   .p12(),
-            )
+            ),
           ]),
-        )
+        ),
       ]);
 }
