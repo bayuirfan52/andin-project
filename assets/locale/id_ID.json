@@ -17,10 +17,10 @@
         "no": "Tidak",
         "cancel": "Batal",
         "change": "Ganti",
-        "home": "Home",
-        "question": "Pertanyaan",
+        "home": "Tabel Pertanyaan",
+        "question": "Tambah Pertanyaan",
         "student": "Siswa",
-        "profile": "Profil",
+        "profile": "Pengampu",
         "camera": "Kamera",
         "gallery": "Galeri"
     },

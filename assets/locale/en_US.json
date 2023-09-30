@@ -17,10 +17,10 @@
         "no": "No",
         "cancel": "Cancel",
         "change": "Change",
-        "home": "Home",
-        "question": "Question",
+        "home": "Table Question",
+        "question": "Add Question",
         "student": "Student",
-        "profile": "Profile",
+        "profile": "Teacher",
         "camera": "Camera",
         "gallery": "Gallery"
     },
