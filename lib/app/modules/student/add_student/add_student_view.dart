@@ -45,7 +45,7 @@ class AddStudentView extends GetView<AddStudentController> {
                   message: 'text_alert_add_student'.tr,
                   onConfirmClicked: () => controller.saveNewStudent(),
                 ),
-              ).wFull(context)
+              ).wFull(context),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(v: 24, h: 128).scrollVertical(),
@@ -83,7 +83,7 @@ class AddStudentView extends GetView<AddStudentController> {
                   isTablet: false,
                   onConfirmClicked: () => controller.saveNewStudent(),
                 ),
-              ).wFull(context)
+              ).wFull(context),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(v: 24, h: 128).scrollVertical(),

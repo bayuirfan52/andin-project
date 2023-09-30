@@ -134,7 +134,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                         color: colorPrimary,
                       ),
                     ),
-                  ]).pOnly(top: 12)
+                  ]).pOnly(top: 12),
                 ]).expand(),
                 24.widthBox,
                 ZStack([
@@ -165,7 +165,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                       Icons.change_circle,
                       color: colorPrimary,
                     ),
-                  )
+                  ),
                 ]),
               ],
               alignment: MainAxisAlignment.center,
@@ -233,7 +233,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                           color: colorPrimary,
                         ),
                       ),
-                    ]).pOnly(top: 12)
+                    ]).pOnly(top: 12),
                   ]).expand(),
                   24.widthBox,
                   ZStack([
@@ -264,7 +264,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                         Icons.change_circle,
                         color: colorPrimary,
                       ),
-                    )
+                    ),
                   ]),
                 ],
                 alignment: MainAxisAlignment.center,
@@ -391,7 +391,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                         color: colorPrimary,
                       ),
                     ),
-                  ]).pOnly(top: 12)
+                  ]).pOnly(top: 12),
                 ]).expand(),
                 24.widthBox,
                 ZStack([
@@ -420,7 +420,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                       Icons.change_circle,
                       color: colorPrimary,
                     ),
-                  )
+                  ),
                 ]),
               ],
               alignment: MainAxisAlignment.center,
@@ -490,7 +490,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                           color: colorPrimary,
                         ),
                       ),
-                    ]).pOnly(top: 12)
+                    ]).pOnly(top: 12),
                   ]).expand(),
                   24.widthBox,
                   ZStack([
@@ -519,7 +519,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
                         Icons.change_circle,
                         color: colorPrimary,
                       ),
-                    )
+                    ),
                   ]),
                 ],
                 alignment: MainAxisAlignment.center,

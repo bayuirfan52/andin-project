@@ -28,7 +28,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
                 textScaleFactor: 1.5,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: Center(
@@ -63,7 +63,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
                 'button_select_student'.tr,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: Center(

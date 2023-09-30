@@ -44,12 +44,9 @@ class AttachmentAudio extends StatelessWidget {
           Container(
             child: '$fileName'.text.maxLines(3).overflow(TextOverflow.ellipsis).make(),
           ).expand(),
-          if (canRemove) Icon(Icons.clear_rounded, color: colorDisabled).p8().onInkTap(() => onRemoveDocument()) else SizedBox()
+          if (canRemove) Icon(Icons.clear_rounded, color: colorDisabled).p8().onInkTap(() => onRemoveDocument()) else SizedBox(),
         ]).onInkTap(
-          () => {
-            // CLICK IMAGE
-            onClick()
-          },
+          () => onClick(),
         ),
       ),
     ).h(75).wFull(context).pOnly(bottom: 16);

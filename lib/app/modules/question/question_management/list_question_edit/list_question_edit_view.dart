@@ -29,7 +29,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                 textScaleFactor: 1.5,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: Center(
@@ -51,7 +51,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
                 'button_add_new_question'.tr,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: Center(

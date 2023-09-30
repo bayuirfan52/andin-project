@@ -45,7 +45,7 @@ class EditStudentView extends GetView<EditStudentController> {
                   message: 'text_alert_edit_student'.tr,
                   onConfirmClicked: () => controller.saveStudent(),
                 ),
-              ).wFull(context)
+              ).wFull(context),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(v: 24, h: 128).scrollVertical(),
@@ -83,7 +83,7 @@ class EditStudentView extends GetView<EditStudentController> {
                   isTablet: false,
                   onConfirmClicked: () => controller.saveStudent(),
                 ),
-              ).wFull(context)
+              ).wFull(context),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(v: 24, h: 128).scrollVertical(),

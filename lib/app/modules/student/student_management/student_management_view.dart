@@ -30,7 +30,7 @@ class StudentManagementView extends GetView<StudentManagementController> {
                 textScaleFactor: 1.5,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: Center(
@@ -76,7 +76,7 @@ class StudentManagementView extends GetView<StudentManagementController> {
                         separatorBuilder: (context, item) => 12.heightBox,
                         itemCount: controller.listStudentFiltered.length,
                       ).expand(),
-              )
+              ),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(h: 128, v: 24).hFull(context),
@@ -97,7 +97,7 @@ class StudentManagementView extends GetView<StudentManagementController> {
                 'button_add_new_student'.tr,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: Center(
@@ -150,7 +150,7 @@ class StudentManagementView extends GetView<StudentManagementController> {
                         separatorBuilder: (context, item) => 12.heightBox,
                         itemCount: controller.listStudentFiltered.length,
                       ).expand(),
-              )
+              ),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(h: 128, v: 12).hFull(context),

@@ -34,7 +34,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                 textScaleFactor: 1.5,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: VStack([
@@ -120,7 +120,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                         color: colorPrimary,
                       ),
                     ),
-                  ]).pOnly(top: 12)
+                  ]).pOnly(top: 12),
                 ]).expand(),
                 24.widthBox,
                 ZStack([
@@ -151,7 +151,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                       Icons.change_circle,
                       color: colorPrimary,
                     ),
-                  )
+                  ),
                 ]),
               ],
               alignment: MainAxisAlignment.center,
@@ -219,7 +219,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                           color: colorPrimary,
                         ),
                       ),
-                    ]).pOnly(top: 12)
+                    ]).pOnly(top: 12),
                   ]).expand(),
                   24.widthBox,
                   ZStack([
@@ -250,7 +250,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                         Icons.change_circle,
                         color: colorPrimary,
                       ),
-                    )
+                    ),
                   ]),
                 ],
                 alignment: MainAxisAlignment.center,
@@ -276,7 +276,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                 'button_save'.tr,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
         body: VStack([
@@ -366,7 +366,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                         color: colorPrimary,
                       ),
                     ),
-                  ]).pOnly(top: 12)
+                  ]).pOnly(top: 12),
                 ]).expand(),
                 24.widthBox,
                 ZStack([
@@ -395,7 +395,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                       Icons.change_circle,
                       color: colorPrimary,
                     ),
-                  )
+                  ),
                 ]),
               ],
               alignment: MainAxisAlignment.center,
@@ -465,7 +465,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                           color: colorPrimary,
                         ),
                       ),
-                    ]).pOnly(top: 12)
+                    ]).pOnly(top: 12),
                   ]).expand(),
                   24.widthBox,
                   ZStack([
@@ -494,7 +494,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
                         Icons.change_circle,
                         color: colorPrimary,
                       ),
-                    )
+                    ),
                   ]),
                 ],
                 alignment: MainAxisAlignment.center,

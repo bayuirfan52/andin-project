@@ -75,7 +75,7 @@ class SelectStudentView extends GetView<SelectStudentController> {
                     : EmptyWidget(
                         message: 'text_student_not_found'.tr,
                       ).scrollVertical().expand(),
-              )
+              ),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(h: 128, v: 24).hFull(context),
@@ -153,7 +153,7 @@ class SelectStudentView extends GetView<SelectStudentController> {
                         message: 'text_student_not_found'.tr,
                         textSize: 12,
                       ).scrollVertical().expand(),
-              )
+              ),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ).pSymmetric(h: 128, v: 12).hFull(context),
