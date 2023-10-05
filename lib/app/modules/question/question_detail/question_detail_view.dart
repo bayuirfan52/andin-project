@@ -24,51 +24,88 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
   Widget phoneUI(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Obx(
-            () => Text(
-              controller.currentLevel.value == 1 ? (controller.level1.value.question ?? '') : (controller.level2.value.question ?? ''),
-              overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.aBeeZee(fontSize: 16),
-            ),
+            () => HStack([
+              Text(
+                '${controller.currentLevel.value == 1 ? (controller.level1.value.question ?? '') : (controller.level2.value.question ?? '')} | ',
+                style: GoogleFonts.aBeeZee(fontSize: 16),
+              ),
+              Text(
+                'text_current_score_'.trParams({'score': controller.currentScore.value.toString()}),
+                style: GoogleFonts.aBeeZee(fontSize: 16),
+              )
+            ]),
           ),
           centerTitle: true,
           actions: [
-            MaterialButton(
-              onPressed: () => controller.goToSelectStudent(),
+            Container(
+              margin: EdgeInsets.only(right: 24),
               child: Text(
-                'button_select_student'.tr,
-                style: GoogleFonts.aBeeZee(color: Colors.white),
-              ),
+                'text_student_'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
+                textAlign: TextAlign.end,
+              ).centered(),
             ),
           ],
         ),
         body: Center(
-          child: VStack(
+          child: HStack(
             [
-              24.heightBox,
-              Obx(
-                () => HStack(
-                  [
-                    Text(
-                      'text_current_score_'.trParams({'score': controller.currentScore.value.toString()}),
-                    ).expand(),
-                    Text(
-                      controller.currentPlayedAnswer.value,
-                      textScaleFactor: 1.2,
-                      textAlign: TextAlign.center,
-                    ).expand(),
-                    Text(
-                      'text_student_'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
-                      textAlign: TextAlign.end,
-                    ).expand(),
-                  ],
-                ).pSymmetric(h: 128),
+              VStack(
+                [
+                  Text(
+                    'text_score'.tr,
+                    style: GoogleFonts.aBeeZee(fontSize: 16),
+                  ),
+                  VStack([
+                    MaterialButton(
+                      color: Colors.red.shade500,
+                      onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(0) : showAlertReachMaxCount(),
+                      padding: EdgeInsets.all(8),
+                      child: Text(
+                        '0',
+                        style: GoogleFonts.aBeeZee(color: Colors.white),
+                      ),
+                    ),
+                    12.widthBox,
+                    MaterialButton(
+                      color: Colors.orange.shade500,
+                      onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(30) : showAlertReachMaxCount(),
+                      padding: EdgeInsets.all(8),
+                      child: Text(
+                        '30',
+                        style: GoogleFonts.aBeeZee(color: Colors.white),
+                      ),
+                    ),
+                    12.widthBox,
+                    MaterialButton(
+                      color: Colors.green.shade500,
+                      onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(60) : showAlertReachMaxCount(),
+                      padding: EdgeInsets.all(8),
+                      child: Text(
+                        '60',
+                        style: GoogleFonts.aBeeZee(color: Colors.white),
+                      ),
+                    ),
+                    12.widthBox,
+                    MaterialButton(
+                      color: Colors.blue.shade500,
+                      onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(80) : showAlertReachMaxCount(),
+                      padding: EdgeInsets.all(8),
+                      child: Text(
+                        '80',
+                        style: GoogleFonts.aBeeZee(color: Colors.white),
+                      ),
+                    ),
+                  ]),
+                ],
+                crossAlignment: CrossAxisAlignment.center,
               ),
-              Spacer(),
               Obx(() => controller.currentLevel.value == 1 ? questionLevel1(context) : questionLevel2(context)),
-              Spacer(),
+              Container(
+                width: 80,
+              )
             ],
-            crossAlignment: CrossAxisAlignment.center,
-          ),
+            alignment: MainAxisAlignment.spaceAround,
+          ).wFull(context),
         ),
         bottomNavigationBar: HStack(
           [
@@ -83,57 +120,16 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                 height: 40,
               ),
             ),
-            VStack(
-              [
-                Obx(
-                  () => Text(
-                    controller.isAnswered.value ? 'text_question_scored'.trParams({'count': (10 - (controller.currentAnswer.value.count ?? 0)).toString()}) : 'text_score'.tr,
-                    style: GoogleFonts.aBeeZee(fontSize: 16),
+            Obx(
+              () => HStack(
+                [
+                  Text(
+                    controller.currentPlayedAnswer.value,
+                    textScaleFactor: 1.2,
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                HStack([
-                  MaterialButton(
-                    color: Colors.red.shade500,
-                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(0) : showAlertReachMaxCount(),
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                      '0',
-                      style: GoogleFonts.aBeeZee(color: Colors.white),
-                    ),
-                  ),
-                  12.widthBox,
-                  MaterialButton(
-                    color: Colors.orange.shade500,
-                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(30) : showAlertReachMaxCount(),
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                      '30',
-                      style: GoogleFonts.aBeeZee(color: Colors.white),
-                    ),
-                  ),
-                  12.widthBox,
-                  MaterialButton(
-                    color: Colors.green.shade500,
-                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(60) : showAlertReachMaxCount(),
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                      '60',
-                      style: GoogleFonts.aBeeZee(color: Colors.white),
-                    ),
-                  ),
-                  12.widthBox,
-                  MaterialButton(
-                    color: Colors.blue.shade500,
-                    onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(80) : showAlertReachMaxCount(),
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                      '80',
-                      style: GoogleFonts.aBeeZee(color: Colors.white),
-                    ),
-                  ),
-                ]),
-              ],
-              crossAlignment: CrossAxisAlignment.center,
+                ],
+              ).pSymmetric(h: 128).pOnly(bottom: 12),
             ),
             Obx(
               () => ExButtonDefault(
@@ -307,27 +303,33 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
         shape: RoundedRectangleBorder(
           side: BorderSide(color: colorBorder),
         ),
-        child: Obx(
-          () => Image.file(
-            File(controller.level1.value.imagePath1 ?? ''),
-            width: controller.isTablet.value ? 256 : 128,
-            height: controller.isTablet.value ? 256 : 128,
-            isAntiAlias: true,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              logE('$error - ${stackTrace}');
-              return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
-            },
-          )
-              .onInkTap(
-                () => controller.play(
-                  controller.level1.value.answer1 ?? '',
-                  controller.level1.value.audioPath1 ?? '',
-                  1,
-                ),
-              )
-              .p12(),
-        ),
+        child: Obx(() {
+          if (controller.level1.value.isDefault ?? true) {
+            return Image.asset(
+              controller.level1.value.imagePath1 ?? '',
+              width: controller.isTablet.value ? 256 : 256,
+              height: controller.isTablet.value ? 256 : 196,
+              isAntiAlias: true,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                logE('$error - ${stackTrace}');
+                return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+              },
+            ).onInkTap(() => controller.play(controller.level1.value.answer1 ?? '', controller.level1.value.audioPath1 ?? '', 1, isDefault: true)).p12();
+          } else {
+            return Image.file(
+              File(controller.level1.value.imagePath1 ?? ''),
+              width: controller.isTablet.value ? 256 : 256,
+              height: controller.isTablet.value ? 256 : 196,
+              isAntiAlias: true,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                logE('$error - ${stackTrace}');
+                return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+              },
+            ).onInkTap(() => controller.play(controller.level1.value.answer1 ?? '', controller.level2.value.audioPath1 ?? '', 1)).p12();
+          }
+        }),
       );
 
   Widget questionLevel2(BuildContext context) => HStack([
@@ -336,27 +338,33 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
             side: BorderSide(color: colorBorder),
           ),
           child: HStack([
-            Obx(
-              () => Image.file(
-                File(controller.level2.value.imagePath1 ?? ''),
-                width: controller.isTablet.value ? 256 : 128,
-                height: controller.isTablet.value ? 256 : 128,
-                isAntiAlias: true,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  logE('$error - ${stackTrace}');
-                  return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
-                },
-              )
-                  .onInkTap(
-                    () => controller.play(
-                      controller.level2.value.answer1 ?? '',
-                      controller.level2.value.audioPath1 ?? '',
-                      1,
-                    ),
-                  )
-                  .p12(),
-            ),
+            Obx(() {
+              if (controller.level2.value.isDefault ?? true) {
+                return Image.asset(
+                  controller.level2.value.imagePath1 ?? '',
+                  width: controller.isTablet.value ? 256 : 256,
+                  height: controller.isTablet.value ? 256 : 196,
+                  isAntiAlias: true,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    logE('$error - ${stackTrace}');
+                    return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                  },
+                ).onInkTap(() => controller.play(controller.level2.value.answer1 ?? '', controller.level2.value.audioPath1 ?? '', 1, isDefault: true)).p12();
+              } else {
+                return Image.file(
+                  File(controller.level2.value.imagePath1 ?? ''),
+                  width: controller.isTablet.value ? 256 : 256,
+                  height: controller.isTablet.value ? 256 : 196,
+                  isAntiAlias: true,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    logE('$error - ${stackTrace}');
+                    return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                  },
+                ).onInkTap(() => controller.play(controller.level2.value.answer1 ?? '', controller.level2.value.audioPath1 ?? '', 1)).p12();
+              }
+            }),
           ]),
         ),
         12.widthBox,
@@ -365,27 +373,33 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
             side: BorderSide(color: colorBorder),
           ),
           child: HStack([
-            Obx(
-              () => Image.file(
-                File(controller.level2.value.imagePath2 ?? ''),
-                width: controller.isTablet.value ? 256 : 128,
-                height: controller.isTablet.value ? 256 : 128,
-                isAntiAlias: true,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  logE('$error - ${stackTrace}');
-                  return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
-                },
-              )
-                  .onInkTap(
-                    () => controller.play(
-                      controller.level2.value.answer2 ?? '',
-                      controller.level2.value.audioPath2 ?? '',
-                      1,
-                    ),
-                  )
-                  .p12(),
-            ),
+            Obx(() {
+              if (controller.level2.value.isDefault ?? true) {
+                return Image.asset(
+                  controller.level2.value.imagePath2 ?? '',
+                  width: controller.isTablet.value ? 256 : 256,
+                  height: controller.isTablet.value ? 256 : 196,
+                  isAntiAlias: true,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    logE('$error - ${stackTrace}');
+                    return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                  },
+                ).onInkTap(() => controller.play(controller.level2.value.answer2 ?? '', controller.level2.value.audioPath2 ?? '', 1, isDefault: true)).p12();
+              } else {
+                return Image.file(
+                  File(controller.level2.value.imagePath2 ?? ''),
+                  width: controller.isTablet.value ? 256 : 256,
+                  height: controller.isTablet.value ? 256 : 196,
+                  isAntiAlias: true,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    logE('$error - ${stackTrace}');
+                    return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                  },
+                ).onInkTap(() => controller.play(controller.level2.value.answer2 ?? '', controller.level2.value.audioPath2 ?? '', 1)).p12();
+              }
+            }),
           ]),
         ),
       ]);

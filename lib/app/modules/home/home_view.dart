@@ -45,7 +45,7 @@ class HomeView extends GetView<HomeController> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
-                      'PECS 1 & 2',
+                      'Level 1',
                       style: GoogleFonts.aBeeZee(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class HomeView extends GetView<HomeController> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
-                      'PECS 3A & 3B 1',
+                      'Level 2',
                       style: GoogleFonts.aBeeZee(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,

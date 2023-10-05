@@ -70,7 +70,8 @@ class ListQuestionController extends GetxController {
   Future<void> getListQuestionLevel1() async {
     listLevel1.clear();
     final level1 = <QuestionLevel1>[];
-    await Database.getAllQuestionLevel1().then((value) {
+    level1.addAll(Database.getDefaultQuestionLevel1());
+    await Database.getQuestionLevel1ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
       level1.addAll(value);
       listLevel1.value = level1;
     }).catchError((dynamic error) {
@@ -81,7 +82,8 @@ class ListQuestionController extends GetxController {
   Future<void> getListQuestionLevel2() async {
     listLevel1.clear();
     final level2 = <QuestionLevel2>[];
-    await Database.getAllQuestionLevel2().then((value) {
+    level2.addAll(Database.getDefaultQuestionLevel2());
+    await Database.getQuestionLevel2ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
       level2.addAll(value);
       listLevel2.value = level2;
     }).catchError((dynamic error) {

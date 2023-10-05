@@ -19,16 +19,12 @@ class QuestionLevel2 extends HiveObject {
   String? _imagePath2;
   @HiveField(6)
   String? _audioPath2;
-
   @HiveField(7)
   String? _answer2;
-
-  /*@HiveField(8)
-  String? _imagePath3;
+  @HiveField(8)
+  String? _userId;
   @HiveField(9)
-  String? _audioPath3;
-  @HiveField(10)
-  String? _answer3;*/
+  bool? _isDefault;
 
   QuestionLevel2({
     String? id,
@@ -39,9 +35,8 @@ class QuestionLevel2 extends HiveObject {
     String? imagePath2,
     String? audioPath2,
     String? answer2,
-    /*String? imagePath3,
-    String? audioPath3,
-    String? answer3,*/
+    String? userId,
+    bool? isDefault,
   }) {
     if (id != null) {
       this._id = id;
@@ -67,15 +62,12 @@ class QuestionLevel2 extends HiveObject {
     if (answer2 != null) {
       this._answer2 = answer2;
     }
-    /*if (imagePath3 != null) {
-      this._imagePath3 = imagePath3;
+    if (userId != null) {
+      this._userId = userId;
     }
-    if (audioPath3 != null) {
-      this._audioPath3 = audioPath3;
+    if (isDefault != null) {
+      this._isDefault = isDefault;
     }
-    if (answer3 != null) {
-      this._answer3 = answer3;
-    }*/
   }
 
   String? get id => _id;
@@ -110,17 +102,13 @@ class QuestionLevel2 extends HiveObject {
 
   set answer2(String? answer2) => _answer2 = answer2;
 
-  /*String? get imagePath3 => _imagePath3;
+  String? get userId => _userId;
 
-  set imagePath3(String? imagePath3) => _imagePath3 = imagePath3;
+  set userId(String? userId) => _userId = userId;
 
-  String? get audioPath3 => _audioPath3;
+  bool? get isDefault => _isDefault;
 
-  set audioPath3(String? audioPath3) => _audioPath3 = audioPath3;
-
-  String? get answer3 => _answer3;
-
-  set answer3(String? answer3) => _answer3 = answer3;*/
+  set isDefault(bool? isDefault) => _isDefault = isDefault;
 
   QuestionLevel2.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
@@ -131,9 +119,8 @@ class QuestionLevel2 extends HiveObject {
     _imagePath2 = json['image_path_2'];
     _audioPath2 = json['audio_path_2'];
     _answer2 = json['answer_2'];
-    /*_imagePath3 = json['image_path_3'];
-    _audioPath3 = json['audio_path_3'];
-    _answer3 = json['answer_3'];*/
+    _userId = json['user_id'];
+    _isDefault = json['is_default'];
   }
 
   Map<String, dynamic> toJson() {
@@ -146,9 +133,8 @@ class QuestionLevel2 extends HiveObject {
     data['image_path_2'] = this._imagePath2;
     data['audio_path_2'] = this._audioPath2;
     data['answer_2'] = this._answer2;
-    /*data['image_path_3'] = this._imagePath3;
-    data['audio_path_3'] = this._audioPath3;
-    data['answer_3'] = this._answer3;*/
+    data['user_id'] = this._userId;
+    data['is_default'] = this._isDefault;
     return data;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/data/question_level_1.dart';
 import 'package:andin_project/app/data/question_level_2.dart';
+import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/device_util.dart';
@@ -12,6 +13,7 @@ class ListQuestionEditController extends GetxController {
   final listLevel1 = <QuestionLevel1>[].obs;
   final listLevel2 = <QuestionLevel2>[].obs;
   final isTablet = false.obs;
+  final currentStudent = Student().obs;
 
   @override
   Future<void> onInit() async {
@@ -42,7 +44,7 @@ class ListQuestionEditController extends GetxController {
   Future<void> getListQuestionLevel1() async {
     listLevel1.clear();
     final level1 = <QuestionLevel1>[];
-    await Database.getAllQuestionLevel1().then((value) {
+    await Database.getQuestionLevel1ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
       level1.addAll(value);
       listLevel1.value = level1;
     }).catchError((dynamic error) {
@@ -53,7 +55,7 @@ class ListQuestionEditController extends GetxController {
   Future<void> getListQuestionLevel2() async {
     listLevel1.clear();
     final level2 = <QuestionLevel2>[];
-    await Database.getAllQuestionLevel2().then((value) {
+    await Database.getQuestionLevel2ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
       level2.addAll(value);
       listLevel2.value = level2;
     }).catchError((dynamic error) {

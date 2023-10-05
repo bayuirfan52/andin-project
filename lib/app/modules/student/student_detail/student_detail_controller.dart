@@ -49,8 +49,8 @@ class StudentDetailController extends GetxController {
     });
 
     await Database.getAnswerByStudent(id.value).then((value) async {
-      final allLevel1Question = await Database.getAllQuestionLevel1();
-      final allLevel2Question = await Database.getAllQuestionLevel2();
+      final allLevel1Question = await Database.getQuestionLevel1ByStudentId(studentId: student.value.id ?? '');
+      final allLevel2Question = await Database.getQuestionLevel2ByStudentId(studentId: student.value.id ?? '');
       value.forEach((element) {
         if (element.level == 1) {
           level1TotalScore.value += element.score ?? 0;

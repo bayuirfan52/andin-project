@@ -34,6 +34,7 @@ dependencies:
   velocity_x: ^3.6.0
   very_good_analysis: ^4.0.0+1
   toggle_switch: ^2.1.0
+  url_launcher: ^6.1.11
 description: Interactive learning for difabel.
 dev_dependencies:
   flutter_launcher_icons: ^0.11.0
@@ -46,6 +47,7 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/audio/
   uses-material-design: true
 flutter_config:
   path: ../

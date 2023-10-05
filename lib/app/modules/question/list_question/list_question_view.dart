@@ -18,7 +18,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
 
   Widget tabletUI(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('${controller.currentLevel.value == 1 ? 'PECS 1 & 2' : 'PECS 3A & 3B 1'}'),
+          title: Text('${controller.currentLevel.value == 1 ? 'Level 1' : 'Level 2'}'),
           centerTitle: true,
           actions: [
             MaterialButton(
@@ -52,7 +52,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
   Widget phoneUI(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(
-            '${controller.currentLevel.value == 1 ? 'PECS 1 & 2' : 'PECS 3A & 3B 1'}',
+            '${controller.currentLevel.value == 1 ? 'Level 1' : 'Level 2'}',
             style: GoogleFonts.aBeeZee(fontSize: 16),
           ),
           centerTitle: true,

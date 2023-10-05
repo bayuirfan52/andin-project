@@ -10,6 +10,7 @@ import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
 
@@ -76,17 +77,28 @@ class QuestionDetailController extends GetxController {
     });
   }
 
-  Future<void> play(String answer, String file, int index) async {
+  Future<void> play(String answer, String file, int index, {bool isDefault = false}) async {
     if (status.value == Status.PAUSED) {
       await audioPlayer.resumePlayer();
     } else {
-      await audioPlayer.startPlayer(
-        fromURI: file,
-        whenFinished: () {
-          logI('finish');
-          stop();
-        },
-      );
+      if (isDefault) {
+        final byteData = await rootBundle.load(file);
+        await audioPlayer.startPlayer(
+          fromDataBuffer: byteData.buffer.asUint8List(),
+          whenFinished: () {
+            logI('finish');
+            stop();
+          },
+        );
+      } else {
+        await audioPlayer.startPlayer(
+          fromURI: file,
+          whenFinished: () {
+            logI('finish');
+            stop();
+          },
+        );
+      }
     }
     currentPlayedAnswer.value = answer;
     currentPlayedAudio.value = index;
@@ -144,6 +156,7 @@ class QuestionDetailController extends GetxController {
   }
 
   Future<void> handleListQuestion() async {
+
     if (currentLevel.value == 1) {
       await getListQuestionLevel1();
     } else {
@@ -154,8 +167,9 @@ class QuestionDetailController extends GetxController {
 
   Future<void> getListQuestionLevel1() async {
     listLevel1.clear();
-    await Database.getAllQuestionLevel1().then((value) {
-      listLevel1.value = value;
+    listLevel1.addAll(Database.getDefaultQuestionLevel1());
+    await Database.getQuestionLevel1ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
+      listLevel1.addAll(value);
       level1.value = listLevel1.firstWhere((element) => element.id == currentId.value);
       isHasPreviousQuestion.value = listLevel1.indexWhere((element) => element.id == level1.value.id) != 0;
       isHasNextQuestion.value = listLevel1.indexWhere((element) => element.id == level1.value.id) != listLevel1.length - 1;
@@ -169,8 +183,9 @@ class QuestionDetailController extends GetxController {
 
   Future<void> getListQuestionLevel2() async {
     listLevel1.clear();
-    await Database.getAllQuestionLevel2().then((value) {
-      listLevel2.value = value;
+    listLevel2.addAll(Database.getDefaultQuestionLevel2());
+    await Database.getQuestionLevel2ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
+      listLevel2.addAll(value);
       level2.value = listLevel2.firstWhere((element) => element.id == currentId.value);
       isHasPreviousQuestion.value = listLevel2.indexWhere((element) => element.id == level2.value.id) != 0;
       isHasNextQuestion.value = listLevel2.indexWhere((element) => element.id == level2.value.id) != listLevel2.length - 1;

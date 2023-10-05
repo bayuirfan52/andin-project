@@ -257,6 +257,7 @@ class AddQuestionController extends GetxController {
           answer1: answer1Controller.text,
           imagePath1: imagePath1.value,
           audioPath1: audioPath1.value,
+          isDefault: false,
         );
 
         await Database.addQuestionLevel1(data).then((value) {
@@ -276,6 +277,7 @@ class AddQuestionController extends GetxController {
           answer2: answer2Controller.text,
           imagePath2: imagePath2.value,
           audioPath2: audioPath2.value,
+          isDefault: false,
         );
 
         await Database.addQuestionLevel2(data).then((value) {

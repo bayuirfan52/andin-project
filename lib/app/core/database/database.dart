@@ -16,13 +16,15 @@ mixin Database {
   static Future<void> databaseInit() async {
     final dir = await getApplicationSupportDirectory();
     await Hive.initFlutter(dir.path);
-    Hive.registerAdapter(StudentAdapter());
+    Hive
+      ..registerAdapter(StudentAdapter())
+      ..registerAdapter(QuestionLevel1Adapter())
+      ..registerAdapter(QuestionLevel2Adapter())
+      ..registerAdapter(AnswerAdapter());
+
     await Hive.openBox<Student>(studentBox);
-    Hive.registerAdapter(QuestionLevel1Adapter());
     await Hive.openBox<QuestionLevel1>(level1Box);
-    Hive.registerAdapter(QuestionLevel2Adapter());
     await Hive.openBox<QuestionLevel2>(level2Box);
-    Hive.registerAdapter(AnswerAdapter());
     await Hive.openBox<Answer>(answer);
     logI('Database started');
   }
@@ -64,12 +66,93 @@ mixin Database {
     await box.close();
   }
 
-  static Future<List<QuestionLevel1>> getAllQuestionLevel1() async {
+  static List<QuestionLevel1> getDefaultQuestionLevel1() {
+    final list = <QuestionLevel1>[];
+    list.add(
+      QuestionLevel1(
+        id: '0x001',
+        question: 'Kata Benda',
+        answer1: 'Gelas',
+        audioPath1: 'assets/audio/gelas.mp3',
+        imagePath1: 'assets/images/img_gelas.jpg',
+        isDefault: true,
+      ),
+    );
+    list.add(
+      QuestionLevel1(
+        id: '0x002',
+        question: 'Kesukaan',
+        answer1: 'Boneka',
+        audioPath1: 'assets/audio/boneka.mp3',
+        imagePath1: 'assets/images/img_boneka.jpg',
+        isDefault: true,
+      ),
+    );
+    list.add(
+      QuestionLevel1(
+        id: '0x003',
+        question: 'Kesukaan',
+        answer1: 'Oreo',
+        audioPath1: 'assets/audio/oreo.mp3',
+        imagePath1: 'assets/images/img_oreo.jpg',
+        isDefault: true,
+      ),
+    );
+
+    return list;
+  }
+
+  static List<QuestionLevel2> getDefaultQuestionLevel2() {
+    final list = <QuestionLevel2>[];
+    list.add(
+      QuestionLevel2(
+        id: '1x001',
+        question: 'Kata Benda',
+        answer1: 'Piring',
+        audioPath1: 'assets/audio/piring.mp3',
+        imagePath1: 'assets/images/img_piring.jpg',
+        answer2: 'Sendok',
+        audioPath2: 'assets/audio/sendok.mp3',
+        imagePath2: 'assets/images/img_sendok.jpg',
+        isDefault: true,
+      ),
+    );
+    list.add(
+      QuestionLevel2(
+        id: '1x002',
+        question: 'Kata Kerja',
+        answer1: 'Makan',
+        audioPath1: 'assets/audio/makan.mp3',
+        imagePath1: 'assets/images/img_makan.jpg',
+        answer2: 'Minum',
+        audioPath2: 'assets/audio/minum.mp3',
+        imagePath2: 'assets/images/img_minum.jpg',
+        isDefault: true,
+      ),
+    );
+    list.add(
+      QuestionLevel2(
+        id: '1x003',
+        question: 'Kesukaan',
+        answer1: 'Pir Gelang',
+        audioPath1: 'assets/audio/pir_gelang.mp3',
+        imagePath1: 'assets/images/img_pir_gelang.jpg',
+        answer2: 'Plastisin',
+        audioPath2: 'assets/audio/plastisin.mp3',
+        imagePath2: 'assets/images/img_plastisin.jpg',
+        isDefault: true,
+      ),
+    );
+
+    return list;
+  }
+
+  static Future<List<QuestionLevel1>> getQuestionLevel1ByStudentId({required String studentId}) async {
     final box = await Hive.openBox<QuestionLevel1>(level1Box);
     final listQuestion = <QuestionLevel1>[];
     for (var i = 0; i < box.length; i++) {
       final item = box.getAt(i) ?? QuestionLevel1();
-      listQuestion.add(item);
+      if (item.userId == studentId) listQuestion.add(item);
     }
     await box.close();
     return listQuestion;
@@ -94,11 +177,12 @@ mixin Database {
     await box.close();
   }
 
-  static Future<List<QuestionLevel2>> getAllQuestionLevel2() async {
+  static Future<List<QuestionLevel2>> getQuestionLevel2ByStudentId({required String studentId}) async {
     final box = await Hive.openBox<QuestionLevel2>(level2Box);
     final listQuestion = <QuestionLevel2>[];
     for (var i = 0; i < box.length; i++) {
       final item = box.getAt(i) ?? QuestionLevel2();
+      if (item.userId == studentId) listQuestion.add(item);
       listQuestion.add(item);
     }
     await box.close();

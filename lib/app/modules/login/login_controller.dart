@@ -34,9 +34,9 @@ class LoginController extends BaseController {
     } else {
       PreferenceHelper.setTeachersName(teacherController.text);
       logI(PreferenceHelper.getTeacherName());
-      _goToSelectStudent();
+      _goToAddStudent();
     }
   }
 
-  void _goToSelectStudent() => Get.toNamed<dynamic>(Routes.SELECT_STUDENT);
+  void _goToAddStudent() => Get.toNamed<dynamic>(Routes.ADD_STUDENT);
 }
