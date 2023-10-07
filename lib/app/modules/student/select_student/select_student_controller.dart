@@ -3,7 +3,6 @@ import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
-import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -19,7 +18,7 @@ class SelectStudentController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     await getStudentData();
-    isTablet.value = await DeviceUtil.isTablet();
+    isTablet.value = PreferenceHelper.isTablet();
   }
 
   @override

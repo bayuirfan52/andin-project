@@ -2,7 +2,6 @@ import 'package:andin_project/app/core/base/base_controller.dart';
 import 'package:andin_project/app/extensions/string_extensions.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
-import 'package:andin_project/app/utils/device_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +13,7 @@ class ProfileController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    isTablet.value = await DeviceUtil.isTablet();
+    isTablet.value = PreferenceHelper.isTablet();
     if (PreferenceHelper.getActiveLanguage().isNullOrEmpty) {
       await PreferenceHelper.setActiveLanguage('id_ID');
     }

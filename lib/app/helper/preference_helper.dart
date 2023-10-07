@@ -6,6 +6,7 @@ const _TEACHER_NAME = 'TEACHER_NAME';
 const _CURRENT_ACTIVE_STUDENT = 'CURRENT_ACTIVE_STUDENT';
 const _ACTIVE_LANGUAGE = 'ACTIVE_LANGUAGE';
 const _FIRST_USE = 'FIRST_USE';
+const _IS_TABLET = 'IS_TABLET';
 
 mixin PreferenceHelper {
   static final _pref = Get.find<GetStorage>();
@@ -38,4 +39,10 @@ mixin PreferenceHelper {
   }
 
   static bool? isFirstUse() => _pref.read(_FIRST_USE) as bool;
+
+  static Future<void> setIsTablet(bool isTablet) async {
+    await _pref.write(_IS_TABLET, isTablet);
+  }
+
+  static bool isTablet() => _pref.read(_IS_TABLET) as bool;
 }

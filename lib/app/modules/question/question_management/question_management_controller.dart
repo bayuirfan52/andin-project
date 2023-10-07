@@ -1,5 +1,5 @@
+import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
-import 'package:andin_project/app/utils/device_util.dart';
 import 'package:get/get.dart';
 
 class QuestionManagementController extends GetxController {
@@ -7,7 +7,7 @@ class QuestionManagementController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    isTablet.value = await DeviceUtil.isTablet();
+    isTablet.value = PreferenceHelper.isTablet();
   }
 
   @override

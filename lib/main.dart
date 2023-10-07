@@ -4,6 +4,7 @@ import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/core/resources/app_theme.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
+import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/generated/locales.g.dart';
 import 'package:flutter/foundation.dart';
@@ -52,6 +53,7 @@ class AndinProject extends StatelessWidget {
         locale: Locale('id', 'ID'),
         fallbackLocale: Locale('id', 'ID'),
         builder: (context, child) {
+          DeviceUtil.isTablet(context).then((value) => PreferenceHelper.setIsTablet(value));
           if (FlutterConfig.get('FLAVOR') == 'production') {
             return child!;
           } else {

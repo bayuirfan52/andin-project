@@ -3,8 +3,8 @@ import 'package:andin_project/app/data/question_level_1.dart';
 import 'package:andin_project/app/data/question_level_2.dart';
 import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
+import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
-import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +19,7 @@ class ListQuestionEditController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     currentLevel.value = Get.arguments as int;
-    isTablet.value = await DeviceUtil.isTablet();
+    isTablet.value = PreferenceHelper.isTablet();
   }
 
   @override

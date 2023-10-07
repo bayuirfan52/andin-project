@@ -52,7 +52,8 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     SizedBox(height: 4),
                     Html(
-                      data: '<a href="https://www.freepik.com/free-vector/young-addicted-people-using-smartphones_12628344.htm#query=kids%20app&position=7&from_view=keyword&track=ais">Image by pikisuperstar</a> on Freepik',
+                      data:
+                          '<a href="https://www.freepik.com/free-vector/young-addicted-people-using-smartphones_12628344.htm#query=kids%20app&position=7&from_view=keyword&track=ais">Image by pikisuperstar</a> on Freepik',
                       style: {
                         'body': Style(margin: EdgeInsets.zero, textAlign: TextAlign.center, fontSize: FontSize(18)),
                       },
@@ -69,7 +70,7 @@ class ProfileView extends GetView<ProfileController> {
               );
             },
             icon: Icon(Icons.info_outline),
-            iconSize: 48,
+            iconSize: controller.isTablet.value ? 48 : 24,
             color: colorPrimary,
             splashColor: Colors.black12,
           ),
@@ -172,7 +173,7 @@ class ProfileView extends GetView<ProfileController> {
               ).wFull(context),
             ],
             crossAlignment: CrossAxisAlignment.center,
-          ).pSymmetric(v: 12, h: 128).scrollVertical(),
+          ).pOnly(top: 12, left: 128, right: 128).scrollVertical(),
         ),
         bottomNavigationBar: VStack(
           [
@@ -202,6 +203,6 @@ class ProfileView extends GetView<ProfileController> {
             ),
           ],
           crossAlignment: CrossAxisAlignment.center,
-        ).p12(),
+        ).p8(),
       );
 }

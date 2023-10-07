@@ -2,7 +2,7 @@ import 'package:andin_project/app/core/base/base_controller.dart';
 import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
-import 'package:andin_project/app/utils/device_util.dart';
+import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +16,7 @@ class EditStudentController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     id.value = Get.arguments as String;
-    isTablet.value = await DeviceUtil.isTablet();
+    isTablet.value = PreferenceHelper.isTablet();
   }
 
   @override

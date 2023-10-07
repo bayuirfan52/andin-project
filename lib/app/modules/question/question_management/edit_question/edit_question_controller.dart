@@ -5,9 +5,9 @@ import 'package:andin_project/app/data/question_level_1.dart';
 import 'package:andin_project/app/data/question_level_2.dart';
 import 'package:andin_project/app/helper/file_helper.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
+import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
-import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -41,7 +41,7 @@ class EditQuestionController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     currentLevel.value = Get.arguments['level'] as int;
-    isTablet.value = await DeviceUtil.isTablet();
+    isTablet.value = PreferenceHelper.isTablet();
     await init();
   }
 

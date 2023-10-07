@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:andin_project/app/core/base/base_controller.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
-import 'package:andin_project/app/utils/device_util.dart';
+import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -26,7 +26,7 @@ class AudioRecorderController extends BaseController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    isTablet.value = await DeviceUtil.isTablet();
+    isTablet.value = PreferenceHelper.isTablet();
     if (Get.arguments != null) {
       isPlayerMode.value = true;
       recordedFile.value = Get.arguments as String;

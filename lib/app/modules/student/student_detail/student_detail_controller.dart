@@ -1,8 +1,8 @@
 import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
+import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
-import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +19,7 @@ class StudentDetailController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     id.value = Get.arguments as String;
-    isTablet.value = await DeviceUtil.isTablet();
+    isTablet.value = PreferenceHelper.isTablet();
     await getStudentData();
   }
 

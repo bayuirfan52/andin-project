@@ -7,7 +7,6 @@ import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
-import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/services.dart';
@@ -38,7 +37,7 @@ class QuestionDetailController extends GetxController {
     super.onInit();
     currentLevel.value = Get.arguments['level'] as int;
     currentId.value = Get.arguments['id'] as String;
-    isTablet.value = await DeviceUtil.isTablet();
+    isTablet.value = PreferenceHelper.isTablet();
     await getCurrentActiveStudent();
     await handleListQuestion();
   }
@@ -156,7 +155,6 @@ class QuestionDetailController extends GetxController {
   }
 
   Future<void> handleListQuestion() async {
-
     if (currentLevel.value == 1) {
       await getListQuestionLevel1();
     } else {
