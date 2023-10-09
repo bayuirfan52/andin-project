@@ -1,0 +1,5 @@
+APP_ID=com.bayuirfan.andin_project
+APP_NAME=Staging AVIC
+APP_SUFFIX_ID=.staging
+BASE_URL=\"
+FLAVOR=staging
