@@ -55,9 +55,9 @@ class ProfileView extends GetView<ProfileController> {
                       data:
                           '<a href="https://www.freepik.com/free-vector/young-addicted-people-using-smartphones_12628344.htm#query=kids%20app&position=7&from_view=keyword&track=ais">Image by pikisuperstar</a> on Freepik',
                       style: {
-                        'body': Style(margin: EdgeInsets.zero, textAlign: TextAlign.center, fontSize: FontSize(18)),
+                        'body': Style(margin: Margins.zero, textAlign: TextAlign.center, fontSize: FontSize(18)),
                       },
-                      onLinkTap: (url, _, __, ___) async {
+                      onLinkTap: (url, _, __) async {
                         if (url != null) {
                           if (await canLaunchUrlString(url)) {
                             await launchUrlString(url);
@@ -74,7 +74,7 @@ class ProfileView extends GetView<ProfileController> {
             color: colorPrimary,
             splashColor: Colors.black12,
           ),
-        )
+        ),
       ],
     );
   }

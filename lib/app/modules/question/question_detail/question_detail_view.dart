@@ -32,7 +32,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               Text(
                 'text_current_score_'.trParams({'score': controller.currentScore.value.toString()}),
                 style: GoogleFonts.aBeeZee(fontSize: 16),
-              )
+              ),
             ]),
           ),
           centerTitle: true,
@@ -102,7 +102,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               Obx(() => controller.currentLevel.value == 1 ? questionLevel1(context) : questionLevel2(context)),
               Container(
                 width: 80,
-              )
+              ),
             ],
             alignment: MainAxisAlignment.spaceAround,
           ).wFull(context),

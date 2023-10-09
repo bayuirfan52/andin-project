@@ -9,7 +9,7 @@ mixin DeviceUtil {
       final deviceInfo = DeviceInfoPlugin();
       final iosInfo = await deviceInfo.iosInfo;
 
-      return iosInfo.model?.toLowerCase() == 'ipad';
+      return iosInfo.model.toLowerCase() == 'ipad';
     } else {
       // The equivalent of the "smallestWidth" qualifier on Android.
       final shortestSide = MediaQuery.of(context).size.shortestSide;

@@ -5,7 +5,6 @@ import 'package:andin_project/app/core/base/base_controller.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/utils/logger.dart';
-import 'package:audio_session/audio_session.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
@@ -160,21 +159,6 @@ class AudioRecorderController extends BaseController {
   }
 
   Future<void> init() async {
-    final session = await AudioSession.instance;
-    await session.configure(
-      AudioSessionConfiguration(
-        avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
-        avAudioSessionCategoryOptions: AVAudioSessionCategoryOptions.allowBluetooth,
-        avAudioSessionMode: AVAudioSessionMode.spokenAudio,
-        avAudioSessionRouteSharingPolicy: AVAudioSessionRouteSharingPolicy.defaultPolicy,
-        avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
-        androidAudioAttributes: const AndroidAudioAttributes(
-          contentType: AndroidAudioContentType.speech,
-          usage: AndroidAudioUsage.voiceCommunication,
-        ),
-        androidWillPauseWhenDucked: true,
-      ),
-    );
     await audioRecorder.openRecorder();
     await audioPlayer.openPlayer();
     await audioRecorder.setSubscriptionDuration(Duration(milliseconds: 100));

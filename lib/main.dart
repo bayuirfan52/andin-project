@@ -54,35 +54,36 @@ class AndinProject extends StatelessWidget {
         fallbackLocale: Locale('id', 'ID'),
         builder: (context, child) {
           return FutureBuilder(
-              future: DeviceUtil.isTablet(context),
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                if (snapshot.hasData) {
-                  PreferenceHelper.setIsTablet(snapshot.data!);
-                  if (FlutterConfig.get('FLAVOR') == 'production') {
-                    return child!;
-                  } else {
-                    return Scaffold(
-                      body: Stack(
-                        children: [
-                          child!,
-                          Positioned(
-                            top: 95,
-                            right: 55,
-                            child: HStack([
-                              Icon(Icons.bug_report, color: Vx.blue300),
-                              4.widthBox,
-                            ]).onInkTap(
-                              () => Get.toNamed<dynamic>(Routes.DEV_TOOLS),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
+            future: DeviceUtil.isTablet(context),
+            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+              if (snapshot.hasData) {
+                PreferenceHelper.setIsTablet(snapshot.data!);
+                if (FlutterConfig.get('FLAVOR') == 'production') {
+                  return child!;
                 } else {
-                  return Container();
+                  return Scaffold(
+                    body: Stack(
+                      children: [
+                        child!,
+                        Positioned(
+                          top: 95,
+                          right: 55,
+                          child: HStack([
+                            Icon(Icons.bug_report, color: Vx.blue300),
+                            4.widthBox,
+                          ]).onInkTap(
+                            () => Get.toNamed<dynamic>(Routes.DEV_TOOLS),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 }
-              });
+              } else {
+                return Container();
+              }
+            },
+          );
         },
       );
 }

@@ -9,7 +9,6 @@ import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
-import 'package:audio_session/audio_session.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
@@ -58,21 +57,6 @@ class EditQuestionController extends GetxController {
   }
 
   Future<void> init() async {
-    final session = await AudioSession.instance;
-    await session.configure(
-      AudioSessionConfiguration(
-        avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
-        avAudioSessionCategoryOptions: AVAudioSessionCategoryOptions.allowBluetooth,
-        avAudioSessionMode: AVAudioSessionMode.spokenAudio,
-        avAudioSessionRouteSharingPolicy: AVAudioSessionRouteSharingPolicy.defaultPolicy,
-        avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
-        androidAudioAttributes: const AndroidAudioAttributes(
-          contentType: AndroidAudioContentType.speech,
-          usage: AndroidAudioUsage.voiceCommunication,
-        ),
-        androidWillPauseWhenDucked: true,
-      ),
-    );
     await audioPlayer.openPlayer();
     audioPlayer.onProgress?.listen((event) {
       logI('Progress Playing: ${event.position.inSeconds}s');
