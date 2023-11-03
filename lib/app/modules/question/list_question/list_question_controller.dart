@@ -26,9 +26,11 @@ class ListQuestionController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    handleListQuestion();
     getCurrentActiveStudent().then(
-      (value) => getAnswered(),
+      (value) {
+        handleListQuestion();
+        getAnswered();
+      }
     );
   }
 

@@ -23,9 +23,9 @@ class ListQuestionEditController extends GetxController {
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
-    handleListQuestion();
+    await getCurrentActiveStudent().then((value) => handleListQuestion());
   }
 
   @override
@@ -40,6 +40,17 @@ class ListQuestionEditController extends GetxController {
       await getListQuestionLevel2();
     }
   }
+
+  Future<void> getCurrentActiveStudent() async {
+    final currentStudentId = PreferenceHelper.getCurrentActiveStudent();
+    logD(currentStudentId);
+    await Database.getStudentData(currentStudentId ?? '').then((value) {
+      currentStudent.value = value!;
+    }).catchError((dynamic error) {
+      logE(error.toString());
+    });
+  }
+
 
   Future<void> getListQuestionLevel1() async {
     listLevel1.clear();

@@ -17,6 +17,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AddQuestionController extends GetxController {
+  String currentStudentId = '';
   final currentLevel = 1.obs;
   final imagePath1 = ''.obs;
   final imagePath2 = ''.obs;
@@ -39,6 +40,7 @@ class AddQuestionController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    currentStudentId = PreferenceHelper.getCurrentActiveStudent()!;
     currentLevel.value = Get.arguments as int;
     isTablet.value = PreferenceHelper.isTablet();
     await init();
@@ -242,7 +244,10 @@ class AddQuestionController extends GetxController {
           imagePath1: imagePath1.value,
           audioPath1: audioPath1.value,
           isDefault: false,
+          userId: currentStudentId,
         );
+
+        logI(data.toJson());
 
         await Database.addQuestionLevel1(data).then((value) {
           Get.back<dynamic>();
@@ -262,7 +267,10 @@ class AddQuestionController extends GetxController {
           imagePath2: imagePath2.value,
           audioPath2: audioPath2.value,
           isDefault: false,
+          userId: currentStudentId,
         );
+
+        logI(data.toJson());
 
         await Database.addQuestionLevel2(data).then((value) {
           Get.back<dynamic>();

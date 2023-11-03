@@ -1458,13 +1458,13 @@ class SortedList<E> extends _DelegatingList<E> {
 ///
 /// For instance you can create a FruitList like this :
 ///
-///     class FruitList extends DelegatingList<Fruit> {
+///     ```class FruitList extends DelegatingList<Fruit> {
 ///       final List<Fruit> _fruits = [];
 ///
 ///       List<Fruit> get delegate => _fruits;
 ///
 ///       // custom methods
-///     }
+///     }```
 abstract class _DelegatingList<E> extends _DelegatingIterable<E> implements List<E> {
   @override
   List<E> get delegate;
@@ -1586,13 +1586,13 @@ abstract class _DelegatingList<E> extends _DelegatingIterable<E> implements List
 ///
 /// For instance you can create a FruitIterable like this :
 ///
-///     class FruitIterable extends DelegatingIterable<Fruit> {
-///       final Iterable<Fruit> _fruits = [];
+///     ```class FruitIterable extends DelegatingIterable<Fruit> {
+///       final Iterable<Fruit> _fruits = <Fruit>[];
 ///
 ///       Iterable<Fruit> get delegate => _fruits;
 ///
 ///       // custom methods
-///     }
+///     }```
 abstract class _DelegatingIterable<E> implements Iterable<E> {
   Iterable<E> get delegate;
 
