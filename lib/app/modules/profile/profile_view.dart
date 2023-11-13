@@ -4,11 +4,9 @@ import 'package:andin_project/app/widgets/ex_button_default.dart';
 import 'package:andin_project/app/widgets/ex_dialog.dart';
 import 'package:andin_project/app/widgets/ex_textfield_normal.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'profile_controller.dart';
