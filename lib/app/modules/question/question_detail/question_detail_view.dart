@@ -30,7 +30,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                 style: GoogleFonts.aBeeZee(fontSize: 16),
               ),
               Text(
-                'text_current_score_'.trParams({'score': controller.currentScore.value.toString()}),
+                'text_current_score_'.trParams({'score': '${controller.currentScore.value}/650'}),
                 style: GoogleFonts.aBeeZee(fontSize: 16),
               ),
             ]),
@@ -47,65 +47,74 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
           ],
         ),
         body: Center(
-          child: HStack(
-            [
-              VStack(
-                [
-                  Text(
-                    'text_score'.tr,
-                    style: GoogleFonts.aBeeZee(fontSize: 16),
-                  ),
-                  VStack([
-                    MaterialButton(
-                      color: Colors.red.shade500,
-                      onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(0) : showAlertReachMaxCount(),
-                      padding: EdgeInsets.all(8),
-                      child: Text(
-                        '0',
-                        style: GoogleFonts.aBeeZee(color: Colors.white),
-                      ),
-                    ),
-                    12.widthBox,
-                    MaterialButton(
-                      color: Colors.orange.shade500,
-                      onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(30) : showAlertReachMaxCount(),
-                      padding: EdgeInsets.all(8),
-                      child: Text(
-                        '30',
-                        style: GoogleFonts.aBeeZee(color: Colors.white),
-                      ),
-                    ),
-                    12.widthBox,
-                    MaterialButton(
-                      color: Colors.green.shade500,
-                      onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(60) : showAlertReachMaxCount(),
-                      padding: EdgeInsets.all(8),
-                      child: Text(
-                        '60',
-                        style: GoogleFonts.aBeeZee(color: Colors.white),
-                      ),
-                    ),
-                    12.widthBox,
-                    MaterialButton(
-                      color: Colors.blue.shade500,
-                      onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(80) : showAlertReachMaxCount(),
-                      padding: EdgeInsets.all(8),
-                      child: Text(
-                        '80',
-                        style: GoogleFonts.aBeeZee(color: Colors.white),
-                      ),
-                    ),
-                  ]),
-                ],
-                crossAlignment: CrossAxisAlignment.center,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                opacity: 0.5,
+                image: AssetImage('assets/images/img_background.jpg'),
               ),
-              Obx(() => controller.currentLevel.value == 1 ? questionLevel1(context) : questionLevel2(context)),
-              Container(
-                width: 80,
-              ),
-            ],
-            alignment: MainAxisAlignment.spaceAround,
-          ).wFull(context),
+            ),
+            child: HStack(
+              [
+                VStack(
+                  [
+                    Text(
+                      'text_score'.tr,
+                      style: GoogleFonts.aBeeZee(fontSize: 16),
+                    ),
+                    VStack([
+                      MaterialButton(
+                        color: Colors.red.shade500,
+                        onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(0) : showAlertReachMaxCount(),
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          '0',
+                          style: GoogleFonts.aBeeZee(color: Colors.white),
+                        ),
+                      ),
+                      12.widthBox,
+                      MaterialButton(
+                        color: Colors.orange.shade500,
+                        onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(30) : showAlertReachMaxCount(),
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          '30',
+                          style: GoogleFonts.aBeeZee(color: Colors.white),
+                        ),
+                      ),
+                      12.widthBox,
+                      MaterialButton(
+                        color: Colors.green.shade500,
+                        onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(60) : showAlertReachMaxCount(),
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          '60',
+                          style: GoogleFonts.aBeeZee(color: Colors.white),
+                        ),
+                      ),
+                      12.widthBox,
+                      MaterialButton(
+                        color: Colors.blue.shade500,
+                        onPressed: () => (controller.currentAnswer.value.count ?? 0) < 10 ? saveAnswerDialog(80) : showAlertReachMaxCount(),
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          '80',
+                          style: GoogleFonts.aBeeZee(color: Colors.white),
+                        ),
+                      ),
+                    ]),
+                  ],
+                  crossAlignment: CrossAxisAlignment.center,
+                ),
+                Obx(() => controller.currentLevel.value == 1 ? questionLevel1(context) : questionLevel2(context)),
+                Container(
+                  width: 80,
+                ),
+              ],
+              alignment: MainAxisAlignment.spaceAround,
+            ).wFull(context),
+          ),
         ),
         bottomNavigationBar: HStack(
           [
@@ -327,7 +336,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                 logE('$error - ${stackTrace}');
                 return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
               },
-            ).onInkTap(() => controller.play(controller.level1.value.answer1 ?? '', controller.level2.value.audioPath1 ?? '', 1)).p12();
+            ).onInkTap(() => controller.play(controller.level1.value.answer1 ?? '', controller.level1.value.audioPath1 ?? '', 1)).p12();
           }
         }),
       );
@@ -385,7 +394,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                     logE('$error - ${stackTrace}');
                     return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
                   },
-                ).onInkTap(() => controller.play(controller.level2.value.answer2 ?? '', controller.level2.value.audioPath2 ?? '', 1, isDefault: true)).p12();
+                ).onInkTap(() => controller.play(controller.level2.value.answer2 ?? '', controller.level2.value.audioPath2 ?? '', 2, isDefault: true)).p12();
               } else {
                 return Image.file(
                   File(controller.level2.value.imagePath2 ?? ''),
@@ -397,7 +406,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                     logE('$error - ${stackTrace}');
                     return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
                   },
-                ).onInkTap(() => controller.play(controller.level2.value.answer2 ?? '', controller.level2.value.audioPath2 ?? '', 1)).p12();
+                ).onInkTap(() => controller.play(controller.level2.value.answer2 ?? '', controller.level2.value.audioPath2 ?? '', 2)).p12();
               }
             }),
           ]),
