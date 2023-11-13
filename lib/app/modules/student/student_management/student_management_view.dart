@@ -118,6 +118,7 @@ class StudentManagementView extends GetView<StudentManagementController> {
                     ? EmptyWidget(
                         message: 'text_student_not_found'.tr,
                         textSize: 12,
+                        imageSize: 125,
                       )
                     : ListView.separated(
                         itemBuilder: (context, index) => ListTile(

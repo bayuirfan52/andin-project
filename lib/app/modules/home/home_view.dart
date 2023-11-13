@@ -42,7 +42,7 @@ class HomeView extends GetView<HomeController> {
                     'assets/images/img_pecs_1_2.png',
                     width: 480,
                     height: 480,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
                 Positioned.fill(
@@ -70,7 +70,7 @@ class HomeView extends GetView<HomeController> {
                     'assets/images/img_pecs_3a_3b_1.png',
                     width: 480,
                     height: 480,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
                 Positioned.fill(
@@ -136,7 +136,7 @@ class HomeView extends GetView<HomeController> {
                       'assets/images/img_pecs_1_2.png',
                       width: 164,
                       height: 164,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
                   ),
                   Positioned.fill(
@@ -177,7 +177,7 @@ class HomeView extends GetView<HomeController> {
                       'assets/images/img_pecs_3a_3b_1.png',
                       width: 164,
                       height: 164,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
                   ),
                   Positioned.fill(

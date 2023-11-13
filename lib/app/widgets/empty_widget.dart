@@ -7,9 +7,12 @@ class EmptyWidget extends StatelessWidget {
     super.key,
     this.message = 'Data tidak ditemukan',
     this.textSize = 24,
+    this.imageSize = 152,
   });
+
   final String message;
   final double textSize;
+  final double imageSize;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class EmptyWidget extends StatelessWidget {
       [
         Image.asset(
           'assets/images/ic_empty.jpg',
-          height: 152,
+          height: imageSize,
         ).centered(),
         SizedBox(height: 4),
         Text(

@@ -185,7 +185,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                 () => HStack(
                   [
                     Text(
-                      'text_current_score_'.trParams({'score': controller.currentScore.value.toString()}),
+                      'text_current_score_'.trParams({'score': '${controller.currentScore.value}/650'}),
                       textScaleFactor: 1.5,
                     ).expand(),
                     Text(
