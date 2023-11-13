@@ -50,7 +50,7 @@ class ProfileView extends GetView<ProfileController> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.aBeeZee(fontWeight: FontWeight.w500, fontSize: 18),
                     ),
-                    SizedBox(height: 4),
+                    /*SizedBox(height: 4),
                     Html(
                       data:
                           '<a href="https://www.freepik.com/free-vector/young-addicted-people-using-smartphones_12628344.htm#query=kids%20app&position=7&from_view=keyword&track=ais">Image by pikisuperstar</a> on Freepik',
@@ -64,7 +64,7 @@ class ProfileView extends GetView<ProfileController> {
                           }
                         }
                       },
-                    ),
+                    ),*/
                   ],
                 ),
               );
