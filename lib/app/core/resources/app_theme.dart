@@ -7,7 +7,8 @@ mixin AppTheme {
   static final theme = ThemeData(
     primaryColor: colorPrimary,
     colorScheme: ColorScheme.light(
-      primary: colorPrimary,
+      primary: Colors.white,
+      onSecondary: colorPrimary,
       error: Colors.red,
       secondary: colorPrimary,
     ),
@@ -27,6 +28,7 @@ mixin AppTheme {
       actionsIconTheme: IconThemeData(
         color: Colors.white,
       ),
+      foregroundColor: Colors.white,
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
   );

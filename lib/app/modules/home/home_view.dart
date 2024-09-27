@@ -24,7 +24,7 @@ class HomeView extends GetView<HomeController> {
               onPressed: () => controller.goToSelectStudent(),
               child: Text(
                 'button_select_student'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),
@@ -45,7 +45,7 @@ class HomeView extends GetView<HomeController> {
                     fit: BoxFit.contain,
                   ),
                 ),
-                Positioned.fill(
+                /*Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
@@ -56,7 +56,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ).pOnly(bottom: 12),
                   ),
-                ),
+                ),*/
               ]).onInkTap(() => controller.goToListQuestion(1)),
             ),
             48.widthBox,
@@ -73,7 +73,7 @@ class HomeView extends GetView<HomeController> {
                     fit: BoxFit.contain,
                   ),
                 ),
-                Positioned.fill(
+                /*Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
@@ -84,7 +84,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ).pOnly(bottom: 12),
                   ),
-                ),
+                ),*/
               ]).onInkTap(() => controller.goToListQuestion(2)),
             ),
           ],

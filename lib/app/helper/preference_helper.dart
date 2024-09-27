@@ -32,7 +32,7 @@ mixin PreferenceHelper {
     await _pref.write(_ACTIVE_LANGUAGE, code);
   }
 
-  static String getActiveLanguage() => _pref.read(_ACTIVE_LANGUAGE) as String;
+  static String? getActiveLanguage() => _pref.read(_ACTIVE_LANGUAGE) as String?;
 
   static Future<void> setFirstUse(bool use) async {
     await _pref.write(_FIRST_USE, use);

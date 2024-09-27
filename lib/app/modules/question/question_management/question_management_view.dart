@@ -32,7 +32,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                   fit: BoxFit.contain,
                   opacity: AlwaysStoppedAnimation(.75),
                 ),
-                Positioned.fill(
+                /*Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
@@ -43,7 +43,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                       ),
                     ).pOnly(bottom: 12),
                   ),
-                ),
+                ),*/
                 Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomRight,
@@ -67,7 +67,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                   fit: BoxFit.contain,
                   opacity: AlwaysStoppedAnimation(.75),
                 ),
-                Positioned.fill(
+                /*Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
@@ -78,7 +78,7 @@ class QuestionManagementView extends GetView<QuestionManagementController> {
                       ),
                     ).pOnly(bottom: 12),
                   ),
-                ),
+                ),*/
                 Positioned.fill(
                   child: Align(
                     alignment: Alignment.bottomRight,

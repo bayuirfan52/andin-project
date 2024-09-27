@@ -37,8 +37,28 @@ Future<void> main() async {
   );
 }
 
-class AndinProject extends StatelessWidget {
+class AndinProject extends StatefulWidget {
   const AndinProject({super.key});
+
+  @override
+  State<AndinProject> createState() => _AndinProjectState();
+}
+
+class _AndinProjectState extends State<AndinProject> {
+  late Locale locale;
+
+  @override
+  void initState() {
+    final languageCode = PreferenceHelper.getActiveLanguage();
+    if (languageCode == null) {
+      locale = Locale('id', 'ID');
+    } else {
+      final parseCode = languageCode.split('_');
+      locale = Locale(parseCode[0], parseCode[1]);
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
@@ -50,7 +70,7 @@ class AndinProject extends StatelessWidget {
         // ignore: avoid_redundant_argument_values
         debugShowCheckedModeBanner: kDebugMode,
         translationsKeys: AppTranslation.translations,
-        locale: Locale('id', 'ID'),
+        locale: locale,
         fallbackLocale: Locale('id', 'ID'),
         builder: (context, child) {
           return FutureBuilder(
