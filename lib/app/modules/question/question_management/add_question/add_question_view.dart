@@ -31,7 +31,7 @@ class AddQuestionView extends GetView<AddQuestionController> {
               onPressed: () => controller.saveQuestion(),
               child: Text(
                 'button_save'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),

@@ -26,7 +26,7 @@ class ListQuestionEditView extends GetView<ListQuestionEditController> {
               onPressed: () => controller.goToAddQuestion(),
               child: Text(
                 'button_add_new_question'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),

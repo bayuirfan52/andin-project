@@ -25,7 +25,7 @@ class ListQuestionView extends GetView<ListQuestionController> {
               onPressed: () => controller.goToSelectStudent(),
               child: Text(
                 'button_select_student'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),

@@ -27,7 +27,7 @@ class StudentManagementView extends GetView<StudentManagementController> {
               onPressed: () => controller.goToAddStudent(),
               child: Text(
                 'button_add_new_student'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),

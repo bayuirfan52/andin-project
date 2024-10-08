@@ -134,7 +134,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                 [
                   Text(
                     controller.currentPlayedAnswer.value,
-                    textScaleFactor: 1.2,
+                    textScaler: TextScaler.linear(1.2),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -171,7 +171,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               onPressed: () => controller.goToSelectStudent(),
               child: Text(
                 'button_select_student'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),
@@ -186,16 +186,16 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                   [
                     Text(
                       'text_current_score_'.trParams({'score': '${controller.currentScore.value}/650'}),
-                      textScaleFactor: 1.5,
+                      textScaler: TextScaler.linear(1.5),
                     ).expand(),
                     Text(
                       controller.currentPlayedAnswer.value,
-                      textScaleFactor: 1.5,
+                      textScaler: TextScaler.linear(1.5),
                       textAlign: TextAlign.center,
                     ).expand(),
                     Text(
                       'text_student_'.trParams({'name': controller.currentStudent.value.studentName ?? ''}),
-                      textScaleFactor: 1.5,
+                      textScaler: TextScaler.linear(1.5),
                       textAlign: TextAlign.end,
                     ).expand(),
                   ],
@@ -237,7 +237,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                     padding: EdgeInsets.all(24),
                     child: Text(
                       '0',
-                      textScaleFactor: 2,
+                      textScaler: TextScaler.linear(2),
                       style: GoogleFonts.aBeeZee(color: Colors.white),
                     ),
                   ),
@@ -248,7 +248,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                     padding: EdgeInsets.all(24),
                     child: Text(
                       '30',
-                      textScaleFactor: 2,
+                      textScaler: TextScaler.linear(2),
                       style: GoogleFonts.aBeeZee(color: Colors.white),
                     ),
                   ),
@@ -259,7 +259,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                     padding: EdgeInsets.all(24),
                     child: Text(
                       '60',
-                      textScaleFactor: 2,
+                      textScaler: TextScaler.linear(2),
                       style: GoogleFonts.aBeeZee(color: Colors.white),
                     ),
                   ),
@@ -270,7 +270,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
                     padding: EdgeInsets.all(24),
                     child: Text(
                       '80',
-                      textScaleFactor: 2,
+                      textScaler: TextScaler.linear(2),
                       style: GoogleFonts.aBeeZee(color: Colors.white),
                     ),
                   ),

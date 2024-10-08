@@ -36,7 +36,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
               ),
               child: Text(
                 'button_delete'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),
@@ -45,7 +45,7 @@ class EditQuestionView extends GetView<EditQuestionController> {
               onPressed: () => controller.saveQuestion(),
               child: Text(
                 'button_save'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),

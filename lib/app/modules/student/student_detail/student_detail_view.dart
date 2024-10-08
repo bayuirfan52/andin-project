@@ -11,10 +11,9 @@ class StudentDetailView extends GetView<StudentDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvoked: (value) {
         controller.backToDashboard();
-        return true;
       },
       child: Obx(() => controller.isTablet.value ? tabletUI(context) : phoneUI(context)),
     );
@@ -37,7 +36,7 @@ class StudentDetailView extends GetView<StudentDetailController> {
               ),
               child: Text(
                 'button_delete'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),
@@ -46,7 +45,7 @@ class StudentDetailView extends GetView<StudentDetailController> {
               onPressed: () => controller.goToEditStudent(),
               child: Text(
                 'button_edit'.tr,
-                textScaleFactor: 1.5,
+                textScaler: TextScaler.linear(1.5),
                 style: GoogleFonts.aBeeZee(color: Colors.white),
               ),
             ),
