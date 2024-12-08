@@ -1,3 +1,4 @@
+import 'package:andin_project/app/core/resources/app_color.dart';
 import 'package:andin_project/app/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,14 +55,19 @@ class ExButtonDefault extends StatelessWidget {
       return ElevatedButton(
         onPressed: onPressed ?? () {},
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
+          backgroundColor: backgroundColor ?? colorPrimary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
           minimumSize: Size(width ?? 44, height ?? 44),
         ),
         child: HStack(
           [
             if (leftIcon != null) HStack([leftIcon!, 8.widthBox]),
-            '$label'.text.textStyle(GoogleFonts.aBeeZee(color: labelColor, fontWeight: isLabelBold ?? true ? FontWeight.w700 : FontWeight.normal)).size(labelSize).overflow(TextOverflow.ellipsis).make(),
+            '$label'
+                .text
+                .textStyle(GoogleFonts.aBeeZee(color: labelColor, fontWeight: isLabelBold ?? true ? FontWeight.w700 : FontWeight.normal))
+                .size(labelSize)
+                .overflow(TextOverflow.ellipsis)
+                .make(),
             if (isShowBadge ?? true && badgeCountForPrint != 0)
               HStack([
                 8.widthBox,
@@ -79,14 +85,19 @@ class ExButtonDefault extends StatelessWidget {
       return ElevatedButton(
         onPressed: null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
+          backgroundColor: backgroundColor ?? colorPrimary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
           minimumSize: Size(width ?? 44, height ?? 44),
         ),
         child: HStack(
           [
             if (leftIcon != null) HStack([leftIcon!, 8.widthBox]),
-            '$label'.text.textStyle(GoogleFonts.aBeeZee(color: labelColor, fontWeight: isLabelBold ?? true ? FontWeight.w700 : FontWeight.normal)).size(labelSize).overflow(TextOverflow.ellipsis).make(),
+            '$label'
+                .text
+                .textStyle(GoogleFonts.aBeeZee(color: labelColor, fontWeight: isLabelBold ?? true ? FontWeight.w700 : FontWeight.normal))
+                .size(labelSize)
+                .overflow(TextOverflow.ellipsis)
+                .make(),
             if (isShowBadge ?? true && badgeCountForPrint != 0)
               HStack([
                 8.widthBox,
@@ -100,7 +111,6 @@ class ExButtonDefault extends StatelessWidget {
           ],
         ),
       );
-
     }
   }
 }
