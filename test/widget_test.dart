@@ -1,16 +1,21 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:andin_project/main.dart';
+import 'package:andin_project/app/core/resources/app_theme.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const AndinProject());
+  testWidgets('application theme stays light when device requests dark mode',
+      (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.theme,
+        themeMode: ThemeMode.light,
+        darkTheme: ThemeData.dark(),
+        home: const Scaffold(body: Text('Question')),
+      ),
+    );
+
+    final context = tester.element(find.text('Question'));
+    expect(Theme.of(context).brightness, Brightness.light);
+    expect(Theme.of(context).scaffoldBackgroundColor, Colors.white);
   });
 }

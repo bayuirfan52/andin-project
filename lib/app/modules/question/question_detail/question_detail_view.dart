@@ -122,7 +122,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               () => ExButtonDefault(
                 width: 164,
                 backgroundColor: colorPrimary,
-                isEnable: controller.isHasPreviousQuestion.value,
+                isEnable: controller.isHasPreviousQuestion.value && !controller.isLoadingQuestions.value,
                 onPressed: () => controller.previousQuestion(),
                 label: 'button_previous'.tr,
                 labelSize: 16,
@@ -144,7 +144,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               () => ExButtonDefault(
                 width: 164,
                 backgroundColor: colorPrimary,
-                isEnable: controller.isHasNextQuestion.value,
+                isEnable: controller.isHasNextQuestion.value && !controller.isLoadingQuestions.value,
                 onPressed: () => controller.nextQuestion(),
                 label: 'button_next'.tr,
                 labelSize: 16,
@@ -214,7 +214,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               () => ExButtonDefault(
                 width: 164,
                 backgroundColor: colorPrimary,
-                isEnable: controller.isHasPreviousQuestion.value,
+                isEnable: controller.isHasPreviousQuestion.value && !controller.isLoadingQuestions.value,
                 onPressed: () => controller.previousQuestion(),
                 label: 'button_previous'.tr,
                 labelSize: 36,
@@ -282,7 +282,7 @@ class QuestionDetailView extends GetView<QuestionDetailController> {
               () => ExButtonDefault(
                 width: 164,
                 backgroundColor: colorPrimary,
-                isEnable: controller.isHasNextQuestion.value,
+                isEnable: controller.isHasNextQuestion.value && !controller.isLoadingQuestions.value,
                 onPressed: () => controller.nextQuestion(),
                 label: 'button_next'.tr,
                 labelSize: 36,

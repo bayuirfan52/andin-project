@@ -64,6 +64,7 @@ class _AndinProjectState extends State<AndinProject> {
   Widget build(BuildContext context) => GetMaterialApp(
         title: PreferenceHelper.getCurrentAppName(),
         theme: AppTheme.theme,
+        themeMode: ThemeMode.light,
         initialRoute: AppPages.initial,
         getPages: AppPages.routes,
         defaultTransition: Transition.cupertino,

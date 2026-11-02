@@ -5,7 +5,6 @@ import 'package:andin_project/app/core/base/base_controller.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/utils/logger.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
@@ -41,9 +40,18 @@ class AudioRecorderController extends BaseController {
   @override
   void onClose() {
     super.onClose();
-    stop();
-    audioRecorder.closeRecorder();
-    audioPlayer.closePlayer();
+    unawaited(_disposeAudio());
+  }
+
+  Future<void> _disposeAudio() async {
+    try {
+      if (audioRecorder.isRecording) await audioRecorder.stopRecorder();
+      if (audioPlayer.isPlaying) await audioPlayer.stopPlayer();
+      await audioRecorder.closeRecorder();
+      await audioPlayer.closePlayer();
+    } catch (error) {
+      logW('Unable to close audio resources: $error');
+    }
   }
 
   String formatTime(int duration) {
@@ -54,6 +62,7 @@ class AudioRecorderController extends BaseController {
   }
 
   Future<void> play() async {
+    if (recordedFile.value.isEmpty || !File(recordedFile.value).existsSync()) return;
     if (status.value == Status.PAUSED) {
       await audioPlayer.resumePlayer();
     } else {
@@ -99,63 +108,43 @@ class AudioRecorderController extends BaseController {
   }
 
   Future<void> startRecord() async {
-    final permissionMicrophone = await Permission.microphone.isGranted;
-    final permissionMedia = await Permission.audio.isGranted;
-    final permissionStorage = await Permission.storage.isGranted;
-    final androidInfo = await DeviceInfoPlugin().androidInfo;
+    if (status.value == Status.RECORDING) return;
+    final permission = await Permission.microphone.request();
+    if (!permission.isGranted) {
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_microphone_permission_needed'.tr, type: FlushbarType.ERROR);
+      return;
+    }
 
-    if (permissionMicrophone && (permissionMedia || permissionStorage)) {
-      Directory? dir;
-      if (Platform.isAndroid) {
-        dir = await getExternalStorageDirectory();
-      } else {
-        dir = await getApplicationDocumentsDirectory();
-      }
-      final audioDir = Directory('${dir?.path}/audio');
-      if (!audioDir.existsSync()) {
-        await audioDir.create();
-      }
-      final file = File(
-        '${audioDir.path}/audio_${DateTime.now().millisecondsSinceEpoch}.wav',
-      );
-      await file.create();
-      logI('File path: ${file.path}');
-
-      status.value = Status.RECORDING;
-      await audioRecorder.startRecorder(
-        toFile: file.path,
-      );
+    File? file;
+    try {
+      // The recording is private app data; scoped-storage permissions are not
+      // needed and requesting them can fail on newer Android versions.
+      final dir = await getApplicationDocumentsDirectory();
+      final audioDir = Directory('${dir.path}/audio');
+      await audioDir.create(recursive: true);
+      file = File('${audioDir.path}/audio_${DateTime.now().millisecondsSinceEpoch}.wav');
+      await audioRecorder.startRecorder(toFile: file.path, codec: Codec.pcm16WAV);
       recordedFile.value = file.path;
-    } else {
-      await Permission.microphone.request().then(
-        (value) {
-          if (value.isGranted && androidInfo.version.sdkInt >= 33) {
-            Permission.audio.request().then((value) {
-              if (value.isGranted) {
-                startRecord();
-              } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'text_audio_permission_needed'.tr, type: FlushbarType.ERROR);
-              }
-            });
-          } else if (value.isGranted && androidInfo.version.sdkInt < 33) {
-            Permission.storage.request().then((value) {
-              if (value.isGranted) {
-                startRecord();
-              } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'text_storage_permission_needed'.tr, type: FlushbarType.ERROR);
-              }
-            });
-          } else {
-            FlushbarHelper.showFlushbar(Get.context!, message: 'text_microphone_permission_needed'.tr, type: FlushbarType.ERROR);
-          }
-        },
-      );
+      status.value = Status.RECORDING;
+    } catch (error) {
+      status.value = Status.IDLE;
+      if (file != null && file.existsSync()) await file.delete();
+      logE('Unable to start audio recording: $error');
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_recording_error'.tr, type: FlushbarType.ERROR);
     }
   }
 
   Future<void> stopRecord() async {
-    await audioRecorder.stopRecorder().then((value) => status.value = Status.IDLE);
-    timeCount.value = '00:00';
+    if (status.value != Status.RECORDING) return;
+    try {
+      await audioRecorder.stopRecorder();
+    } catch (error) {
+      logE('Unable to stop audio recording: $error');
+      recordedFile.value = '';
+    } finally {
+      status.value = Status.IDLE;
+      timeCount.value = '00:00';
+    }
   }
 
   Future<void> init() async {

@@ -6,6 +6,7 @@ import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
+import 'package:andin_project/app/modules/question/question_detail/question_navigation.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +31,7 @@ class QuestionDetailController extends GetxController {
   final isHasNextQuestion = false.obs;
   final isAnswered = false.obs;
   final isTablet = false.obs;
+  final isLoadingQuestions = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -60,7 +62,12 @@ class QuestionDetailController extends GetxController {
     });
   }
 
-  Future<void> play(String answer, String file, int index, {bool isDefault = false}) async {
+  Future<void> play(
+    String answer,
+    String file,
+    int index, {
+    bool isDefault = false,
+  }) async {
     if (status.value == Status.PAUSED) {
       await audioPlayer.resumePlayer();
     } else {
@@ -103,29 +110,25 @@ class QuestionDetailController extends GetxController {
   void goToSelectStudent() => Get.toNamed<dynamic>(Routes.SELECT_STUDENT);
 
   void previousQuestion() {
-    if (currentLevel.value == 1) {
-      final index = listLevel1.indexWhere((element) => element.id == level1.value.id);
-      currentId.value = listLevel1[index - 1].id ?? '';
-    } else {
-      final index = listLevel2.indexWhere((element) => element.id == level2.value.id);
-      currentId.value = listLevel2[index - 1].id ?? '';
-    }
-    handleListQuestion();
+    _moveQuestion(-1);
   }
 
   void nextQuestion() {
     if ((currentAnswer.value.score ?? 0) < 650) {
       FlushbarHelper.showFlushbar(Get.context!, title: 'text_attention'.tr, message: 'text_not_reach_minimum_score'.tr, type: FlushbarType.ERROR);
     } else {
-      if (currentLevel.value == 1) {
-        final index = listLevel1.indexWhere((element) => element.id == level1.value.id);
-        currentId.value = listLevel1[index + 1].id ?? '';
-      } else {
-        final index = listLevel2.indexWhere((element) => element.id == level2.value.id);
-        currentId.value = listLevel2[index + 1].id ?? '';
-      }
-      handleListQuestion();
+      _moveQuestion(1);
     }
+  }
+
+  void _moveQuestion(int offset) {
+    if (isLoadingQuestions.value) return;
+    final ids = currentLevel.value == 1 ? listLevel1.map((question) => question.id).toList() : listLevel2.map((question) => question.id).toList();
+    final currentQuestionId = currentLevel.value == 1 ? level1.value.id : level2.value.id;
+    final nextId = questionIdAtOffset(ids, currentQuestionId, offset);
+    if (nextId == null || nextId == currentId.value) return;
+    currentId.value = nextId;
+    handleListQuestion();
   }
 
   Future<void> getCurrentActiveStudent() async {
@@ -139,12 +142,18 @@ class QuestionDetailController extends GetxController {
   }
 
   Future<void> handleListQuestion() async {
-    if (currentLevel.value == 1) {
-      await getListQuestionLevel1();
-    } else {
-      await getListQuestionLevel2();
+    if (isLoadingQuestions.value) return;
+    isLoadingQuestions.value = true;
+    try {
+      if (currentLevel.value == 1) {
+        await getListQuestionLevel1();
+      } else {
+        await getListQuestionLevel2();
+      }
+      await checkAnswered();
+    } finally {
+      isLoadingQuestions.value = false;
     }
-    await checkAnswered();
   }
 
   Future<void> getListQuestionLevel1() async {
@@ -152,29 +161,37 @@ class QuestionDetailController extends GetxController {
     listLevel1.addAll(Database.getDefaultQuestionLevel1());
     await Database.getQuestionLevel1ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
       listLevel1.addAll(value);
-      level1.value = listLevel1.firstWhere((element) => element.id == currentId.value);
-      isHasPreviousQuestion.value = listLevel1.indexWhere((element) => element.id == level1.value.id) != 0;
-      isHasNextQuestion.value = listLevel1.indexWhere((element) => element.id == level1.value.id) != listLevel1.length - 1;
+      final index = listLevel1.indexWhere((element) => element.id == currentId.value);
+      if (index < 0) throw StateError('Question ${currentId.value} was not found in level 1');
+      level1.value = listLevel1[index];
+      isHasPreviousQuestion.value = index > 0;
+      isHasNextQuestion.value = index < listLevel1.length - 1;
 
       logD('has prev question :${isHasPreviousQuestion.value}');
       logD('has next question :${isHasNextQuestion.value}');
     }).catchError((dynamic error) {
+      isHasPreviousQuestion.value = false;
+      isHasNextQuestion.value = false;
       logE(error);
     });
   }
 
   Future<void> getListQuestionLevel2() async {
-    listLevel1.clear();
+    listLevel2.clear();
     listLevel2.addAll(Database.getDefaultQuestionLevel2());
     await Database.getQuestionLevel2ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
       listLevel2.addAll(value);
-      level2.value = listLevel2.firstWhere((element) => element.id == currentId.value);
-      isHasPreviousQuestion.value = listLevel2.indexWhere((element) => element.id == level2.value.id) != 0;
-      isHasNextQuestion.value = listLevel2.indexWhere((element) => element.id == level2.value.id) != listLevel2.length - 1;
+      final index = listLevel2.indexWhere((element) => element.id == currentId.value);
+      if (index < 0) throw StateError('Question ${currentId.value} was not found in level 2');
+      level2.value = listLevel2[index];
+      isHasPreviousQuestion.value = index > 0;
+      isHasNextQuestion.value = index < listLevel2.length - 1;
 
       logD('has prev question :${isHasPreviousQuestion.value}');
       logD('has next question :${isHasNextQuestion.value}');
     }).catchError((dynamic error) {
+      isHasPreviousQuestion.value = false;
+      isHasNextQuestion.value = false;
       logE(error);
     });
   }
@@ -184,21 +201,15 @@ class QuestionDetailController extends GetxController {
     isAnswered.value = false;
     await Database.getAnswerByStudent(currentStudent.value.id ?? '').then((value) {
       logD(value.toString());
-      value.forEach((element) {
-        if (currentLevel.value == 1) {
-          isAnswered.value = element.idQuestion == level1.value.id;
-        } else {
-          isAnswered.value = element.idQuestion == level2.value.id;
-        }
-
-        if (isAnswered.value) {
-          currentScore.value = element.score ?? 0;
-          currentAnswer.value = element;
-          logD('answer_id : ${currentAnswer.value.idAnswer}, score: ${currentScore.value}, count: ${element.count}');
-        } else {
-          currentAnswer.value = Answer();
-        }
-      });
+      final questionId = currentLevel.value == 1 ? level1.value.id : level2.value.id;
+      final matchingAnswers = value.where((answer) => answer.idQuestion == questionId);
+      final answer = matchingAnswers.isEmpty ? null : matchingAnswers.last;
+      isAnswered.value = answer != null;
+      currentAnswer.value = answer ?? Answer();
+      currentScore.value = answer?.score ?? 0;
+      if (answer != null) {
+        logD('answer_id : ${answer.idAnswer}, score: ${answer.score}, count: ${answer.count}');
+      }
     });
   }
 

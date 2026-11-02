@@ -79,7 +79,7 @@ class ExTextFieldNormal extends StatelessWidget {
   Widget build(BuildContext context) {
     return VStack(
       [
-        if (labelText != null) labelText!.text.caption(context).color(labelTextColor).make().pOnly(bottom: 8),
+        if (labelText != null) labelText!.text.labelSmall(context).color(labelTextColor).make().pOnly(bottom: 8),
         ExBaseTextField(
           borderType: ExTextFieldBorderType.roundLine,
           borderRadius: 4,
@@ -113,7 +113,7 @@ class ExTextFieldNormal extends StatelessWidget {
           textAlign: textAlign,
           capitalization: capitalization,
         ),
-        if (helperText != null) helperText!.text.caption(context).color(helperTextColor).make().pOnly(top: 8),
+        if (helperText != null) helperText!.text.labelSmall(context).color(helperTextColor).make().pOnly(top: 8),
       ],
     );
   }

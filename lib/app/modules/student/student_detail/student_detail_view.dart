@@ -12,7 +12,7 @@ class StudentDetailView extends GetView<StudentDetailController> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (value) {
+      onPopInvokedWithResult: (value, result) {
         controller.backToDashboard();
       },
       child: Obx(() => controller.isTablet.value ? tabletUI(context) : phoneUI(context)),

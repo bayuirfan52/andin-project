@@ -28,6 +28,8 @@
 		<true/>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>Record assessment notes from microphone to record audio notes</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Take pictures to add images to learning questions</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Pick images for question</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>

@@ -129,7 +129,11 @@ class EditQuestionController extends GetxController {
 
   Future<void> saveQuestion() async {
     if (questionController.text.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_title_required'.tr, type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_title_required'.tr,
+        type: FlushbarType.ERROR,
+      );
       return;
     }
     if (answer1Controller.text.isEmpty) {
@@ -213,37 +217,43 @@ class EditQuestionController extends GetxController {
   }
 
   Future<void> pickImage(int answerIndex, ImageSource method) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: method, imageQuality: 75);
-    logI(pickedFile?.path);
-    final file = await FileHelper.copyImageToAppDir(File(pickedFile?.path ?? ''));
-    switch (answerIndex) {
-      case 1:
-        imagePath1.value = file.path;
-        logI('path 1: ${imagePath1.value}');
-        break;
-      case 2:
-        imagePath2.value = file.path;
-        logI('path 2: ${imagePath2.value}');
-        break;
-      // case 3:
-      //   imagePath3.value = file.path;
-      //   logI('path 3: ${imagePath3.value}');
-      //   break;
-      default:
-        logE('No indexed answer selected');
-        break;
+    try {
+      final pickedFile = await ImagePicker().pickImage(source: method, imageQuality: 75);
+      if (pickedFile == null) return; // User cancelled the picker.
+      logI(pickedFile.path);
+      final file = await FileHelper.copyImageToAppDir(File(pickedFile.path));
+      switch (answerIndex) {
+        case 1:
+          imagePath1.value = file.path;
+          logI('path 1: ${imagePath1.value}');
+          break;
+        case 2:
+          imagePath2.value = file.path;
+          logI('path 2: ${imagePath2.value}');
+          break;
+        // case 3:
+        //   imagePath3.value = file.path;
+        //   logI('path 3: ${imagePath3.value}');
+        //   break;
+        default:
+          logE('No indexed answer selected');
+          break;
+      }
+    } catch (error) {
+      logE('Unable to pick image: $error');
+      FlushbarHelper.showFlushbar(Get.context!, message: 'text_image_pick_error'.tr, type: FlushbarType.ERROR);
     }
   }
 
   void goToAudioRecorder(int answerIndex) {
     Get.toNamed<dynamic>(Routes.AUDIO_RECORDER)?.then((value) {
+      if (value is! String || value.isEmpty) return;
       switch (answerIndex) {
         case 1:
-          audioPath1.value = value as String;
+          audioPath1.value = value;
           break;
         case 2:
-          audioPath2.value = value as String;
+          audioPath2.value = value;
           break;
         // case 3:
         //   audioPath3.value = value as String;
@@ -259,7 +269,7 @@ class EditQuestionController extends GetxController {
     final imagePermissionStatus = await Permission.photos.isGranted;
     final cameraPermissionStatus = await Permission.camera.isGranted;
     final storagePermissionStatus = await Permission.storage.isGranted;
-    final androidInfo = await DeviceInfoPlugin().androidInfo;
+    final androidSdk = Platform.isAndroid ? (await DeviceInfoPlugin().androidInfo).version.sdkInt : 0;
     logI('Permission status $imagePermissionStatus');
 
     switch (method) {
@@ -279,7 +289,7 @@ class EditQuestionController extends GetxController {
         }
         break;
       case ImageSource.gallery:
-        if (androidInfo.version.sdkInt >= 33) {
+        if (!Platform.isAndroid || androidSdk >= 33) {
           if (imagePermissionStatus) {
             await pickImage(answerIndex, ImageSource.gallery);
           } else {

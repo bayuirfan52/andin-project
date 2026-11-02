@@ -26,7 +26,7 @@ class Answer extends HiveObject {
     int? score,
     int? count,
   }) {
-    if (_idAnswer != null) {
+    if (idAnswer != null) {
       this._idAnswer = idAnswer;
     }
     if (idStudent != null) {

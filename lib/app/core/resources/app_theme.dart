@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 mixin AppTheme {
   static final theme = ThemeData(
+    brightness: Brightness.light,
     primaryColor: colorPrimary,
     colorScheme: ColorScheme.light(
       primary: Colors.white,

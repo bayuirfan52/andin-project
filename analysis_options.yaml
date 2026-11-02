@@ -22,6 +22,9 @@ analyzer:
     - "lib/generated/**"
     - "lib/app/models/**"
     - "lib/app/data/**"
+    - build/**
+    - android/**
+    - ios/**
   language:
     strict-raw-types: false
 

@@ -1,5 +1,5 @@
 import 'package:andin_project/app/core/base/base_controller.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 class DashboardController extends BaseController {
   final tabController = PersistentTabController();

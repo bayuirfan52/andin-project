@@ -84,6 +84,8 @@
         "edit_name_success": "Berhasil merubah nama",
         "current_score_": " Skor Saat Ini: @score",
         "react_max_count_alert": "Telah mencapai batas maksimal kesempatan menjawab",
-        "not_reach_minimum_score": "Belum mencapai skor minimal untuk lanjut"
+        "not_reach_minimum_score": "Belum mencapai skor minimal untuk lanjut",
+        "image_pick_error": "Gambar yang dipilih tidak dapat digunakan.",
+        "recording_error": "Perekaman suara gagal dimulai."
     }
 }

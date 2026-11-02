@@ -27,21 +27,16 @@ mixin FileHelper {
   }
 
   static Future<File> copyImageToAppDir(File file) async {
-    Directory? dir;
-    if (Platform.isAndroid) {
-      dir = await getExternalStorageDirectory();
-    } else {
-      dir = await getApplicationDocumentsDirectory();
+    if (!file.existsSync()) {
+      throw FileSystemException('Selected image does not exist', file.path);
     }
-    final imageDir = Directory('${dir?.path}/image');
-    if (!imageDir.existsSync()) {
-      await imageDir.create();
-    }
+    final dir = await getApplicationDocumentsDirectory();
+    final imageDir = Directory('${dir.path}/image');
+    await imageDir.create(recursive: true);
 
     logger.logI('Image Dir: ${imageDir.path}');
     final timeStamp = DateTime.now().millisecondsSinceEpoch;
     final newFile = File('${imageDir.path}/image_$timeStamp${getFileExtensions(file.path)}');
-    await newFile.writeAsBytes(file.readAsBytesSync());
-    return newFile;
+    return file.copy(newFile.path);
   }
 }
