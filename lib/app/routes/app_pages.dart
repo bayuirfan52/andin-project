@@ -39,7 +39,6 @@ import '../modules/student/student_detail/student_detail_view.dart';
 import '../modules/student/student_management/student_management_binding.dart';
 import '../modules/student/student_management/student_management_view.dart';
 
-// ignore_for_file: inference_failure_on_instance_creation
 
 part 'app_routes.dart';
 
@@ -48,7 +47,7 @@ class AppPages {
 
   static String initial = PreferenceHelper.getTeacherName().isNullOrEmpty || PreferenceHelper.getCurrentActiveStudent().isNullOrEmpty ? Routes.LOGIN : Routes.DASHBOARD;
 
-  static final routes = [
+  static final List<GetPage<dynamic>> routes = [
     GetPage(
       name: Routes.HOME,
       page: () => const HomeView(),

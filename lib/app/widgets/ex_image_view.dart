@@ -1,10 +1,11 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:andin_project/app/extensions/string_extensions.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 ///   created               : Aditya Pratama
@@ -50,7 +51,10 @@ class ExImageView extends StatelessWidget {
             width: size ?? width,
             height: size ?? height,
             decoration: BoxDecoration(
-              border: Border.all(color: borderColor ?? Colors.grey[300]!, width: borderWidth ?? 0.5),
+              border: Border.all(
+                color: borderColor ?? Colors.grey[300]!,
+                width: borderWidth ?? 0.5,
+              ),
             ),
             child: image.isUrl!
                 ? Image.network(
@@ -70,7 +74,10 @@ class ExImageView extends StatelessWidget {
                       ).centered();
                     },
                     errorBuilder: (context, error, stackTrace) {
-                      return Container(color: Colors.grey[300], child: Icon(errorIcon));
+                      return Container(
+                        color: Colors.grey[300],
+                        child: Icon(errorIcon),
+                      );
                     },
                   )
                 : Image.file(
@@ -81,14 +88,19 @@ class ExImageView extends StatelessWidget {
                     isAntiAlias: true,
                     errorBuilder: (context, error, stackTrace) {
                       logE('$error - ${stackTrace}');
-                      return Container(color: Colors.grey[300], child: Icon(errorIcon));
+                      return Container(
+                        color: Colors.grey[300],
+                        child: Icon(errorIcon),
+                      );
                     },
                   ),
           ).cornerRadius(radius),
         ],
       ).onTap(() {
         if (isAllowPreview ?? true) {
-          Get.toNamed<dynamic>(Routes.IMAGE_PREVIEW, arguments: image);
+          unawaited(
+            Get.toNamed<dynamic>(Routes.IMAGE_PREVIEW, arguments: image),
+          );
         }
       });
     } else {
@@ -98,7 +110,10 @@ class ExImageView extends StatelessWidget {
             width: size ?? width,
             height: size ?? height,
             decoration: BoxDecoration(
-              border: Border.all(color: borderColor ?? Colors.grey[300]!, width: borderWidth ?? 0.5),
+              border: Border.all(
+                color: borderColor ?? Colors.grey[300]!,
+                width: borderWidth ?? 0.5,
+              ),
             ),
             child: image.isUrl!
                 ? Image.network(
@@ -118,7 +133,10 @@ class ExImageView extends StatelessWidget {
                       ).centered();
                     },
                     errorBuilder: (context, error, stackTrace) {
-                      return Container(color: Colors.grey[300], child: Icon(errorIcon));
+                      return Container(
+                        color: Colors.grey[300],
+                        child: Icon(errorIcon),
+                      );
                     },
                   )
                 : Image.file(
@@ -129,7 +147,10 @@ class ExImageView extends StatelessWidget {
                     isAntiAlias: true,
                     errorBuilder: (context, error, stackTrace) {
                       logE('$error - ${stackTrace}');
-                      return Container(color: Colors.grey[300], child: Icon(errorIcon));
+                      return Container(
+                        color: Colors.grey[300],
+                        child: Icon(errorIcon),
+                      );
                     },
                   ),
           ).cornerRadius(radius),

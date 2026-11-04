@@ -28,7 +28,11 @@ class AddStudentController extends GetxController {
 
   Future<void> saveNewStudent() async {
     if (studentController.text.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_name_field_error'.tr, type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_name_field_error'.tr,
+        type: FlushbarType.ERROR,
+      );
       return;
     }
 
@@ -37,12 +41,21 @@ class AddStudentController extends GetxController {
     student.id = 'student_$timestamp';
     student.studentName = studentController.text;
 
-    await Database.addStudent(student).then((value) {
-      PreferenceHelper.setCurrentActiveStudent(student.id ?? '');
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_add_new_student_success'.tr, type: FlushbarType.SUCCESS);
-      Get.offAllNamed<dynamic>(Routes.DASHBOARD);
-    }).catchError((dynamic error) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_save_error'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
-    });
+    try {
+      await Database.addStudent(student);
+      await PreferenceHelper.setCurrentActiveStudent(student.id ?? '');
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_add_new_student_success'.tr,
+        type: FlushbarType.SUCCESS,
+      );
+      await Get.offAllNamed<dynamic>(Routes.DASHBOARD);
+    } on Object catch (error) {
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_save_error'.trParams({'error': error.toString()}),
+        type: FlushbarType.ERROR,
+      );
+    }
   }
 }

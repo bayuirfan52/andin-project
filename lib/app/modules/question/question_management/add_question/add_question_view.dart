@@ -5,10 +5,10 @@ import 'package:andin_project/app/helper/bottomsheet_helper.dart';
 import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_controller.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/app/widgets/ex_textfield_normal.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:path/path.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -19,7 +19,9 @@ class AddQuestionView extends GetView<AddQuestionController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isTablet.isTrue ? tabletUI(context) : phoneUI(context));
+    return Obx(
+      () => controller.isTablet.isTrue ? tabletUI(context) : phoneUI(context),
+    );
   }
 
   Widget tabletUI(BuildContext context) => Scaffold(
@@ -78,9 +80,12 @@ class AddQuestionView extends GetView<AddQuestionController> {
                   HStack([
                     Obx(
                       () => Visibility(
-                        visible: controller.audioPath1.isNotEmpty && (controller.status.value == Status.IDLE || controller.status.value == Status.PAUSED),
+                        visible: controller.audioPath1.isNotEmpty &&
+                            (controller.status.value == Status.IDLE ||
+                                controller.status.value == Status.PAUSED),
                         child: IconButton(
-                          onPressed: () => controller.play(controller.audioPath1.value, 1),
+                          onPressed: () =>
+                              controller.play(controller.audioPath1.value, 1),
                           iconSize: 48,
                           icon: Icon(
                             Icons.play_circle,
@@ -91,7 +96,8 @@ class AddQuestionView extends GetView<AddQuestionController> {
                     ),
                     Obx(
                       () => Visibility(
-                        visible: controller.status.value == Status.PLAYING && controller.currentPlayedAudio.value == 1,
+                        visible: controller.status.value == Status.PLAYING &&
+                            controller.currentPlayedAudio.value == 1,
                         child: IconButton(
                           onPressed: () => controller.pause(),
                           iconSize: 48,
@@ -139,9 +145,16 @@ class AddQuestionView extends GetView<AddQuestionController> {
                         isAntiAlias: true,
                         errorBuilder: (context, error, stackTrace) {
                           logE('$error - ${stackTrace}');
-                          return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                          return Container(
+                            color: Colors.grey[300],
+                            child: Icon(Icons.image_not_supported),
+                          );
                         },
-                      ).onInkTap(() => controller.goToImagePreview(controller.imagePath1.value)),
+                      ).onInkTap(
+                        () => controller.goToImagePreview(
+                          controller.imagePath1.value,
+                        ),
+                      ),
                     ),
                   ),
                   IconButton(
@@ -177,9 +190,12 @@ class AddQuestionView extends GetView<AddQuestionController> {
                     HStack([
                       Obx(
                         () => Visibility(
-                          visible: controller.audioPath2.isNotEmpty && (controller.status.value == Status.IDLE || controller.status.value == Status.PAUSED),
+                          visible: controller.audioPath2.isNotEmpty &&
+                              (controller.status.value == Status.IDLE ||
+                                  controller.status.value == Status.PAUSED),
                           child: IconButton(
-                            onPressed: () => controller.play(controller.audioPath2.value, 2),
+                            onPressed: () =>
+                                controller.play(controller.audioPath2.value, 2),
                             iconSize: 48,
                             icon: Icon(
                               Icons.play_circle,
@@ -190,7 +206,8 @@ class AddQuestionView extends GetView<AddQuestionController> {
                       ),
                       Obx(
                         () => Visibility(
-                          visible: controller.status.value == Status.PLAYING && controller.currentPlayedAudio.value == 2,
+                          visible: controller.status.value == Status.PLAYING &&
+                              controller.currentPlayedAudio.value == 2,
                           child: IconButton(
                             onPressed: () => controller.pause(),
                             iconSize: 48,
@@ -238,9 +255,16 @@ class AddQuestionView extends GetView<AddQuestionController> {
                           isAntiAlias: true,
                           errorBuilder: (context, error, stackTrace) {
                             logE('$error - ${stackTrace}');
-                            return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                            return Container(
+                              color: Colors.grey[300],
+                              child: Icon(Icons.image_not_supported),
+                            );
                           },
-                        ).onInkTap(() => controller.goToImagePreview(controller.imagePath2.value)),
+                        ).onInkTap(
+                          () => controller.goToImagePreview(
+                            controller.imagePath2.value,
+                          ),
+                        ),
                       ),
                     ),
                     IconButton(
@@ -324,9 +348,12 @@ class AddQuestionView extends GetView<AddQuestionController> {
                   HStack([
                     Obx(
                       () => Visibility(
-                        visible: controller.audioPath1.isNotEmpty && (controller.status.value == Status.IDLE || controller.status.value == Status.PAUSED),
+                        visible: controller.audioPath1.isNotEmpty &&
+                            (controller.status.value == Status.IDLE ||
+                                controller.status.value == Status.PAUSED),
                         child: IconButton(
-                          onPressed: () => controller.play(controller.audioPath1.value, 1),
+                          onPressed: () =>
+                              controller.play(controller.audioPath1.value, 1),
                           iconSize: 24,
                           icon: Icon(
                             Icons.play_circle,
@@ -337,7 +364,8 @@ class AddQuestionView extends GetView<AddQuestionController> {
                     ),
                     Obx(
                       () => Visibility(
-                        visible: controller.status.value == Status.PLAYING && controller.currentPlayedAudio.value == 1,
+                        visible: controller.status.value == Status.PLAYING &&
+                            controller.currentPlayedAudio.value == 1,
                         child: IconButton(
                           onPressed: () => controller.pause(),
                           iconSize: 24,
@@ -383,9 +411,16 @@ class AddQuestionView extends GetView<AddQuestionController> {
                         isAntiAlias: true,
                         errorBuilder: (context, error, stackTrace) {
                           logE('$error - ${stackTrace}');
-                          return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                          return Container(
+                            color: Colors.grey[300],
+                            child: Icon(Icons.image_not_supported),
+                          );
                         },
-                      ).onInkTap(() => controller.goToImagePreview(controller.imagePath1.value)),
+                      ).onInkTap(
+                        () => controller.goToImagePreview(
+                          controller.imagePath1.value,
+                        ),
+                      ),
                     ),
                   ),
                   IconButton(
@@ -423,9 +458,12 @@ class AddQuestionView extends GetView<AddQuestionController> {
                     HStack([
                       Obx(
                         () => Visibility(
-                          visible: controller.audioPath2.isNotEmpty && (controller.status.value == Status.IDLE || controller.status.value == Status.PAUSED),
+                          visible: controller.audioPath2.isNotEmpty &&
+                              (controller.status.value == Status.IDLE ||
+                                  controller.status.value == Status.PAUSED),
                           child: IconButton(
-                            onPressed: () => controller.play(controller.audioPath2.value, 2),
+                            onPressed: () =>
+                                controller.play(controller.audioPath2.value, 2),
                             iconSize: 24,
                             icon: Icon(
                               Icons.play_circle,
@@ -436,7 +474,8 @@ class AddQuestionView extends GetView<AddQuestionController> {
                       ),
                       Obx(
                         () => Visibility(
-                          visible: controller.status.value == Status.PLAYING && controller.currentPlayedAudio.value == 2,
+                          visible: controller.status.value == Status.PLAYING &&
+                              controller.currentPlayedAudio.value == 2,
                           child: IconButton(
                             onPressed: () => controller.pause(),
                             iconSize: 24,
@@ -482,9 +521,16 @@ class AddQuestionView extends GetView<AddQuestionController> {
                           isAntiAlias: true,
                           errorBuilder: (context, error, stackTrace) {
                             logE('$error - ${stackTrace}');
-                            return Container(color: Colors.grey[300], child: Icon(Icons.image_not_supported));
+                            return Container(
+                              color: Colors.grey[300],
+                              child: Icon(Icons.image_not_supported),
+                            );
                           },
-                        ).onInkTap(() => controller.goToImagePreview(controller.imagePath2.value)),
+                        ).onInkTap(
+                          () => controller.goToImagePreview(
+                            controller.imagePath2.value,
+                          ),
+                        ),
                       ),
                     ),
                     IconButton(
@@ -508,26 +554,38 @@ class AddQuestionView extends GetView<AddQuestionController> {
     BottomSheetHelper.bottomSheetCommon(
       children: VStack([
         ListTile(
-          title: Text('button_camera'.tr, style: GoogleFonts.aBeeZee(fontSize: 14, fontWeight: FontWeight.bold)),
+          title: Text(
+            'button_camera'.tr,
+            style: GoogleFonts.aBeeZee(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: Icon(
             Icons.camera,
             size: 48,
           ),
-          onTap: () {
+          onTap: () async {
             Get.back<dynamic>();
-            controller.changeImage(index, ImageSource.camera);
+            await controller.changeImage(index, ImageSource.camera);
           },
         ),
         8.heightBox,
         ListTile(
-          title: Text('button_gallery'.tr, style: GoogleFonts.aBeeZee(fontSize: 14, fontWeight: FontWeight.bold)),
+          title: Text(
+            'button_gallery'.tr,
+            style: GoogleFonts.aBeeZee(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: Icon(
             Icons.image,
             size: 48,
           ),
-          onTap: () {
+          onTap: () async {
             Get.back<dynamic>();
-            controller.changeImage(index, ImageSource.gallery);
+            await controller.changeImage(index, ImageSource.gallery);
           },
         ),
       ]),

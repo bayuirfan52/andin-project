@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:andin_project/app/core/resources/app_color.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:material_ui/material_ui.dart';
@@ -25,24 +27,26 @@ mixin FlushbarHelper {
                 ? colorPrimary
                 : Colors.red.shade500;
 
-    Flushbar<dynamic>(
-      title: title,
-      message: message,
-      icon: Icon(
-        icon,
-        size: 28.0,
-        color: color,
-      ),
-      margin: EdgeInsets.all(6.0),
-      flushbarPosition: FlushbarPosition.TOP,
-      textDirection: Directionality.of(context),
-      borderRadius: BorderRadius.circular(12),
-      backgroundColor: Colors.white,
-      duration: Duration(seconds: 3),
-      titleColor: colorText,
-      messageColor: colorText,
-      leftBarIndicatorColor: color,
-    ).show(context);
+    unawaited(
+      Flushbar<dynamic>(
+        title: title,
+        message: message,
+        icon: Icon(
+          icon,
+          size: 28.0,
+          color: color,
+        ),
+        margin: EdgeInsets.all(6.0),
+        flushbarPosition: FlushbarPosition.TOP,
+        textDirection: Directionality.of(context),
+        borderRadius: BorderRadius.circular(12),
+        backgroundColor: Colors.white,
+        duration: Duration(seconds: 3),
+        titleColor: colorText,
+        messageColor: colorText,
+        leftBarIndicatorColor: color,
+      ).show(context),
+    );
   }
 }
 

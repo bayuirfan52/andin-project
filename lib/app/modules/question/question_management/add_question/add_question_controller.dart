@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:andin_project/app/core/database/database.dart';
@@ -10,30 +11,30 @@ import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_co
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AddQuestionController extends GetxController {
   String currentStudentId = '';
-  final currentLevel = 1.obs;
-  final imagePath1 = ''.obs;
-  final imagePath2 = ''.obs;
+  final RxInt currentLevel = 1.obs;
+  final RxString imagePath1 = ''.obs;
+  final RxString imagePath2 = ''.obs;
 
   // final imagePath3 = ''.obs;
-  final audioPath1 = ''.obs;
-  final audioPath2 = ''.obs;
+  final RxString audioPath1 = ''.obs;
+  final RxString audioPath2 = ''.obs;
 
   // final audioPath3 = ''.obs;
-  final isTablet = false.obs;
+  final RxBool isTablet = false.obs;
   final questionController = TextEditingController();
   final answer1Controller = TextEditingController();
   final answer2Controller = TextEditingController();
   final audioPlayer = FlutterSoundPlayer();
-  final status = Status.IDLE.obs;
-  final currentPlayedAudio = 0.obs;
+  final Rx<Status> status = Status.IDLE.obs;
+  final RxInt currentPlayedAudio = 0.obs;
 
   // final answer3Controller = TextEditingController();
 
@@ -54,7 +55,7 @@ class AddQuestionController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    audioPlayer.closePlayer();
+    unawaited(audioPlayer.closePlayer());
   }
 
   Future<void> init() async {
@@ -72,7 +73,7 @@ class AddQuestionController extends GetxController {
         fromURI: file,
         whenFinished: () {
           logI('finish');
-          stop();
+          unawaited(stop());
         },
       );
     }
@@ -92,69 +93,54 @@ class AddQuestionController extends GetxController {
   }
 
   void goToImagePreview(String path) {
-    Get.toNamed<dynamic>(Routes.IMAGE_PREVIEW, arguments: path);
+    unawaited(Get.toNamed<dynamic>(Routes.IMAGE_PREVIEW, arguments: path));
   }
 
   Future<void> changeImage(int answerIndex, ImageSource method) async {
     final imagePermissionStatus = await Permission.photos.isGranted;
     final cameraPermissionStatus = await Permission.camera.isGranted;
     final storagePermissionStatus = await Permission.storage.isGranted;
-    final androidSdk = Platform.isAndroid ? (await DeviceInfoPlugin().androidInfo).version.sdkInt : 0;
+    final androidSdk = Platform.isAndroid
+        ? (await DeviceInfoPlugin().androidInfo).version.sdkInt
+        : 0;
     logI('Permission status $imagePermissionStatus');
 
     switch (method) {
       case ImageSource.camera:
-        if (cameraPermissionStatus) {
-          await pickImage(answerIndex, ImageSource.camera);
-        } else {
-          await Permission.camera.request().then(
-            (value) {
-              if (value.isGranted) {
-                pickImage(answerIndex, ImageSource.camera);
-              } else {
-                FlushbarHelper.showFlushbar(
-                  Get.context!,
-                  message: 'camera_permission_needed'.tr,
-                  type: FlushbarType.ERROR,
-                );
-              }
-            },
+        if (!cameraPermissionStatus &&
+            !(await Permission.camera.request()).isGranted) {
+          FlushbarHelper.showFlushbar(
+            Get.context!,
+            message: 'camera_permission_needed'.tr,
+            type: FlushbarType.ERROR,
           );
+          return;
         }
-        break;
+        await pickImage(answerIndex, ImageSource.camera);
       case ImageSource.gallery:
-        if (!Platform.isAndroid || androidSdk >= 33) {
-          if (imagePermissionStatus) {
-            await pickImage(answerIndex, ImageSource.gallery);
-          } else {
-            await Permission.photos.request().then((value) {
-              if (value.isGranted) {
-                pickImage(answerIndex, ImageSource.gallery);
-              } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'photo_permission_needed'.tr, type: FlushbarType.ERROR);
-              }
-            });
-          }
-        } else {
-          if (storagePermissionStatus) {
-            await pickImage(answerIndex, ImageSource.gallery);
-          } else {
-            await Permission.storage.request().then((value) {
-              if (value.isGranted) {
-                pickImage(answerIndex, ImageSource.gallery);
-              } else {
-                FlushbarHelper.showFlushbar(Get.context!, message: 'text_storage_permission_needed'.tr, type: FlushbarType.ERROR);
-              }
-            });
-          }
+        final hasGalleryPermission = !Platform.isAndroid || androidSdk >= 33
+            ? imagePermissionStatus ||
+                (await Permission.photos.request()).isGranted
+            : storagePermissionStatus ||
+                (await Permission.storage.request()).isGranted;
+        if (!hasGalleryPermission) {
+          FlushbarHelper.showFlushbar(
+            Get.context!,
+            message: Platform.isAndroid && androidSdk < 33
+                ? 'text_storage_permission_needed'.tr
+                : 'photo_permission_needed'.tr,
+            type: FlushbarType.ERROR,
+          );
+          return;
         }
-        break;
+        await pickImage(answerIndex, ImageSource.gallery);
     }
   }
 
   Future<void> pickImage(int answerIndex, ImageSource method) async {
     try {
-      final pickedFile = await ImagePicker().pickImage(source: method, imageQuality: 75);
+      final pickedFile =
+          await ImagePicker().pickImage(source: method, imageQuality: 75);
       if (pickedFile == null) return; // User cancelled the picker.
       logI(pickedFile.path);
       final file = await FileHelper.copyImageToAppDir(File(pickedFile.path));
@@ -162,56 +148,70 @@ class AddQuestionController extends GetxController {
         case 1:
           imagePath1.value = file.path;
           logI('path 1: ${imagePath1.value}');
-          break;
         case 2:
           imagePath2.value = file.path;
           logI('path 2: ${imagePath2.value}');
-          break;
         // case 3:
         //   imagePath3.value = file.path;
         //   logI('path 3: ${imagePath3.value}');
         //   break;
         default:
           logE('No indexed answer selected');
-          break;
       }
-    } catch (error) {
+    } on Object catch (error) {
       logE('Unable to pick image: $error');
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_image_pick_error'.tr, type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_image_pick_error'.tr,
+        type: FlushbarType.ERROR,
+      );
     }
   }
 
   void goToAudioRecorder(int answerIndex) {
-    Get.toNamed<dynamic>(Routes.AUDIO_RECORDER)?.then((value) {
-      if (value is! String || value.isEmpty) return;
-      switch (answerIndex) {
-        case 1:
-          audioPath1.value = value;
-          break;
-        case 2:
-          audioPath2.value = value;
-          break;
-        // case 3:
-        //   audioPath3.value = value as String;
-        //   break;
-        default:
-          logE('No indexed answer selected');
-          break;
-      }
-    });
+    final navigation = Get.toNamed<dynamic>(Routes.AUDIO_RECORDER);
+    if (navigation == null) return;
+    unawaited(
+      navigation.then<void>((value) {
+        if (value is! String || value.isEmpty) return;
+        switch (answerIndex) {
+          case 1:
+            audioPath1.value = value;
+          case 2:
+            audioPath2.value = value;
+          // case 3:
+          //   audioPath3.value = value as String;
+          //   break;
+          default:
+            logE('No indexed answer selected');
+        }
+      }),
+    );
   }
 
   Future<void> saveQuestion() async {
     if (questionController.text.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_title_required'.tr, type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_title_required'.tr,
+        type: FlushbarType.ERROR,
+      );
       return;
     }
     if (answer1Controller.text.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_answer_required_'.trParams({'answer': 1.toString()}), type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_answer_required_'.trParams({'answer': 1.toString()}),
+        type: FlushbarType.ERROR,
+      );
       return;
     }
     if (answer2Controller.text.isEmpty && currentLevel.value == 2) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_answer_required_'.trParams({'answer': 2.toString()}), type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_answer_required_'.trParams({'answer': 2.toString()}),
+        type: FlushbarType.ERROR,
+      );
       return;
     }
     // if (answer3Controller.text.isEmpty && currentLevel.value == 2) {
@@ -219,11 +219,19 @@ class AddQuestionController extends GetxController {
     //   return;
     // }
     if (imagePath1.value.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_image_required_'.trParams({'answer': 1.toString()}), type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_image_required_'.trParams({'answer': 1.toString()}),
+        type: FlushbarType.ERROR,
+      );
       return;
     }
     if (imagePath2.value.isEmpty && currentLevel.value == 2) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_image_required_'.trParams({'answer': 2.toString()}), type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_image_required_'.trParams({'answer': 2.toString()}),
+        type: FlushbarType.ERROR,
+      );
       return;
     }
     // if (imagePath3.value.isEmpty && currentLevel.value == 2) {
@@ -231,11 +239,19 @@ class AddQuestionController extends GetxController {
     //   return;
     // }
     if (audioPath1.value.isEmpty) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_audio_required_'.trParams({'answer': 1.toString()}), type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_audio_required_'.trParams({'answer': 1.toString()}),
+        type: FlushbarType.ERROR,
+      );
       return;
     }
     if (audioPath2.value.isEmpty && currentLevel.value == 2) {
-      FlushbarHelper.showFlushbar(Get.context!, message: 'text_audio_required_'.trParams({'answer': 2.toString()}), type: FlushbarType.ERROR);
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_audio_required_'.trParams({'answer': 2.toString()}),
+        type: FlushbarType.ERROR,
+      );
       return;
     }
     // if (audioPath3.value.isEmpty && currentLevel.value == 2) {
@@ -261,11 +277,14 @@ class AddQuestionController extends GetxController {
 
         await Database.addQuestionLevel1(data).then((value) {
           Get.back<dynamic>();
-          FlushbarHelper.showFlushbar(Get.context!, message: 'text_question_added_'.trParams({'level': 1.toString()}), type: FlushbarType.SUCCESS);
+          FlushbarHelper.showFlushbar(
+            Get.context!,
+            message: 'text_question_added_'.trParams({'level': 1.toString()}),
+            type: FlushbarType.SUCCESS,
+          );
         }).catchError((dynamic error) {
           logE(error);
         });
-        break;
       case 2:
         final data = QuestionLevel2(
           id: id,
@@ -284,11 +303,14 @@ class AddQuestionController extends GetxController {
 
         await Database.addQuestionLevel2(data).then((value) {
           Get.back<dynamic>();
-          FlushbarHelper.showFlushbar(Get.context!, message: 'text_question_added_'.trParams({'level': 2.toString()}), type: FlushbarType.SUCCESS);
+          FlushbarHelper.showFlushbar(
+            Get.context!,
+            message: 'text_question_added_'.trParams({'level': 2.toString()}),
+            type: FlushbarType.SUCCESS,
+          );
         }).catchError((dynamic error) {
           logE(error);
         });
-        break;
     }
   }
 }

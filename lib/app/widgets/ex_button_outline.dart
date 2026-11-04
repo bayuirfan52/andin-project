@@ -73,7 +73,7 @@ class ExButtonOutline extends StatelessWidget {
               .overflow(TextOverflow.ellipsis)
               .maxLines(1)
               .make(),
-          if (isShowBadge ?? true && badgeCountForPrint != 0)
+          if (isShowBadge ?? (badgeCountForPrint != 0))
             HStack([
               8.widthBox,
               Container(
@@ -105,7 +105,7 @@ class ExButtonOutline extends StatelessWidget {
               .overflow(TextOverflow.ellipsis)
               .maxLines(1)
               .make(),
-          if (isShowBadge ?? true && badgeCountForPrint != 0)
+          if (isShowBadge ?? (badgeCountForPrint != 0))
             HStack([
               8.widthBox,
               Container(

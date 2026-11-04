@@ -988,7 +988,6 @@ extension IterableCycle<E> on Iterable<E> {
     }
     if (n == null) {
       yield it.current;
-      // ignore: literal_only_boolean_expressions
       while (true) {
         while (it.moveNext()) {
           yield it.current;
@@ -1273,7 +1272,6 @@ class _CachedIterable<T> extends IterableBase<T> {
 
 class _CachedIterator<T> implements Iterator<T> {
   _CachedIterator(_IterableCache<T> cache, this._uncomputedIterator)
-      // ignore: prefer_initializing_formals
       : _cache = cache,
         _latestValidCache = cache;
 

@@ -1,3 +1,4 @@
+// These file-level exceptions preserve legacy extension behavior and regex style.
 // ignore_for_file: noop_primitive_operations, use_raw_strings
 
 import 'dart:convert';
@@ -10,7 +11,8 @@ import 'package:intl/intl.dart';
 extension HtmlExtensions on String {
   String get parseHtmlString {
     final document = parse(this);
-    final parsedString = parse(document.body?.text ?? '').documentElement?.text ?? '';
+    final parsedString =
+        parse(document.body?.text ?? '').documentElement?.text ?? '';
 
     return parsedString;
   }
@@ -46,17 +48,16 @@ extension MiscExtensions on String? {
     final splitW = this!.split(' ');
     var output = '';
 
-    try {
-      if (splitW.length > 1) {
-        final fWord = splitW[0].substring(0, 1).toUpperCase();
-        final sWord = splitW[1].substring(0, 1).toUpperCase();
-        output = fWord + sWord;
-      } else {
-        final fWord = splitW[0].substring(0, 1).toUpperCase();
-        output = fWord;
+    if (splitW.isEmpty || splitW.first.isEmpty) {
+      return '-';
+    }
+
+    output = splitW.first.substring(0, 1).toUpperCase();
+    if (splitW.length > 1) {
+      if (splitW[1].isEmpty) {
+        return '-';
       }
-    } catch (_) {
-      output = '-';
+      output += splitW[1].substring(0, 1).toUpperCase();
     }
     return output;
   }
@@ -210,7 +211,6 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return this;
     }
-    // ignore: unnecessary_raw_strings
     final regex = RegExp(r'([^a-zA-Z\s]+)');
     return this!.replaceAll(regex, '');
   }
@@ -230,7 +230,6 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return this;
     }
-    // ignore: unnecessary_raw_strings
     final regex = RegExp(r'([^α-ωΑ-ΩίϊΐόάέύϋΰήώΊΪΌΆΈΎΫΉΏ\s]+)');
     return this!.replaceAll(regex, '');
   }
@@ -318,7 +317,9 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return false;
     }
-    final regex = RegExp(r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)');
+    final regex = RegExp(
+      r'[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)',
+    );
     return regex.hasMatch(this!);
   }
 
@@ -417,7 +418,9 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return false;
     }
-    final regex = RegExp(r'^(?=.*([A-Z]){1,})(?=.*[!@#$&*]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,100}$');
+    final regex = RegExp(
+      r'^(?=.*([A-Z]){1,})(?=.*[!@#$&*]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,100}$',
+    );
     return regex.hasMatch(this!);
   }
 
@@ -439,7 +442,9 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return false;
     }
-    final regex = RegExp(r'^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$');
+    final regex = RegExp(
+      r'^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$',
+    );
     return regex.hasMatch(this!);
   }
 
@@ -509,6 +514,7 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return this;
     }
+    // Keep this regex raw so its pattern does not need Dart string escaping.
     // ignore: unnecessary_raw_strings
     final regex = RegExp(r'([^0-9]+)');
     return this!.replaceAll(regex, '');
@@ -532,6 +538,7 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return this;
     }
+    // Keep this regex raw so its pattern does not need Dart string escaping.
     // ignore: unnecessary_raw_strings
     final regex = RegExp(r'([a-zA-Z]+)');
     return this!.replaceAll(regex, '');
@@ -553,8 +560,7 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return [];
     }
-    // ignore: omit_local_variable_types
-    final List<Map<String, int>> occurences = [];
+    final occurences = <Map<String, int>>[];
     final letters = this!.split('')..sort();
     var checkingLetter = letters[0];
     var count = 0;
@@ -588,7 +594,10 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return 0;
     }
-    return this!.split('').fold<int>(0, (previousValue, ch) => previousValue + (ch == char ? 1 : 0));
+    return this!.split('').fold<int>(
+          0,
+          (previousValue, ch) => previousValue + (ch == char ? 1 : 0),
+        );
   }
 
   /// Finds the most frequent character in the String.
@@ -763,7 +772,10 @@ extension MiscExtensions on String? {
     final result = StringBuffer();
     result.write(words[0].toLowerCase());
     for (var i = 1; i < words.length; i++) {
-      result.write(words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase());
+      result.write(
+        words[i].substring(0, 1).toUpperCase() +
+            words[i].substring(1).toLowerCase(),
+      );
     }
     return result.toString();
   }
@@ -981,8 +993,7 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return [];
     }
-    // ignore: omit_local_variable_types
-    final List<int> occurences = [];
+    final occurences = <int>[];
     // How many times the pattern can fit the text provided
     final fitCount = (this!.length / pattern.length).truncate().toInt();
     if (fitCount > this!.length) {
@@ -1019,6 +1030,7 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return this;
     }
+    // Keep this regex raw so its pattern does not need Dart string escaping.
     // ignore: unnecessary_raw_strings
     final regex = RegExp(r'<[^>]*>');
     return this!.replaceAll(regex, '');
@@ -1104,7 +1116,9 @@ extension MiscExtensions on String? {
     }
     var sb = '';
     for (var i = 0; i < this!.length; i++) {
-      if (i == 0 || this![i - 1] != this![i] || (this![i - 1] == this![i] && this![i] != char)) {
+      if (i == 0 ||
+          this![i - 1] != this![i] ||
+          (this![i - 1] == this![i] && this![i] != char)) {
         sb += this![i];
       }
     }
@@ -1189,8 +1203,10 @@ extension MiscExtensions on String? {
       costs[0] = i;
       var nw = i - 1;
       for (var j = 1; j <= result.length; j++) {
-        // ignore: omit_local_variable_types
-        final int cj = min(1 + min(costs[j], costs[j - 1]), a[i - 1] == result[j - 1] ? nw : nw + 1);
+        final int cj = min(
+          1 + min(costs[j], costs[j - 1]),
+          a[i - 1] == result[j - 1] ? nw : nw + 1,
+        );
         nw = costs[j];
         costs[j] = cj;
       }
@@ -1413,12 +1429,16 @@ extension MiscExtensions on String? {
     if (this!.isEmpty) {
       return this;
     }
-    try {
-      final f = NumberFormat.currency(locale: 'el_GR');
-      return f.format(double.tryParse(this!.replaceAll(',', '.'))).replaceAll('EUR', '').trim().append(currencySymbol == null ? '' : ' $currencySymbol');
-    } catch (e) {
+    final amount = double.tryParse(this!.replaceAll(',', '.'));
+    if (amount == null) {
       return null;
     }
+    final formatter = NumberFormat.currency(locale: 'el_GR');
+    return formatter
+        .format(amount)
+        .replaceAll('EUR', '')
+        .trim()
+        .append(currencySymbol == null ? '' : ' $currencySymbol');
   }
 
   /// Returns the day name of the date provided.
@@ -1436,8 +1456,7 @@ extension MiscExtensions on String? {
   /// String day = date.getDayFromDate(); // returns 'Saturday'
   /// String grDay = date.getDayFromDate(locale:'el'); // returns 'Σάββατο'
   /// ```
-  String? getDayFromDate({String locale = 'en'}) {
-    initializeDateFormatting(locale);
+  Future<String?> getDayFromDate({String locale = 'en'}) async {
     if (this == null) {
       return null;
     }
@@ -1448,6 +1467,7 @@ extension MiscExtensions on String? {
     if (date == null) {
       return null;
     }
+    await initializeDateFormatting(locale);
     return DateFormat('EEEE', locale).format(date).toString();
   }
 
@@ -1466,8 +1486,7 @@ extension MiscExtensions on String? {
   /// String month = date.getMonthFromDate(); // returns 'August'
   /// String grMonth = date.getMonthFromDate(locale:'el'); // returns 'Αυγούστου'
   /// ```
-  String? getMonthFromDate({String locale = 'en'}) {
-    initializeDateFormatting(locale);
+  Future<String?> getMonthFromDate({String locale = 'en'}) async {
     if (this == null) {
       return null;
     }
@@ -1478,6 +1497,7 @@ extension MiscExtensions on String? {
     if (date == null) {
       return null;
     }
+    await initializeDateFormatting(locale);
     return DateFormat('MMMM', locale).format(date).toString();
   }
 
@@ -1496,8 +1516,7 @@ extension MiscExtensions on String? {
   /// String day = date.firstDayOfDate(); // returns 'Friday'
   /// String grDay = date.firstDayOfDate(locale:'el'); // returns 'Παρασκευή'
   /// ```
-  String? firstDayOfMonth({String locale = 'en'}) {
-    initializeDateFormatting(locale);
+  Future<String?> firstDayOfMonth({String locale = 'en'}) async {
     if (this == null) {
       return null;
     }
@@ -1508,7 +1527,10 @@ extension MiscExtensions on String? {
     if (date == null) {
       return null;
     }
-    return DateFormat('EEEE', locale).format(DateTime(date.year, date.month)).toString();
+    await initializeDateFormatting(locale);
+    return DateFormat('EEEE', locale)
+        .format(DateTime(date.year, date.month))
+        .toString();
   }
 
   /// Returns the last day of the month from the provided `DateTime`.
@@ -1526,8 +1548,7 @@ extension MiscExtensions on String? {
   /// String day = date.firstDayOfDate(); // returns 'Friday'
   /// String grDay = date.firstDayOfDate(locale:'el'); // returns 'Παρασκευή'
   /// ```
-  String? lastDayOfMonth({String locale = 'en'}) {
-    initializeDateFormatting(locale);
+  Future<String?> lastDayOfMonth({String locale = 'en'}) async {
     if (this == null) {
       return null;
     }
@@ -1538,6 +1559,7 @@ extension MiscExtensions on String? {
     if (date == null) {
       return null;
     }
+    await initializeDateFormatting(locale);
     return DateFormat('EEEE', locale)
         .format(
           DateTime(date.year, date.month + 1).add(
@@ -1691,7 +1713,7 @@ extension MiscExtensions on String? {
         return this;
       }
       return jsonDecode(this!, reviver: reviver);
-    } catch (_) {
+    } on FormatException {
       throw Exception('🛑 cant parseJSON');
     }
   }
@@ -1782,7 +1804,11 @@ extension MiscExtensions on String? {
                   : 'assets/images/ic_file.svg';
 
   String convertCurrency() {
-    final format = NumberFormat.simpleCurrency(locale: 'in', decimalDigits: 0, name: 'Rp. ');
+    final format = NumberFormat.simpleCurrency(
+      locale: 'in',
+      decimalDigits: 0,
+      name: 'Rp. ',
+    );
     return format.format(int.parse(this!));
   }
 }

@@ -9,11 +9,11 @@ import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
 
 class ListQuestionEditController extends GetxController {
-  final currentLevel = 1.obs;
-  final listLevel1 = <QuestionLevel1>[].obs;
-  final listLevel2 = <QuestionLevel2>[].obs;
-  final isTablet = false.obs;
-  final currentStudent = Student().obs;
+  final RxInt currentLevel = 1.obs;
+  final RxList<QuestionLevel1> listLevel1 = <QuestionLevel1>[].obs;
+  final RxList<QuestionLevel2> listLevel2 = <QuestionLevel2>[].obs;
+  final RxBool isTablet = false.obs;
+  final Rx<Student> currentStudent = Student().obs;
 
   @override
   Future<void> onInit() async {
@@ -51,11 +51,12 @@ class ListQuestionEditController extends GetxController {
     });
   }
 
-
   Future<void> getListQuestionLevel1() async {
     listLevel1.clear();
     final level1 = <QuestionLevel1>[];
-    await Database.getQuestionLevel1ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
+    await Database.getQuestionLevel1ByStudentId(
+      studentId: currentStudent.value.id ?? '',
+    ).then((value) {
       level1.addAll(value);
       listLevel1.value = level1;
     }).catchError((dynamic error) {
@@ -66,7 +67,9 @@ class ListQuestionEditController extends GetxController {
   Future<void> getListQuestionLevel2() async {
     listLevel1.clear();
     final level2 = <QuestionLevel2>[];
-    await Database.getQuestionLevel2ByStudentId(studentId: currentStudent.value.id ?? '').then((value) {
+    await Database.getQuestionLevel2ByStudentId(
+      studentId: currentStudent.value.id ?? '',
+    ).then((value) {
       level2.addAll(value);
       listLevel2.value = level2;
     }).catchError((dynamic error) {
@@ -74,25 +77,33 @@ class ListQuestionEditController extends GetxController {
     });
   }
 
-  void removeQuestion(String id) {
-    if (currentLevel.value == 1) {
-      Database.removeQuestionLevel1ById(id).then((value) {
-        FlushbarHelper.showFlushbar(Get.context!, message: 'text_remove_success'.tr, type: FlushbarType.SUCCESS);
-        handleListQuestion();
-      }).catchError((dynamic error) {
-        FlushbarHelper.showFlushbar(Get.context!, message: 'text_remove_error_'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
-      });
-    } else {
-      Database.removeQuestionLevel2ById(id).then((value) {
-        FlushbarHelper.showFlushbar(Get.context!, message: 'text_remove_success'.tr, type: FlushbarType.SUCCESS);
-        handleListQuestion();
-      }).catchError((dynamic error) {
-        FlushbarHelper.showFlushbar(Get.context!, message: 'text_remove_error_'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
-      });
+  Future<void> removeQuestion(String id) async {
+    try {
+      if (currentLevel.value == 1) {
+        await Database.removeQuestionLevel1ById(id);
+      } else {
+        await Database.removeQuestionLevel2ById(id);
+      }
+    } on Object catch (error) {
+      FlushbarHelper.showFlushbar(
+        Get.context!,
+        message: 'text_remove_error_'.trParams({'error': error.toString()}),
+        type: FlushbarType.ERROR,
+      );
+      return;
     }
+
+    FlushbarHelper.showFlushbar(
+      Get.context!,
+      message: 'text_remove_success'.tr,
+      type: FlushbarType.SUCCESS,
+    );
+    await handleListQuestion();
   }
 
-  void goToAddQuestion() => Get.toNamed<dynamic>(Routes.ADD_QUESTION, arguments: currentLevel.value)?.then((value) => handleListQuestion());
+  void goToAddQuestion() =>
+      Get.toNamed<dynamic>(Routes.ADD_QUESTION, arguments: currentLevel.value)
+          ?.then((value) => handleListQuestion());
 
   void goToEditQuestion(String id) => Get.toNamed<dynamic>(
         Routes.EDIT_QUESTION,

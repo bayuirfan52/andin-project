@@ -2,9 +2,8 @@ import 'package:andin_project/app/modules/home/home_view.dart';
 import 'package:andin_project/app/modules/profile/profile_view.dart';
 import 'package:andin_project/app/modules/question/question_management/question_management_view.dart';
 import 'package:andin_project/app/modules/student/student_management/student_management_view.dart';
-import 'package:material_ui/material_ui.dart';
-
 import 'package:get/get.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 import 'dashboard_controller.dart';
@@ -16,7 +15,6 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return PersistentTabView(
       controller: controller.tabController,
-      resizeToAvoidBottomInset: true,
       tabs: [
         PersistentTabConfig(
           screen: HomeView(),

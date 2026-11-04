@@ -105,7 +105,7 @@ class ExBaseTextField extends StatefulWidget {
   final TextCapitalization? capitalization;
 
   @override
-  _ExBaseTextFieldState createState() => _ExBaseTextFieldState();
+  State<ExBaseTextField> createState() => _ExBaseTextFieldState();
 }
 
 class _ExBaseTextFieldState extends State<ExBaseTextField> {
@@ -158,7 +158,10 @@ class _ExBaseTextFieldState extends State<ExBaseTextField> {
         border: getInputBorder(),
         enabledBorder: getInputBorder(),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: widget.borderColorFocus ?? Theme.of(context).primaryColor, width: 2.0),
+          borderSide: BorderSide(
+            color: widget.borderColorFocus ?? Theme.of(context).primaryColor,
+            width: 2.0,
+          ),
           borderRadius: BorderRadius.circular(getBorderRadius()),
         ),
       ),
@@ -175,7 +178,8 @@ class _ExBaseTextFieldState extends State<ExBaseTextField> {
     );
 
     const other = null;
-    if (widget.maxLine == other && widget.borderType == ExTextFieldBorderType.roundLine) {
+    if (widget.maxLine == other &&
+        widget.borderType == ExTextFieldBorderType.roundLine) {
       return Container(
         decoration: getBoxDecoration(),
         constraints: BoxConstraints(minHeight: widget.height),
@@ -317,25 +321,19 @@ class _ExBaseTextFieldState extends State<ExBaseTextField> {
   /// when change in the textfield
   void onChanged(String value) {
     notify();
-    if (widget.onChanged != null) {
-      widget.onChanged!(value);
-    }
+    widget.onChanged?.call(value);
   }
 
   /// After the completion of editing
   void onEditingComplete() {
     FocusScope.of(context).unfocus();
-    if (widget.onEditingComplete != null) {
-      widget.onEditingComplete!();
-    }
+    widget.onEditingComplete?.call();
   }
 
   /// After submitting the textfield
   void onSubmitted(String value) {
     FocusScope.of(context).unfocus();
-    if (widget.onSubmitted != null) {
-      widget.onSubmitted!(value);
-    }
+    widget.onSubmitted?.call(value);
   }
 
   /// Updating the view

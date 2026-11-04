@@ -3,7 +3,7 @@ import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class QuestionManagementController extends GetxController {
-  final isTablet = false.obs;
+  final RxBool isTablet = false.obs;
   @override
   Future<void> onInit() async {
     super.onInit();

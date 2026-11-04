@@ -1,7 +1,7 @@
 import 'package:andin_project/app/core/resources/app_color.dart';
 import 'package:andin_project/app/extensions/string_extensions.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 ///   created               : Aditya Pratama
@@ -68,7 +68,7 @@ class ExButtonDefault extends StatelessWidget {
                 .size(labelSize)
                 .overflow(TextOverflow.ellipsis)
                 .make(),
-            if (isShowBadge ?? true && badgeCountForPrint != 0)
+            if (isShowBadge ?? (badgeCountForPrint != 0))
               HStack([
                 8.widthBox,
                 Container(
@@ -98,7 +98,7 @@ class ExButtonDefault extends StatelessWidget {
                 .size(labelSize)
                 .overflow(TextOverflow.ellipsis)
                 .make(),
-            if (isShowBadge ?? true && badgeCountForPrint != 0)
+            if (isShowBadge ?? (badgeCountForPrint != 0))
               HStack([
                 8.widthBox,
                 Container(

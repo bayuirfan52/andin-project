@@ -36,7 +36,11 @@ mixin FileHelper {
 
     logger.logI('Image Dir: ${imageDir.path}');
     final timeStamp = DateTime.now().millisecondsSinceEpoch;
-    final newFile = File('${imageDir.path}/image_$timeStamp${getFileExtensions(file.path)}');
-    return file.copy(newFile.path);
+    final newFile = File(
+      '${imageDir.path}/image_$timeStamp${getFileExtensions(file.path)}',
+    );
+    return await file.copy(
+      newFile.path,
+    );
   }
 }
