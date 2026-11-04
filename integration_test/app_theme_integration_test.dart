@@ -18,6 +18,7 @@ void main() {
         home: const Scaffold(body: Center(child: Text('Question screen'))),
       ),
     );
+    await tester.pumpAndSettle();
 
     expect(find.text('Question screen'), findsOneWidget);
     expect(

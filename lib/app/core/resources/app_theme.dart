@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 mixin AppTheme {
-  static final theme = ThemeData(
+  static final ThemeData theme = ThemeData(
     brightness: Brightness.light,
     primaryColor: colorPrimary,
     colorScheme: ColorScheme.light(

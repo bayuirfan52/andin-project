@@ -25,6 +25,7 @@ analyzer:
     - build/**
     - android/**
     - ios/**
+    - windows/**
   language:
     strict-raw-types: false
 
