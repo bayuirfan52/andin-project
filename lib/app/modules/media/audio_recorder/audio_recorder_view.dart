@@ -1,8 +1,7 @@
 import 'package:andin_project/app/core/resources/app_color.dart';
-import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'audio_recorder_controller.dart';
@@ -237,8 +236,8 @@ class AudioRecorderView extends GetView<AudioRecorderController> {
         alignment: MainAxisAlignment.center,
       ).p24();
 
-  void onRemovePressed() {
-    Get.defaultDialog<dynamic>(
+  Future<void> onRemovePressed() async {
+    await Get.defaultDialog<dynamic>(
       title: 'text_attention'.tr,
       titleStyle: GoogleFonts.aBeeZee(
         fontSize: 16,

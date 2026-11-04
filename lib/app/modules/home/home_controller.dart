@@ -7,8 +7,8 @@ import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
 
 class HomeController extends BaseController {
-  final currentStudent = Student().obs;
-  final isTablet = true.obs;
+  final Rx<Student> currentStudent = Student().obs;
+  final RxBool isTablet = true.obs;
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -16,9 +16,9 @@ class HomeController extends BaseController {
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
-    getCurrentActiveStudent();
+    await getCurrentActiveStudent();
   }
 
   @override

@@ -4,13 +4,13 @@ import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/utils/logger.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:material_ui/material_ui.dart';
 
 class EditStudentController extends BaseController {
   final studentController = TextEditingController();
-  final id = ''.obs;
-  final isTablet = true.obs;
+  final RxString id = ''.obs;
+  final RxBool isTablet = true.obs;
 
   @override
   Future<void> onInit() async {
@@ -20,9 +20,9 @@ class EditStudentController extends BaseController {
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
-    getStudentData();
+    await getStudentData();
   }
 
   @override

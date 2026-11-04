@@ -1,8 +1,8 @@
 import 'dart:developer' as developer;
 
-import 'package:flutter_config/flutter_config.dart';
+import 'package:andin_project/app/utils/app_config.dart';
 
-String _logName = FlutterConfig.get('APP_NAME').toString();
+String _logName = AppConfig.appName;
 
 class Logger {
   Logger._();

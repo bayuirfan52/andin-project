@@ -4,14 +4,14 @@ import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:material_ui/material_ui.dart';
 
 class StudentManagementController extends GetxController {
   final searchController = TextEditingController();
-  final listStudent = <Student>[].obs;
-  final listStudentFiltered = <Student>[].obs;
-  final isTablet = false.obs;
+  final RxList<Student> listStudent = <Student>[].obs;
+  final RxList<Student> listStudentFiltered = <Student>[].obs;
+  final RxBool isTablet = false.obs;
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -19,9 +19,9 @@ class StudentManagementController extends GetxController {
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
-    getStudentData();
+    await getStudentData();
   }
 
   @override
@@ -58,9 +58,9 @@ class StudentManagementController extends GetxController {
     if (student.id == PreferenceHelper.getCurrentActiveStudent()) {
       await PreferenceHelper.setCurrentActiveStudent(null);
     }
-    await Database.removeStudentById(student.id ?? '').then((value) {
+    await Database.removeStudentById(student.id ?? '').then((value) async {
       FlushbarHelper.showFlushbar(Get.context!, message: 'text_student_removed'.tr, type: FlushbarType.SUCCESS);
-      getStudentData();
+      await getStudentData();
     });
   }
 

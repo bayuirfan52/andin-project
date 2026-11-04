@@ -19,7 +19,7 @@ mixin AppTheme {
       backgroundColor: colorPrimary,
     ),
     appBarTheme: AppBarTheme(
-      color: colorPrimary,
+      backgroundColor: colorPrimary,
       elevation: 1.0,
       titleTextStyle: GoogleFonts.aBeeZee(
         fontSize: 24,

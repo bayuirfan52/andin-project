@@ -6,7 +6,7 @@ import 'package:andin_project/app/modules/media/audio_recorder/audio_recorder_co
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/app/widgets/ex_dialog.dart';
 import 'package:andin_project/app/widgets/ex_textfield_normal.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

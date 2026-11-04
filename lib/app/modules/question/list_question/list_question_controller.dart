@@ -9,12 +9,12 @@ import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
 
 class ListQuestionController extends GetxController {
-  final currentLevel = 1.obs;
-  final listLevel1 = <QuestionLevel1>[].obs;
-  final listLevel2 = <QuestionLevel2>[].obs;
-  final listAnswer = <Answer>[].obs;
-  final currentStudent = Student().obs;
-  final isTablet = false.obs;
+  final RxInt currentLevel = 1.obs;
+  final RxList<QuestionLevel1> listLevel1 = <QuestionLevel1>[].obs;
+  final RxList<QuestionLevel2> listLevel2 = <QuestionLevel2>[].obs;
+  final RxList<Answer> listAnswer = <Answer>[].obs;
+  final Rx<Student> currentStudent = Student().obs;
+  final RxBool isTablet = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -24,14 +24,12 @@ class ListQuestionController extends GetxController {
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
-    getCurrentActiveStudent().then(
-      (value) {
-        handleListQuestion();
-        getAnswered();
-      }
-    );
+    await getCurrentActiveStudent().then((value) async {
+      await handleListQuestion();
+      await getAnswered();
+    });
   }
 
   @override

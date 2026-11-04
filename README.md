@@ -6,7 +6,9 @@ Autism visual communication for early student.
 ## Getting Started
 
 Project ini dibangun menggunakan:
-- flutter versi `v3.7.3`
+- Flutter stable `3.47.9` (atau versi stable yang lebih baru)
+- Android SDK dan JDK `17`
+- Minimum deployment target iOS `15.0`
 - `GetX` ekosistem.
 - `VelocityX` A minimalist Flutter framework for rapidly building custom designs.
 
@@ -39,8 +41,8 @@ Project ini dibangun menggunakan:
 ---
 
 ### How to Run With Flavor
-- Update your editor run script with argument `--flavor={FlavorName}`
-- or run manually on terminal `flutter run --flavor={FlavorName}`
-- Flavor Name list:
-    - Staging ```flutter run --flavor=Staging```
-    - Production ```flutter run --flavor=Production```
+- Ambil dependency: `flutter pub get`
+- Jalankan staging: `flutter run --flavor=staging`
+- Build APK staging: `flutter build apk --flavor=staging`
+- Jalankan production: `flutter run --flavor=production`
+- Build APK production: `flutter build apk --flavor=production`

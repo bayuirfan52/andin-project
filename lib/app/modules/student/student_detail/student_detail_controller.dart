@@ -7,13 +7,13 @@ import 'package:andin_project/app/utils/logger.dart';
 import 'package:get/get.dart';
 
 class StudentDetailController extends GetxController {
-  final id = ''.obs;
-  final student = Student().obs;
-  final level1TotalScore = 0.obs;
-  final level2TotalScore = 0.obs;
-  final averageLevel1 = 0.0.obs;
-  final averageLevel2 = 0.0.obs;
-  final isTablet = false.obs;
+  final RxString id = ''.obs;
+  final Rx<Student> student = Student().obs;
+  final RxInt level1TotalScore = 0.obs;
+  final RxInt level2TotalScore = 0.obs;
+  final RxDouble averageLevel1 = 0.0.obs;
+  final RxDouble averageLevel2 = 0.0.obs;
+  final RxBool isTablet = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -35,8 +35,8 @@ class StudentDetailController extends GetxController {
 
   void backToDashboard() => Get.offAllNamed<dynamic>(Routes.DASHBOARD);
 
-  void goToEditStudent() => Get.toNamed<dynamic>(Routes.EDIT_STUDENT, arguments: id.value)?.then((value) {
-        getStudentData();
+  void goToEditStudent() => Get.toNamed<dynamic>(Routes.EDIT_STUDENT, arguments: id.value)?.then((value) async {
+        await getStudentData();
       });
 
   Future<void> getStudentData() async {

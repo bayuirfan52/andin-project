@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:andin_project/app/extensions/string_extensions.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 

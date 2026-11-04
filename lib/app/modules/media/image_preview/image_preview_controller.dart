@@ -2,7 +2,7 @@ import 'package:andin_project/app/core/base/base_controller.dart';
 import 'package:get/get.dart';
 
 class ImagePreviewController extends BaseController {
-  final url = ''.obs;
+  final RxString url = ''.obs;
   @override
   void onInit() {
     super.onInit();
@@ -18,5 +18,4 @@ class ImagePreviewController extends BaseController {
   void onClose() {
     super.onClose();
   }
-
 }

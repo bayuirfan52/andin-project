@@ -4,6 +4,50 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+def readEnvironment = { String fileName ->
+    def environmentFile = rootProject.file("../${fileName}")
+    if (!environmentFile.isFile()) {
+        throw new GradleException("Missing environment file: ${environmentFile}")
+    }
+
+    def values = [:]
+    environmentFile.eachLine("UTF-8") { line ->
+        def entry = line.trim()
+        if (entry && !entry.startsWith("#")) {
+            def separator = entry.indexOf("=")
+            if (separator <= 0) {
+                throw new GradleException("Invalid entry in ${fileName}: ${entry}")
+            }
+
+            def key = entry.substring(0, separator).trim()
+            def value = entry.substring(separator + 1).trim()
+            if (value.length() >= 2 &&
+                    ((value.startsWith('"') && value.endsWith('"')) ||
+                    (value.startsWith("'") && value.endsWith("'")))) {
+                value = value.substring(1, value.length() - 1)
+            }
+            values[key] = value
+        }
+    }
+
+    ["APP_ID", "APP_NAME", "APP_SUFFIX_ID"].each { key ->
+        if (!values.containsKey(key)) {
+            throw new GradleException("Missing ${key} in ${fileName}")
+        }
+    }
+    values
+}
+
+def gradleString = { String value ->
+    "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
+}
+
+def stagingEnvironment = readEnvironment(".env.staging")
+def productionEnvironment = readEnvironment(".env.production")
+if (stagingEnvironment.APP_ID != productionEnvironment.APP_ID) {
+    throw new GradleException("Staging and production must use the same Android namespace")
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -22,12 +66,6 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-project.ext.envConfigFiles = [
-        staging    : ".env.staging",
-        production : ".env.production",
-]
-apply from: project(':flutter_config').projectDir.getPath() + "/dotenv.gradle"
-
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
@@ -35,7 +73,8 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    namespace stagingEnvironment.APP_ID
+    compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -48,17 +87,20 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += "src/main/kotlin"
     }
 
-    lintOptions {
+    lint {
         checkReleaseBuilds false
-        disable 'InvalidPackage'
+        disable += "InvalidPackage"
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId project.env.get("APP_ID")
+        applicationId stagingEnvironment.APP_ID
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
@@ -67,8 +109,7 @@ android {
         versionName flutterVersionName
         multiDexEnabled true
 
-        resValue "string", "build_config_package", project.env.get("APP_ID")
-        resValue "string", "application_id", project.env.get("APP_ID") + project.env.get("APP_SUFFIX_ID")
+        resValue "string", "build_config_package", stagingEnvironment.APP_ID
     }
 
     buildTypes {
@@ -95,23 +136,30 @@ android {
         }
     }
 
-    flavorDimensions "andin_project"
+    flavorDimensions += "andin_project"
     productFlavors {
         def developmentSigningVariable = signingConfigs.debug
 
-        Staging {
+        staging {
             signingConfig developmentSigningVariable
             dimension "andin_project"
-            applicationIdSuffix project.env.get("APP_SUFFIX_ID")
+            applicationIdSuffix stagingEnvironment.APP_SUFFIX_ID
+            buildConfigField "String", "APP_NAME", gradleString(stagingEnvironment.APP_NAME)
+            buildConfigField "String", "APP_FLAVOR", gradleString("staging")
+            resValue "string", "application_id", stagingEnvironment.APP_ID + stagingEnvironment.APP_SUFFIX_ID
             manifestPlaceholders = [
-                    appName: project.env.get("APP_NAME"),
+                    appName: stagingEnvironment.APP_NAME,
             ]
         }
-        Production {
+
+        production {
             signingConfig signingConfigs.release
             dimension "andin_project"
+            buildConfigField "String", "APP_NAME", gradleString(productionEnvironment.APP_NAME)
+            buildConfigField "String", "APP_FLAVOR", gradleString("production")
+            resValue "string", "application_id", productionEnvironment.APP_ID + productionEnvironment.APP_SUFFIX_ID
             manifestPlaceholders = [
-                    appName: project.env.get("APP_NAME"),
+                    appName: productionEnvironment.APP_NAME,
             ]
         }
     }

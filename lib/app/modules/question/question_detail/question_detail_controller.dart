@@ -14,24 +14,24 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
 
 class QuestionDetailController extends GetxController {
-  final currentId = ''.obs;
-  final currentAnswer = Answer().obs;
-  final currentLevel = 1.obs;
-  final currentScore = 0.obs;
-  final level1 = QuestionLevel1().obs;
-  final level2 = QuestionLevel2().obs;
-  final listLevel1 = <QuestionLevel1>[].obs;
-  final listLevel2 = <QuestionLevel2>[].obs;
-  final currentStudent = Student().obs;
+  final RxString currentId = ''.obs;
+  final Rx<Answer> currentAnswer = Answer().obs;
+  final RxInt currentLevel = 1.obs;
+  final RxInt currentScore = 0.obs;
+  final Rx<QuestionLevel1> level1 = QuestionLevel1().obs;
+  final Rx<QuestionLevel2> level2 = QuestionLevel2().obs;
+  final RxList<QuestionLevel1> listLevel1 = <QuestionLevel1>[].obs;
+  final RxList<QuestionLevel2> listLevel2 = <QuestionLevel2>[].obs;
+  final Rx<Student> currentStudent = Student().obs;
   final audioPlayer = FlutterSoundPlayer();
-  final status = Status.IDLE.obs;
-  final currentPlayedAudio = 0.obs;
-  final currentPlayedAnswer = ''.obs;
-  final isHasPreviousQuestion = false.obs;
-  final isHasNextQuestion = false.obs;
-  final isAnswered = false.obs;
-  final isTablet = false.obs;
-  final isLoadingQuestions = false.obs;
+  final Rx<Status> status = Status.IDLE.obs;
+  final RxInt currentPlayedAudio = 0.obs;
+  final RxString currentPlayedAnswer = ''.obs;
+  final RxBool isHasPreviousQuestion = false.obs;
+  final RxBool isHasNextQuestion = false.obs;
+  final RxBool isAnswered = false.obs;
+  final RxBool isTablet = false.obs;
+  final RxBool isLoadingQuestions = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -44,15 +44,15 @@ class QuestionDetailController extends GetxController {
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
-    init();
+    await init();
   }
 
   @override
-  void onClose() {
+  Future<void> onClose() async {
     super.onClose();
-    audioPlayer.closePlayer();
+    await audioPlayer.closePlayer();
   }
 
   Future<void> init() async {
@@ -75,17 +75,17 @@ class QuestionDetailController extends GetxController {
         final byteData = await rootBundle.load(file);
         await audioPlayer.startPlayer(
           fromDataBuffer: byteData.buffer.asUint8List(),
-          whenFinished: () {
+          whenFinished: () async {
             logI('finish');
-            stop();
+            await stop();
           },
         );
       } else {
         await audioPlayer.startPlayer(
           fromURI: file,
-          whenFinished: () {
+          whenFinished: () async {
             logI('finish');
-            stop();
+            await stop();
           },
         );
       }
@@ -109,26 +109,26 @@ class QuestionDetailController extends GetxController {
 
   void goToSelectStudent() => Get.toNamed<dynamic>(Routes.SELECT_STUDENT);
 
-  void previousQuestion() {
-    _moveQuestion(-1);
+  Future<void> previousQuestion() async {
+    await _moveQuestion(-1);
   }
 
-  void nextQuestion() {
+  Future<void> nextQuestion() async {
     if ((currentAnswer.value.score ?? 0) < 650) {
       FlushbarHelper.showFlushbar(Get.context!, title: 'text_attention'.tr, message: 'text_not_reach_minimum_score'.tr, type: FlushbarType.ERROR);
     } else {
-      _moveQuestion(1);
+      await _moveQuestion(1);
     }
   }
 
-  void _moveQuestion(int offset) {
+  Future<void> _moveQuestion(int offset) async {
     if (isLoadingQuestions.value) return;
     final ids = currentLevel.value == 1 ? listLevel1.map((question) => question.id).toList() : listLevel2.map((question) => question.id).toList();
     final currentQuestionId = currentLevel.value == 1 ? level1.value.id : level2.value.id;
     final nextId = questionIdAtOffset(ids, currentQuestionId, offset);
     if (nextId == null || nextId == currentId.value) return;
     currentId.value = nextId;
-    handleListQuestion();
+    await handleListQuestion();
   }
 
   Future<void> getCurrentActiveStudent() async {
@@ -236,9 +236,9 @@ class QuestionDetailController extends GetxController {
       answer.score = score;
     }
 
-    await Database.addAnswer(answer).then((value) {
+    await Database.addAnswer(answer).then((value) async {
       FlushbarHelper.showFlushbar(Get.context!, message: 'text_score_saved'.tr, type: FlushbarType.SUCCESS);
-      handleListQuestion();
+      await handleListQuestion();
     }).catchError((dynamic error) {
       FlushbarHelper.showFlushbar(Get.context!, message: 'text_save_error'.trParams({'error': error.toString()}), type: FlushbarType.ERROR);
     });

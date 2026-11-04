@@ -4,14 +4,13 @@ import 'package:andin_project/app/core/database/database.dart';
 import 'package:andin_project/app/core/resources/app_theme.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
+import 'package:andin_project/app/utils/app_config.dart';
 import 'package:andin_project/app/utils/device_util.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/generated/locales.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_config/flutter_config.dart';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,15 +24,19 @@ Future<void> main() async {
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
-      await FlutterConfig.loadEnvVariables();
+      await AppConfig.initialize();
       await GetStorage.init();
       await Logger.init();
       await Database.databaseInit();
       GoogleFonts.config.allowRuntimeFetching = false;
       Get.lazyPut<GetStorage>(() => GetStorage());
-      runApp(AndinProject());
+      runApp(const AndinProject());
     },
-    (error, stack) {},
+    (error, stack) {
+      FlutterError.reportError(
+        FlutterErrorDetails(exception: error, stack: stack),
+      );
+    },
   );
 }
 
@@ -68,6 +71,7 @@ class _AndinProjectState extends State<AndinProject> {
         initialRoute: AppPages.initial,
         getPages: AppPages.routes,
         defaultTransition: Transition.cupertino,
+        // Keep the banner visible in debug builds but hide it in release.
         // ignore: avoid_redundant_argument_values
         debugShowCheckedModeBanner: kDebugMode,
         translationsKeys: AppTranslation.translations,
@@ -76,10 +80,10 @@ class _AndinProjectState extends State<AndinProject> {
         builder: (context, child) {
           return FutureBuilder(
             future: DeviceUtil.isTablet(context),
-            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            builder: (context, snapshot) {
               if (snapshot.hasData) {
-                PreferenceHelper.setIsTablet(snapshot.data!);
-                if (FlutterConfig.get('FLAVOR') == 'production') {
+                unawaited(PreferenceHelper.setIsTablet(snapshot.data!));
+                if (AppConfig.isProduction) {
                   return child!;
                 } else {
                   return Scaffold(
@@ -93,7 +97,11 @@ class _AndinProjectState extends State<AndinProject> {
                             Icon(Icons.bug_report, color: Vx.blue300),
                             4.widthBox,
                           ]).onInkTap(
-                            () => Get.toNamed<dynamic>(Routes.DEV_TOOLS),
+                            () {
+                              unawaited(
+                                Get.toNamed<dynamic>(Routes.DEV_TOOLS),
+                              );
+                            },
                           ),
                         ),
                       ],

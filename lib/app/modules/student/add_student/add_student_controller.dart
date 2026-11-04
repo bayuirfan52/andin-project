@@ -3,12 +3,12 @@ import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:get/get.dart';
 
 class AddStudentController extends GetxController {
   final studentController = TextEditingController();
-  final isTablet = true.obs;
+  final RxBool isTablet = true.obs;
 
   @override
   Future<void> onInit() async {

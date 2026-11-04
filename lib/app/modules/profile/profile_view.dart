@@ -3,9 +3,9 @@ import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/app/widgets/ex_button_default.dart';
 import 'package:andin_project/app/widgets/ex_dialog.dart';
 import 'package:andin_project/app/widgets/ex_textfield_normal.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -23,8 +23,8 @@ class ProfileView extends GetView<ProfileController> {
           top: 32,
           left: 64,
           child: IconButton(
-            onPressed: () {
-              Get.defaultDialog<dynamic>(
+            onPressed: () async {
+              await Get.defaultDialog<dynamic>(
                 title: 'About AVIC',
                 titleStyle: GoogleFonts.aBeeZee(fontWeight: FontWeight.w700, fontSize: 24),
                 titlePadding: EdgeInsets.all(24),
@@ -129,9 +129,9 @@ class ProfileView extends GetView<ProfileController> {
                 animationDuration: 200,
                 activeBgColor: const [colorPrimary, colorPrimary],
                 labels: const ['Indonesia', 'English (US)'],
-                onToggle: (index) {
+                onToggle: (index) async {
                   logD('clicked $index');
-                  controller.changeLanguage(index);
+                  await controller.changeLanguage(index);
                 },
               ),
             ),
@@ -193,9 +193,9 @@ class ProfileView extends GetView<ProfileController> {
                 animationDuration: 200,
                 activeBgColor: const [colorPrimary, colorPrimary],
                 labels: const ['Indonesia', 'English (US)'],
-                onToggle: (index) {
+                onToggle: (index) async {
                   logD('clicked $index');
-                  controller.changeLanguage(index);
+                  await controller.changeLanguage(index);
                 },
               ),
             ),

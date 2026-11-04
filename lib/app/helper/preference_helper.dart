@@ -1,4 +1,4 @@
-import 'package:flutter_config/flutter_config.dart';
+import 'package:andin_project/app/utils/app_config.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -9,7 +9,7 @@ const _FIRST_USE = 'FIRST_USE';
 const _IS_TABLET = 'IS_TABLET';
 
 mixin PreferenceHelper {
-  static final _pref = Get.find<GetStorage>();
+  static final GetStorage _pref = Get.find<GetStorage>();
 
   static void resetData() => _pref.erase();
   static void deleteData(String key) => _pref.remove(key);
@@ -24,9 +24,10 @@ mixin PreferenceHelper {
     await _pref.write(_CURRENT_ACTIVE_STUDENT, id);
   }
 
-  static String? getCurrentActiveStudent() => _pref.read(_CURRENT_ACTIVE_STUDENT) as String?;
+  static String? getCurrentActiveStudent() =>
+      _pref.read(_CURRENT_ACTIVE_STUDENT) as String?;
 
-  static String getCurrentAppName() => FlutterConfig.get('APP_NAME').toString();
+  static String getCurrentAppName() => AppConfig.appName;
 
   static Future<void> setActiveLanguage(String code) async {
     await _pref.write(_ACTIVE_LANGUAGE, code);

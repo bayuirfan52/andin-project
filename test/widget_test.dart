@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('application theme stays light when device requests dark mode',
-      (tester) async {
+  testWidgets('application theme stays light when device requests dark mode', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         theme: AppTheme.theme,

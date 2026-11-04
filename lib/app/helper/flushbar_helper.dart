@@ -1,6 +1,6 @@
 import 'package:andin_project/app/core/resources/app_color.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 mixin FlushbarHelper {
   static void showFlushbar(

@@ -4,15 +4,15 @@ import 'package:andin_project/app/data/student.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
 import 'package:andin_project/app/routes/app_pages.dart';
 import 'package:andin_project/app/utils/logger.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:get/get.dart';
 
 class SelectStudentController extends BaseController {
   final searchController = TextEditingController();
-  final selectedIndex = 0.obs;
-  final listStudent = <Student>[].obs;
-  final listStudentFiltered = <Student>[].obs;
-  final isTablet = true.obs;
+  final RxInt selectedIndex = 0.obs;
+  final RxList<Student> listStudent = <Student>[].obs;
+  final RxList<Student> listStudentFiltered = <Student>[].obs;
+  final RxBool isTablet = true.obs;
 
   @override
   Future<void> onInit() async {
@@ -35,9 +35,9 @@ class SelectStudentController extends BaseController {
 
   void goToDashboard() => Get.offAllNamed<dynamic>(Routes.DASHBOARD);
 
-  void selectCurrentActiveStudent() {
+  Future<void> selectCurrentActiveStudent() async {
     final student = listStudentFiltered[selectedIndex.value];
-    PreferenceHelper.setCurrentActiveStudent(student.id ?? '');
+    await PreferenceHelper.setCurrentActiveStudent(student.id ?? '');
     goToDashboard();
   }
 

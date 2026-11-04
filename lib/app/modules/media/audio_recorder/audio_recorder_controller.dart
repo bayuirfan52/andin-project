@@ -11,15 +11,15 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AudioRecorderController extends BaseController {
-  final recordedFile = ''.obs;
-  final timeCount = '00:00'.obs;
-  final status = Status.IDLE.obs;
+  final RxString recordedFile = ''.obs;
+  final RxString timeCount = '00:00'.obs;
+  final Rx<Status> status = Status.IDLE.obs;
   final audioRecorder = FlutterSoundRecorder();
   final audioPlayer = FlutterSoundPlayer();
-  final maxDuration = 1.0.obs;
-  final currentDuration = 0.0.obs;
-  final isPlayerMode = false.obs;
-  final isTablet = false.obs;
+  final RxDouble maxDuration = 1.0.obs;
+  final RxDouble currentDuration = 0.0.obs;
+  final RxBool isPlayerMode = false.obs;
+  final RxBool isTablet = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -49,7 +49,7 @@ class AudioRecorderController extends BaseController {
       if (audioPlayer.isPlaying) await audioPlayer.stopPlayer();
       await audioRecorder.closeRecorder();
       await audioPlayer.closePlayer();
-    } catch (error) {
+    } on Exception catch (error) {
       logW('Unable to close audio resources: $error');
     }
   }
@@ -68,9 +68,9 @@ class AudioRecorderController extends BaseController {
     } else {
       await audioPlayer.startPlayer(
         fromURI: recordedFile.value,
-        whenFinished: () {
+        whenFinished: () async {
           logI('finish');
-          stop();
+          await stop();
         },
       );
     }
@@ -99,7 +99,7 @@ class AudioRecorderController extends BaseController {
     final file = File(recordedFile.value);
     try {
       await file.delete();
-    } catch (e) {
+    } on Exception catch (e) {
       logW(e.toString());
     }
     recordedFile.value = '';
@@ -126,7 +126,7 @@ class AudioRecorderController extends BaseController {
       await audioRecorder.startRecorder(toFile: file.path, codec: Codec.pcm16WAV);
       recordedFile.value = file.path;
       status.value = Status.RECORDING;
-    } catch (error) {
+    } on Exception catch (error) {
       status.value = Status.IDLE;
       if (file != null && file.existsSync()) await file.delete();
       logE('Unable to start audio recording: $error');
@@ -138,7 +138,7 @@ class AudioRecorderController extends BaseController {
     if (status.value != Status.RECORDING) return;
     try {
       await audioRecorder.stopRecorder();
-    } catch (error) {
+    } on Exception catch (error) {
       logE('Unable to stop audio recording: $error');
       recordedFile.value = '';
     } finally {

@@ -5,10 +5,9 @@ import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/utils/logger.dart';
 import 'package:andin_project/app/widgets/ex_button_default.dart';
 import 'package:andin_project/app/widgets/ex_dialog.dart';
-import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'question_detail_controller.dart';

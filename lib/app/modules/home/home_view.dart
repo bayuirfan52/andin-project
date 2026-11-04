@@ -1,8 +1,7 @@
 import 'package:andin_project/app/helper/preference_helper.dart';
-import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'home_controller.dart';
@@ -196,9 +195,9 @@ class HomeView extends GetView<HomeController> {
                         child: Text(
                           'Level 2',
                           style: GoogleFonts.aBeeZee(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black54,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54,
                           ),
                           textAlign: TextAlign.center,
                         ),

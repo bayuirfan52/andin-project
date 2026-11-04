@@ -2,13 +2,13 @@ import 'package:andin_project/app/core/base/base_controller.dart';
 import 'package:andin_project/app/extensions/string_extensions.dart';
 import 'package:andin_project/app/helper/flushbar_helper.dart';
 import 'package:andin_project/app/helper/preference_helper.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends BaseController {
   final teacherController = TextEditingController();
-  final currentLocale = 0.obs;
-  final isTablet = false.obs;
+  final RxInt currentLocale = 0.obs;
+  final RxBool isTablet = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -31,25 +31,23 @@ class ProfileController extends BaseController {
     super.onClose();
   }
 
-  void saveNewName() {
+  Future<void> saveNewName() async {
     if (teacherController.text.isEmpty) {
       FlushbarHelper.showFlushbar(Get.context!, message: 'text_name_field_error'.tr, type: FlushbarType.ERROR);
     }
-    PreferenceHelper.setTeachersName(teacherController.text);
+    await PreferenceHelper.setTeachersName(teacherController.text);
     FlushbarHelper.showFlushbar(Get.context!, message: 'text_edit_name_success'.tr, type: FlushbarType.SUCCESS);
   }
 
-  void changeLanguage(int? index) {
+  Future<void> changeLanguage(int? index) async {
     currentLocale.value = index ?? 0;
     switch (index) {
       case 0:
-        Get.updateLocale(Locale('id', 'ID'));
-        PreferenceHelper.setActiveLanguage('id_ID');
-        break;
+        await Get.updateLocale(Locale('id', 'ID'));
+        await PreferenceHelper.setActiveLanguage('id_ID');
       case 1:
-        Get.updateLocale(Locale('en', 'US'));
-        PreferenceHelper.setActiveLanguage('en_US');
-        break;
+        await Get.updateLocale(Locale('en', 'US'));
+        await PreferenceHelper.setActiveLanguage('en_US');
       default:
     }
   }
